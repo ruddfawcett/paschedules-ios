@@ -1,0 +1,522 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		50E918FBEEE77166CC648543 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 550C11C65AE3F91792968E42 /* libPods.a */; };
+		F118D3801A0F0A5100D1F717 /* PASchedule.m in Sources */ = {isa = PBXBuildFile; fileRef = F118D37F1A0F0A5100D1F717 /* PASchedule.m */; };
+		F118D3831A0F265A00D1F717 /* PACourse.m in Sources */ = {isa = PBXBuildFile; fileRef = F118D3821A0F265A00D1F717 /* PACourse.m */; };
+		F1313A731A12910200997B56 /* PASession.m in Sources */ = {isa = PBXBuildFile; fileRef = F1313A721A12910200997B56 /* PASession.m */; };
+		F14034151A167EBA00AF764E /* PATabBarController.m in Sources */ = {isa = PBXBuildFile; fileRef = F14034141A167EBA00AF764E /* PATabBarController.m */; };
+		F193A2091A13E6EA00A11EDA /* PALoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F193A2081A13E6EA00A11EDA /* PALoginViewController.m */; };
+		F193E5CC1A0DC6370016103E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F193E5CB1A0DC6370016103E /* main.m */; };
+		F193E5CF1A0DC6370016103E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F193E5CE1A0DC6370016103E /* AppDelegate.m */; };
+		F193E5DA1A0DC6370016103E /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = F193E5D91A0DC6370016103E /* Images.xcassets */; };
+		F193E5DD1A0DC6370016103E /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F193E5DB1A0DC6370016103E /* LaunchScreen.xib */; };
+		F193E5FA1A0DDB1C0016103E /* PASchedulesAPI.m in Sources */ = {isa = PBXBuildFile; fileRef = F193E5F91A0DDB1C0016103E /* PASchedulesAPI.m */; };
+		F193E5FD1A0E91FA0016103E /* PAStudent.m in Sources */ = {isa = PBXBuildFile; fileRef = F193E5FC1A0E91FA0016103E /* PAStudent.m */; };
+		F1BC5D651A15057700DF804F /* NSError+PAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F1BC5D641A15057700DF804F /* NSError+PAExtensions.m */; };
+		F1CB18541A117CA100BDB4D8 /* PANavigationController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1CB18531A117CA100BDB4D8 /* PANavigationController.m */; };
+		F1F6817B1A0F2A6500F678FA /* PACommitment.m in Sources */ = {isa = PBXBuildFile; fileRef = F1F6817A1A0F2A6500F678FA /* PACommitment.m */; };
+		F1F6817E1A0F2DC200F678FA /* PASection.m in Sources */ = {isa = PBXBuildFile; fileRef = F1F6817D1A0F2DC200F678FA /* PASection.m */; };
+		F1F681811A0F2DEC00F678FA /* PASupercourse.m in Sources */ = {isa = PBXBuildFile; fileRef = F1F681801A0F2DEC00F678FA /* PASupercourse.m */; };
+		F1F681841A0F2E5800F678FA /* PATeacher.m in Sources */ = {isa = PBXBuildFile; fileRef = F1F681831A0F2E5800F678FA /* PATeacher.m */; };
+		F1F681901A0F3AB600F678FA /* PATextFieldCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F1F6818F1A0F3AB600F678FA /* PATextFieldCell.m */; };
+		F1F681971A0F3C1700F678FA /* UIImage+PAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F1F681961A0F3C1700F678FA /* UIImage+PAExtensions.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		22ABAEAF807F4C0487A56151 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		550C11C65AE3F91792968E42 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		93768340555CE0A4C25C7C78 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		F118D37E1A0F0A5100D1F717 /* PASchedule.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASchedule.h; sourceTree = "<group>"; };
+		F118D37F1A0F0A5100D1F717 /* PASchedule.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASchedule.m; sourceTree = "<group>"; };
+		F118D3811A0F265A00D1F717 /* PACourse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PACourse.h; sourceTree = "<group>"; };
+		F118D3821A0F265A00D1F717 /* PACourse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PACourse.m; sourceTree = "<group>"; };
+		F1313A711A12910200997B56 /* PASession.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASession.h; sourceTree = "<group>"; };
+		F1313A721A12910200997B56 /* PASession.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASession.m; sourceTree = "<group>"; };
+		F14034131A167EBA00AF764E /* PATabBarController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PATabBarController.h; path = PASchedules/Classes/Controllers/PATabBarController.h; sourceTree = SOURCE_ROOT; };
+		F14034141A167EBA00AF764E /* PATabBarController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PATabBarController.m; path = PASchedules/Classes/Controllers/PATabBarController.m; sourceTree = SOURCE_ROOT; };
+		F193A2071A13E6EA00A11EDA /* PALoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PALoginViewController.h; sourceTree = "<group>"; };
+		F193A2081A13E6EA00A11EDA /* PALoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PALoginViewController.m; sourceTree = "<group>"; };
+		F193A20A1A13E72600A11EDA /* PASchedules.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PASchedules.h; path = PASchedules/PASchedules.h; sourceTree = SOURCE_ROOT; };
+		F193A20B1A13E92200A11EDA /* PrefixHeader.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = "<group>"; };
+		F193E5C61A0DC6370016103E /* PASchedules.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PASchedules.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		F193E5CA1A0DC6370016103E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		F193E5CB1A0DC6370016103E /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		F193E5CD1A0DC6370016103E /* AppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
+		F193E5CE1A0DC6370016103E /* AppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
+		F193E5D91A0DC6370016103E /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
+		F193E5DC1A0DC6370016103E /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.xib; name = Base; path = Base.lproj/LaunchScreen.xib; sourceTree = "<group>"; };
+		F193E5F81A0DDB1C0016103E /* PASchedulesAPI.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASchedulesAPI.h; sourceTree = "<group>"; };
+		F193E5F91A0DDB1C0016103E /* PASchedulesAPI.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASchedulesAPI.m; sourceTree = "<group>"; };
+		F193E5FB1A0E91FA0016103E /* PAStudent.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAStudent.h; sourceTree = "<group>"; };
+		F193E5FC1A0E91FA0016103E /* PAStudent.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAStudent.m; sourceTree = "<group>"; };
+		F1BC5D631A15057700DF804F /* NSError+PAExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "NSError+PAExtensions.h"; path = "PASchedules/Classes/Categories/NSError+PAExtensions.h"; sourceTree = SOURCE_ROOT; };
+		F1BC5D641A15057700DF804F /* NSError+PAExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "NSError+PAExtensions.m"; path = "PASchedules/Classes/Categories/NSError+PAExtensions.m"; sourceTree = SOURCE_ROOT; };
+		F1CB18521A117CA100BDB4D8 /* PANavigationController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PANavigationController.h; sourceTree = "<group>"; };
+		F1CB18531A117CA100BDB4D8 /* PANavigationController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PANavigationController.m; sourceTree = "<group>"; };
+		F1F681791A0F2A6500F678FA /* PACommitment.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PACommitment.h; sourceTree = "<group>"; };
+		F1F6817A1A0F2A6500F678FA /* PACommitment.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PACommitment.m; sourceTree = "<group>"; };
+		F1F6817C1A0F2DC200F678FA /* PASection.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASection.h; sourceTree = "<group>"; };
+		F1F6817D1A0F2DC200F678FA /* PASection.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASection.m; sourceTree = "<group>"; };
+		F1F6817F1A0F2DEC00F678FA /* PASupercourse.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASupercourse.h; sourceTree = "<group>"; };
+		F1F681801A0F2DEC00F678FA /* PASupercourse.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASupercourse.m; sourceTree = "<group>"; };
+		F1F681821A0F2E5800F678FA /* PATeacher.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATeacher.h; sourceTree = "<group>"; };
+		F1F681831A0F2E5800F678FA /* PATeacher.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATeacher.m; sourceTree = "<group>"; };
+		F1F6818E1A0F3AB600F678FA /* PATextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATextFieldCell.h; sourceTree = "<group>"; };
+		F1F6818F1A0F3AB600F678FA /* PATextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATextFieldCell.m; sourceTree = "<group>"; };
+		F1F681951A0F3C1700F678FA /* UIImage+PAExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "UIImage+PAExtensions.h"; sourceTree = "<group>"; };
+		F1F681961A0F3C1700F678FA /* UIImage+PAExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "UIImage+PAExtensions.m"; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		F193E5C31A0DC6370016103E /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				50E918FBEEE77166CC648543 /* libPods.a in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		47AFCB30D389C7C79DBCCBBF /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				550C11C65AE3F91792968E42 /* libPods.a */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		DB33A4C829CE05C56287642C /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				22ABAEAF807F4C0487A56151 /* Pods.debug.xcconfig */,
+				93768340555CE0A4C25C7C78 /* Pods.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
+		F193E5BD1A0DC6370016103E = {
+			isa = PBXGroup;
+			children = (
+				F193E5C81A0DC6370016103E /* PASchedules */,
+				F193A20B1A13E92200A11EDA /* PrefixHeader.pch */,
+				F193E5C71A0DC6370016103E /* Products */,
+				47AFCB30D389C7C79DBCCBBF /* Frameworks */,
+				DB33A4C829CE05C56287642C /* Pods */,
+			);
+			sourceTree = "<group>";
+		};
+		F193E5C71A0DC6370016103E /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				F193E5C61A0DC6370016103E /* PASchedules.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		F193E5C81A0DC6370016103E /* PASchedules */ = {
+			isa = PBXGroup;
+			children = (
+				F193E5F41A0DD9590016103E /* Classes */,
+				F193A20A1A13E72600A11EDA /* PASchedules.h */,
+				F193E5CD1A0DC6370016103E /* AppDelegate.h */,
+				F193E5CE1A0DC6370016103E /* AppDelegate.m */,
+				F193E5D91A0DC6370016103E /* Images.xcassets */,
+				F193E5DB1A0DC6370016103E /* LaunchScreen.xib */,
+				F193E5C91A0DC6370016103E /* Supporting Files */,
+			);
+			path = PASchedules;
+			sourceTree = "<group>";
+		};
+		F193E5C91A0DC6370016103E /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				F193E5CA1A0DC6370016103E /* Info.plist */,
+				F193E5CB1A0DC6370016103E /* main.m */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		F193E5F41A0DD9590016103E /* Classes */ = {
+			isa = PBXGroup;
+			children = (
+				F1F681911A0F3BD800F678FA /* Categories */,
+				F1F6819B1A0F3CCB00F678FA /* Models */,
+				F193E5F61A0DD9DA0016103E /* Views */,
+				F193E5F71A0DD9E10016103E /* Controllers */,
+				F1F6819A1A0F3C9400F678FA /* API */,
+			);
+			path = Classes;
+			sourceTree = "<group>";
+		};
+		F193E5F51A0DD9870016103E /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				F193E5FB1A0E91FA0016103E /* PAStudent.h */,
+				F193E5FC1A0E91FA0016103E /* PAStudent.m */,
+				F1F681791A0F2A6500F678FA /* PACommitment.h */,
+				F1F6817A1A0F2A6500F678FA /* PACommitment.m */,
+				F118D3811A0F265A00D1F717 /* PACourse.h */,
+				F118D3821A0F265A00D1F717 /* PACourse.m */,
+				F118D37E1A0F0A5100D1F717 /* PASchedule.h */,
+				F118D37F1A0F0A5100D1F717 /* PASchedule.m */,
+				F1F6817C1A0F2DC200F678FA /* PASection.h */,
+				F1F6817D1A0F2DC200F678FA /* PASection.m */,
+				F1F681821A0F2E5800F678FA /* PATeacher.h */,
+				F1F681831A0F2E5800F678FA /* PATeacher.m */,
+				F1F6817F1A0F2DEC00F678FA /* PASupercourse.h */,
+				F1F681801A0F2DEC00F678FA /* PASupercourse.m */,
+				F1313A711A12910200997B56 /* PASession.h */,
+				F1313A721A12910200997B56 /* PASession.m */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		F193E5F61A0DD9DA0016103E /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				F1F6818E1A0F3AB600F678FA /* PATextFieldCell.h */,
+				F1F6818F1A0F3AB600F678FA /* PATextFieldCell.m */,
+				F1CB18521A117CA100BDB4D8 /* PANavigationController.h */,
+				F1CB18531A117CA100BDB4D8 /* PANavigationController.m */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		F193E5F71A0DD9E10016103E /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				F193A2071A13E6EA00A11EDA /* PALoginViewController.h */,
+				F193A2081A13E6EA00A11EDA /* PALoginViewController.m */,
+				F14034131A167EBA00AF764E /* PATabBarController.h */,
+				F14034141A167EBA00AF764E /* PATabBarController.m */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		F1F681911A0F3BD800F678FA /* Categories */ = {
+			isa = PBXGroup;
+			children = (
+				F1BC5D631A15057700DF804F /* NSError+PAExtensions.h */,
+				F1BC5D641A15057700DF804F /* NSError+PAExtensions.m */,
+				F1F681951A0F3C1700F678FA /* UIImage+PAExtensions.h */,
+				F1F681961A0F3C1700F678FA /* UIImage+PAExtensions.m */,
+			);
+			path = Categories;
+			sourceTree = "<group>";
+		};
+		F1F6819A1A0F3C9400F678FA /* API */ = {
+			isa = PBXGroup;
+			children = (
+				F193E5F51A0DD9870016103E /* Models */,
+				F193E5F81A0DDB1C0016103E /* PASchedulesAPI.h */,
+				F193E5F91A0DDB1C0016103E /* PASchedulesAPI.m */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		F1F6819B1A0F3CCB00F678FA /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Models;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		F193E5C51A0DC6370016103E /* PASchedules */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = F193E5EC1A0DC6370016103E /* Build configuration list for PBXNativeTarget "PASchedules" */;
+			buildPhases = (
+				F8E855FC6B964BD067A7F0E5 /* Check Pods Manifest.lock */,
+				68A63BCD97B0330B56A1BC29 /*  */,
+				F193E5C21A0DC6370016103E /* Sources */,
+				F193E5C31A0DC6370016103E /* Frameworks */,
+				F193E5C41A0DC6370016103E /* Resources */,
+				3FD55D6E694549F871F58E5F /* Copy Pods Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = PASchedules;
+			productName = PASchedules;
+			productReference = F193E5C61A0DC6370016103E /* PASchedules.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		F193E5BE1A0DC6370016103E /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = PA;
+				LastUpgradeCheck = 0610;
+				ORGANIZATIONNAME = "Rudd Fawcett";
+				TargetAttributes = {
+					F193E5C51A0DC6370016103E = {
+						CreatedOnToolsVersion = 6.1;
+					};
+				};
+			};
+			buildConfigurationList = F193E5C11A0DC6370016103E /* Build configuration list for PBXProject "PASchedules" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = F193E5BD1A0DC6370016103E;
+			productRefGroup = F193E5C71A0DC6370016103E /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				F193E5C51A0DC6370016103E /* PASchedules */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		F193E5C41A0DC6370016103E /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F193E5DD1A0DC6370016103E /* LaunchScreen.xib in Resources */,
+				F193E5DA1A0DC6370016103E /* Images.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		3FD55D6E694549F871F58E5F /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		68A63BCD97B0330B56A1BC29 /*  */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+		F8E855FC6B964BD067A7F0E5 /* Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_ROOT}/../Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [[ $? != 0 ]] ; then\n    cat << EOM\nerror: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\nEOM\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		F193E5C21A0DC6370016103E /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				F118D3801A0F0A5100D1F717 /* PASchedule.m in Sources */,
+				F1313A731A12910200997B56 /* PASession.m in Sources */,
+				F14034151A167EBA00AF764E /* PATabBarController.m in Sources */,
+				F193E5CF1A0DC6370016103E /* AppDelegate.m in Sources */,
+				F193E5FD1A0E91FA0016103E /* PAStudent.m in Sources */,
+				F193E5FA1A0DDB1C0016103E /* PASchedulesAPI.m in Sources */,
+				F1F681841A0F2E5800F678FA /* PATeacher.m in Sources */,
+				F193E5CC1A0DC6370016103E /* main.m in Sources */,
+				F1F681971A0F3C1700F678FA /* UIImage+PAExtensions.m in Sources */,
+				F1BC5D651A15057700DF804F /* NSError+PAExtensions.m in Sources */,
+				F1F681901A0F3AB600F678FA /* PATextFieldCell.m in Sources */,
+				F1F6817E1A0F2DC200F678FA /* PASection.m in Sources */,
+				F1F6817B1A0F2A6500F678FA /* PACommitment.m in Sources */,
+				F193A2091A13E6EA00A11EDA /* PALoginViewController.m in Sources */,
+				F1F681811A0F2DEC00F678FA /* PASupercourse.m in Sources */,
+				F1CB18541A117CA100BDB4D8 /* PANavigationController.m in Sources */,
+				F118D3831A0F265A00D1F717 /* PACourse.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		F193E5DB1A0DC6370016103E /* LaunchScreen.xib */ = {
+			isa = PBXVariantGroup;
+			children = (
+				F193E5DC1A0DC6370016103E /* Base */,
+			);
+			name = LaunchScreen.xib;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		F193E5EA1A0DC6370016103E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREFIX_HEADER = PASchedules.pch;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				MTL_ENABLE_DEBUG_INFO = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "";
+			};
+			name = Debug;
+		};
+		F193E5EB1A0DC6370016103E /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++0x";
+				CLANG_CXX_LIBRARY = "libc++";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_PREFIX_HEADER = PASchedules.pch;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 6.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				SDKROOT = iphoneos;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				USER_HEADER_SEARCH_PATHS = "";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		F193E5ED1A0DC6370016103E /* Debug */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 22ABAEAF807F4C0487A56151 /* Pods.debug.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = PrefixHeader.pch;
+				INFOPLIST_FILE = "PASchedules/Supporting Files/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "";
+			};
+			name = Debug;
+		};
+		F193E5EE1A0DC6370016103E /* Release */ = {
+			isa = XCBuildConfiguration;
+			baseConfigurationReference = 93768340555CE0A4C25C7C78 /* Pods.release.xcconfig */;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				GCC_PREFIX_HEADER = PrefixHeader.pch;
+				INFOPLIST_FILE = "PASchedules/Supporting Files/Info.plist";
+				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				TARGETED_DEVICE_FAMILY = 1;
+				USER_HEADER_SEARCH_PATHS = "";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		F193E5C11A0DC6370016103E /* Build configuration list for PBXProject "PASchedules" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F193E5EA1A0DC6370016103E /* Debug */,
+				F193E5EB1A0DC6370016103E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		F193E5EC1A0DC6370016103E /* Build configuration list for PBXNativeTarget "PASchedules" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				F193E5ED1A0DC6370016103E /* Debug */,
+				F193E5EE1A0DC6370016103E /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = F193E5BE1A0DC6370016103E /* Project object */;
+}

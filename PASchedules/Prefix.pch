@@ -1,0 +1,29 @@
+//
+//  PASchedules.h
+//  PASchedules
+//
+//  Created by Rudd Fawcett on 11/9/14.
+//  Copyright (c) 2014 Rudd Fawcett. All rights reserved.
+//
+
+// Colors
+#define PA_BLUE [UIColor colorWithRed:0.004 green:0.090 blue:0.173 alpha:1.00]
+#define PA_WHITE [UIColor whiteColor]
+
+// TEViews
+#import "PANavigationController.h"
+
+#pragma mark - PAExtensions
+#import "UIImage+PAExtensions.h"
+
+// Cocoapods
+
+// TESTING
+
+#define TESTING 1
+
+#ifdef TESTING
+#define LOGOUT_USER 1
+#define TEST_USER @"test"
+#define TEST_PASSWORD @"t3st"
+#endif
