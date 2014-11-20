@@ -10,16 +10,18 @@
 
 @implementation NSError (PAExtensions)
 
-+ (void)showWithError:(NSError *)error {
-//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-//                                                    message:error.localizedDescription
-//                                                   delegate:nil
-//                                          cancelButtonTitle:@"Ok"
-//                                          otherButtonTitles: nil];
-//    
-//    [alert show];
-
++ (void)showHUDWithError:(NSError *)error {
     [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+}
+
++ (void)showWithError:(NSError *)error {
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                    message:error.localizedDescription
+                                                   delegate:nil
+                                          cancelButtonTitle:@"Ok"
+                                          otherButtonTitles: nil];
+    
+    [alert show];
 }
 
 @end

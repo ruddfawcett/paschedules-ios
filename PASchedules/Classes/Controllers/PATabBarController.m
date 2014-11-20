@@ -8,6 +8,59 @@
 
 #import "PATabBarController.h"
 
+#import "PANavigationController.h"
+
+#import "PAStudentViewController.h"
+#import "PAstudent.h"
+
 @implementation PATabBarController
+
+- (id)initWithStudent:(PAStudent *)student {
+    if (self = [super init]) {
+        self.student = student;
+        [self initialize];
+    }
+    
+    return self;
+}
+
+- (void)viewDidLoad {
+    
+    [super viewDidLoad];
+}
+
+- (void)initialize {
+    NSMutableArray *viewControllers = [@[] mutableCopy];
+    
+    PAStudentViewController *studentViewController = [[PAStudentViewController alloc] initWithStudent:self.student];
+    studentViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Students" imageName:@"grad-hat-icon" selectedImageName:@"grad-hat-icon-selected"];
+    
+    [viewControllers addObject:studentViewController];
+    
+    UIViewController *compareViewController = [[UIViewController alloc] init];
+    compareViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Compare" imageName:@"scale-icon" selectedImageName:@"scale-icon-selected"];
+    
+    [viewControllers addObject:compareViewController];
+    
+    UIViewController *scheduleViewController = [[UIViewController alloc] init];
+    scheduleViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Schedule" imageName:@"calendar-icon" selectedImageName:@"calendar-icon-selected"];
+    
+    [viewControllers addObject:scheduleViewController];
+    
+    UIViewController *searchViewController = [[UIViewController alloc] init];
+    searchViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Search" imageName:@"search-icon" selectedImageName:@"search-icon-selected"];
+    
+    [viewControllers addObject:searchViewController];
+    
+    NSMutableArray *newControllers = [@[] mutableCopy];
+    
+    for (id eachController in viewControllers) {
+        PANavigationController *navController = [[PANavigationController alloc] initWithRootViewController:eachController];
+        
+        [newControllers addObject:navController];
+    }
+    
+    [self setViewControllers:newControllers];
+}
 
 @end

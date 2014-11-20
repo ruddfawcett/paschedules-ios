@@ -11,6 +11,8 @@
 @class PASchedulesAPI;
 @class PANavigationController;
 @class PALoginViewController;
+@class PATabBarController;
+@class PAStudentViewController;
 
 extern NSString * const kPASchedulesErrorDomain;
 

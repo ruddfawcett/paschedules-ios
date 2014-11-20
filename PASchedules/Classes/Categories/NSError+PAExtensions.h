@@ -10,6 +10,7 @@
 
 @interface NSError (PAExtensions)
 
++ (void)showHUDWithError:(NSError *)error;
 + (void)showWithError:(NSError *)error;
 
 @end

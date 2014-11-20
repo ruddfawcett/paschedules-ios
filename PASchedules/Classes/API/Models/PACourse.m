@@ -13,7 +13,7 @@
 - (id)initWithAttributes:(NSDictionary *)attributes {
     if (self = [super init]) {
         self.sectionName = attributes[@"section"][@"name"];
-        self.sectionId = (NSUInteger)attributes[@"section"][@"id"];
+        self.sectionId = [attributes[@"section"][@"id"] intValue];
         self.teacherName = attributes[@"section"][@"teacher"] != nil ? attributes[@"section"][@"teacher"] : nil;
         self.room = attributes[@"room"];
     }

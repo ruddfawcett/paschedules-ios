@@ -35,6 +35,17 @@
     return self;
 }
 
+- (void)drawRect:(CGRect)rect {
+    CGRect frame = CGRectMake(15, 12, self.bounds.size.width-(2*15), 21);
+    
+    if (self.imageView.image != nil) {
+        frame.origin.x += 40;
+        frame.size.width -= 40;
+    }
+    
+    self.textField.frame = frame;
+}
+
 - (void)setIcon:(UIImage *)icon {
     self.imageView.image = icon;
     

@@ -16,7 +16,7 @@
 
 // TESTING
 
-#define TESTING 1   
+#define TESTING 1 
 
 #ifdef TESTING
 #define TEST_USER_EMAIL @"rfawcett@andover.edu"

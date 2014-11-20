@@ -11,6 +11,8 @@
 #import "PASchedulesAPI.h"
 #import "PANavigationController.h"
 #import "PALoginViewController.h"
+#import "PATabBarController.h"
+#import "PAStudentViewController.h"
 
 NSString * const kPASchedulesErrorDomain = @"com.ruddfawcett.paschedules.error";
 
@@ -23,16 +25,27 @@ NSString * const kPASchedulesErrorDomain = @"com.ruddfawcett.paschedules.error";
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
+    self.window.backgroundColor = PA_WHITE;
     
     // Override point for customization after application launch.
     [[UINavigationBar appearance] setBarTintColor:PA_DARK_BLUE];
     [[UINavigationBar appearance] setTintColor:[UIColor whiteColor]];
     [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
     
-    PANavigationController *navController = [[PANavigationController alloc] initWithRootViewController:[PALoginViewController new]];
-    self.window.backgroundColor = PA_WHITE;
-    self.window.rootViewController = navController;
+//    [[UITabBar appearance] setBarTintColor:PA_DARK_BLUE];
+    [[UITabBar appearance] setTintColor:PA_DARK_BLUE];
+//    [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]} forState:UIControlStateNormal];
     
+    if ([NSDate isExpired:[PASchedulesAPI sessionCreated]] || ![PASchedulesAPI currentUser]) {
+        PANavigationController *navController = [[PANavigationController alloc] initWithRootViewController:[PALoginViewController new]];
+        
+        self.window.rootViewController = navController;
+    }
+    else {
+        PATabBarController *studentController = [[PATabBarController alloc] initWithStudent:[PASchedulesAPI studentFromSession]];
+        self.window.rootViewController = studentController;
+    }
+
     [self.window makeKeyAndVisible];
     
     return YES;

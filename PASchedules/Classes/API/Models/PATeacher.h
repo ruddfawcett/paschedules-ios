@@ -8,6 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
+@class PASection;
+
 @interface PATeacher : NSObject
+
+@property (strong, nonatomic) NSString *name;
+@property (strong, nonatomic) NSString *department;
+
+@property (nonatomic) NSUInteger teacherId;
+
+@property (strong, nonatomic) NSArray *sections;
+
+- (id)initWithAttributes:(NSDictionary *)attributes;
 
 @end

@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <CRNavigationController/CRNavigationController.h>
 
-@interface PANavigationController : UINavigationController
+@interface PANavigationController : CRNavigationController
 
 @end

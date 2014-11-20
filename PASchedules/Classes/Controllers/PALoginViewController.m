@@ -9,6 +9,8 @@
 #import "PALoginViewController.h"
 
 #import "PATextFieldCell.h"
+#import "PATabBarController.h"
+#import "PAStudent.h"
 
 @interface PALoginViewController () <UITextFieldDelegate, PASessionDelegate>
 
@@ -23,9 +25,7 @@
 
 - (id)init {
     if (self = [super initWithStyle:UITableViewStyleGrouped]) {
-        self.tableView.separatorColor = [UIColor whiteColor];
-        
-        [PASchedulesAPI sharedClient].currentUser.delegate = self;
+//        self.tableView.separatorColor = [UIColor whiteColor];
     }
     
     return self;
@@ -33,7 +33,6 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    
     self.title = @"Log In";
 }
 
@@ -42,18 +41,40 @@
         [self.passwordField becomeFirstResponder];
     }
     
+//    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"credentials"]) {
+//        [self loginUser];
+//    }
+    
     [super viewDidAppear:animated];
 }
 
 - (void)loginUser {
-    NSLog(@"Logging in...");
+    [SVProgressHUD showWithStatus:@"Logging In..." maskType:SVProgressHUDMaskTypeGradient];
     
-    [[PASchedulesAPI sharedClient] login:self.usernameField.text withPassword:self.passwordField.text success:^(NSDictionary *result) {
-        NSLog(@"%@",result);
-        [SVProgressHUD showSuccessWithStatus:@"Logged In"];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [NSError showWithError:error];
-    }];
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+        [[PASchedulesAPI sharedClient] login:self.usernameField.text withPassword:self.passwordField.text success:^(NSDictionary *result) {
+            [SVProgressHUD showSuccessWithStatus:@"Logged In"];
+            
+            PAStudent *student = [[PAStudent alloc] initWithAttributes:result];
+            PATabBarController *tabBarController = [[PATabBarController alloc] initWithStudent:student];
+            tabBarController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
+        
+            [self.navigationController presentViewController:tabBarController animated:YES completion:nil];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [SVProgressHUD dismiss];
+            
+            if (error.code == 0) {
+                [NSError showHUDWithError:error];
+            }
+            else {
+                [NSError showWithError:error];
+            }
+            
+            
+            [self.passwordField becomeFirstResponder];
+            
+        }];
+    });
 }
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
@@ -87,8 +108,6 @@
     }
     else {
         [self.view endEditing:YES];
-        
-        [SVProgressHUD showWithStatus:@"Logging In..." maskType:SVProgressHUDMaskTypeGradient];
         [self loginUser];
     }
     
@@ -112,15 +131,16 @@
     if (indexPath.row == 0) {
         cell.icon = [UIImage maskedImageWithName:@"envelope" color:PA_DARK];
         cell.textField.placeholder = @"Andover Username";
-        cell.textField.text = TEST_USER_EMAIL;
+        cell.textField.text = TESTING ? TEST_USER_EMAIL : [[NSUserDefaults standardUserDefaults] objectForKey:@"credentials"][@"email"];
         cell.textField.returnKeyType = UIReturnKeyNext;
         self.usernameField = cell.textField;
     }
     else {
         cell.icon = [UIImage maskedImageWithName:@"lock" color:PA_DARK];
         cell.textField.placeholder = @"Password";
-        cell.textField.text = TEST_USER_PASSWORD;
+        cell.textField.text = TESTING ? TEST_USER_PASSWORD : [[NSUserDefaults standardUserDefaults] objectForKey:@"credentials"][@"password"];
         cell.textField.secureTextEntry = YES;
+        
         self.passwordField = cell.textField;
     }
     

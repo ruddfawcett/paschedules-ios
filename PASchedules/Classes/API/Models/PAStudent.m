@@ -15,11 +15,12 @@
 
 - (id)initWithAttributes:(NSDictionary *)attributes {
     if (self = [super init]) {
-        self.name = attributes[@"name"];
+        self.name = attributes[@"name"] != nil ? attributes[@"name"] : nil;
         self.nickname = attributes[@"nickname"] != nil ? attributes[@"nickname"] : nil;
         
-        self.studentId = (NSUInteger)attributes[@"id"];
-        self.graduation = (NSUInteger)attributes[@"graduation"];
+        self.studentId = attributes[@"id"] != nil ? [attributes[@"id"] intValue] : 0;
+        
+        self.graduation = attributes[@"id"] != nil ? [attributes[@"graduation"] intValue] : 0;
         
         [self loadCourses:attributes[@"courses"]];
         [self loadCommitments:attributes[@"commitments"]];
@@ -50,6 +51,10 @@
     }
     
     self.commitments = theCommitments;
+}
+
+- (BOOL)isCurrentStudent {
+    return self.studentId == [PASchedulesAPI sharedClient].currentStudent.studentId;
 }
 
 @end

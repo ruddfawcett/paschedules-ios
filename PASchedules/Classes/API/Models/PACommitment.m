@@ -18,8 +18,8 @@
         self.name = attributes[@"name"];
         self.title = attributes[@"title"];
         
-        self.commitmentId = (NSUInteger)attributes[@"id"];
-        self.size = attributes[@"size"] != nil ? [NSNumber numberWithInteger:(NSInteger)attributes[@"size"]] : nil;
+        self.commitmentId = attributes[@"id"] != nil  ? [attributes[@"id"] intValue] : 0;
+        self.size = attributes[@"size"] != nil  ? [attributes[@"size"] intValue] : 0;
         
         [self loadStudents:attributes[@"students"]];
     }

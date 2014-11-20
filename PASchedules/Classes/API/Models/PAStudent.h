@@ -18,7 +18,6 @@
 @property (strong, nonatomic) NSString *name;
 @property (strong, nonatomic) NSString *nickname;
 
-
 @property (nonatomic) NSUInteger studentId;
 @property (nonatomic) NSUInteger graduation;
 
@@ -26,5 +25,7 @@
 @property (strong, nonatomic) NSArray *commitments;
 
 - (id)initWithAttributes:(NSDictionary *)attributes;
+
+- (BOOL)isCurrentStudent;
 
 @end

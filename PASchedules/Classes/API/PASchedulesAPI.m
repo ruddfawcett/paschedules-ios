@@ -10,11 +10,18 @@
 
 #import "PAStudent.h"
 #import "PASchedule.h"
-#import "PASession.h"
+#import "PASection.h"
+#import "PATeacher.h"
+#import "PASupercourse.h"
+#import "PACommitment.h"
 
 static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.herokuapp.com/";
 
 @interface PASchedulesAPI ()
+
+@property (nonatomic) NSUInteger loginAttempts;
+
+@property (nonatomic) BOOL showedError;
 
 @end
 
@@ -32,94 +39,224 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
 
 
 - (void)login:(NSString *)email withPassword:(NSString *)password success:(void (^)(NSDictionary *result))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
-    NSDictionary *paramters = @{@"email" : email, @"password" : password};
+    NSDictionary *paramters = @{@"email" : email, @"password" : password, @"ios" : @YES};
     
     [self POST:@"api/v1/login/" parameters:paramters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *result = (NSDictionary *)responseObject;
         
-        NSLog(@"%@",result);
-        
         if (!result[@"session"]) {
-            if ([[NSNumber numberWithBool:(BOOL)result[@"result"]] intValue] == 1) {
-                self.currentUser = [[PASession alloc] initWithAttributes:@{@"parameters" : paramters, @"result" : result}];
-                
-                [self.currentUser loggedIn:result];
+            if ([result[@"result"] intValue] == 1) {
+                self.currentStudent = [[PAStudent alloc] initWithAttributes:result];
+                [self saveSession:result[@"key"] forStudent:self.currentStudent];
                 
                 success(result);
                 return;
             }
             else {
-                NSError *error = [[NSError alloc] initWithDomain:kPASchedulesErrorDomain code:0 userInfo:@{NSLocalizedDescriptionKey : result[@"message"]}];
+                self.loginAttempts++;
+                
+                NSError *error;
+                
+                if (self.loginAttempts >= 3 && !self.showedError) {
+                    error = [[NSError alloc] initWithDomain:kPASchedulesErrorDomain code:1 userInfo:@{NSLocalizedDescriptionKey : @"We've noticed something's up.\n\nIt looks like you've gotten a few failed logins, and we're sorry.\n\nAre you sure you're connected to the internet?\n\nWe're doing our best to lock down this login issue, so please just keep trying!"}];
+                    
+                    self.showedError = YES;
+                }
+                else {
+                    error = [[NSError alloc] initWithDomain:kPASchedulesErrorDomain code:0 userInfo:@{NSLocalizedDescriptionKey : result[@"message"]}];
+                }
                 
                 failure(nil, error);
             }
         }
-        else [self.currentUser sessionEnded:result];
+        else [self sessionEnded:result];
     } failure:failure];
 }
 
 - (void)logout:(void (^)(BOOL *success))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
-    [self POST:@"api/v1/logout/" parameters:@{@"key" : self.currentUser.key} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self POST:@"api/v1/logout/" parameters:@{@"key" : [self sessionKey]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *result = (NSDictionary *)responseObject;
         
         if (!result[@"session"]) {
-            if ([[NSNumber numberWithBool:(BOOL)result[@"result"]] intValue] != 0) {
+            if ([result[@"result"] intValue] != 0 || result[@"result"] == nil) {
                 BOOL result = YES;
                 
                 success(&result);
             }
             else {
-                NSError *error = [[NSError alloc] initWithDomain:kPASchedulesErrorDomain code:0 userInfo:@{NSLocalizedDescriptionKey : result[@"message"]}];
+                NSError *error = [[NSError alloc] initWithDomain:kPASchedulesErrorDomain code:0 userInfo:@{NSLocalizedDescriptionKey : result[@"message"] ? result[@"message"] : @"Fetch error, no result."}];
                 
                 failure(nil, error);
             }
         }
-        else [self.currentUser sessionEnded:result];
+        else [self sessionEnded:result];
     } failure:failure];
 }
 
 - (void)students:(NSUInteger)studentId success:(void (^)(PAStudent *student))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
-    NSDictionary *parameters = @{@"key" : self.currentUser.key, @"id" : @(studentId)};
+    NSDictionary *parameters = @{@"key" : [self sessionKey], @"id" : @(studentId), @"ios" : @YES};
     
     [self POST:@"api/v1/students/" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *result = (NSDictionary *)responseObject;
         
         if (!result[@"session"]) {
-            if ([[NSNumber numberWithBool:(BOOL)result[@"result"]] intValue] != 0) {
+            if ([result[@"result"] intValue] != 0 || result[@"result"] == nil) {
                 PAStudent *student = [[PAStudent alloc] initWithAttributes:result];
                 
                 success(student);
             }
             else {
-                NSError *error = [[NSError alloc] initWithDomain:kPASchedulesErrorDomain code:0 userInfo:@{NSLocalizedDescriptionKey : result[@"message"]}];
+                NSError *error = [[NSError alloc] initWithDomain:kPASchedulesErrorDomain code:0 userInfo:@{NSLocalizedDescriptionKey : result[@"message"] ? result[@"message"] : @"Fetch error, no result."}];
                 
                 failure(nil, error);
             }
         }
-        else [self.currentUser sessionEnded:result];
+        else [self sessionEnded:result];
     } failure:failure];
 }
 
 - (void)schedules:(NSUInteger)studentId success:(void (^)(PASchedule *schedule))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
-    NSDictionary *parameters = @{@"key" : self.currentUser.key, @"id" : @(studentId)};
+    NSDictionary *parameters = @{@"key" : [self sessionKey], @"id" : @(studentId), @"ios" : @YES};
     
     [self POST:@"api/v1/schedules/" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *result = (NSDictionary *)responseObject;
         
         if (!result[@"session"]) {
-            if ([[NSNumber numberWithBool:(BOOL)result[@"result"]] intValue] != 0) {
+            if ([result[@"result"] intValue] != 0 || result[@"result"] == nil) {
                 PASchedule *schedule = [[PASchedule alloc] initWithAttributes:result];
                 
                 success(schedule);
             }
             else {
-                NSError *error = [[NSError alloc] initWithDomain:kPASchedulesErrorDomain code:0 userInfo:@{NSLocalizedDescriptionKey : result[@"message"]}];
+                NSError *error = [[NSError alloc] initWithDomain:kPASchedulesErrorDomain code:0 userInfo:@{NSLocalizedDescriptionKey : result[@"message"] ? result[@"message"] : @"Fetch error, no result."}];
                 
                 failure(nil, error);
             }
         }
-        else [self.currentUser sessionEnded:result];
+        else [self sessionEnded:result];
     } failure:failure];
+}
+
+- (void)sections:(NSUInteger)sectionId success:(void (^)(PASection *section))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    NSDictionary *parameters = @{@"key" : [self sessionKey], @"id" : @(sectionId), @"ios" : @YES};
+    
+    [self POST:@"api/v1/sections/" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *result = (NSDictionary *)responseObject;
+        
+        if (!result[@"session"]) {
+            if ([result[@"result"] intValue] != 0 || result[@"result"] == nil) {
+                PASection *section = [[PASection alloc] initWithAttributes:result];
+                
+                success(section);
+            }
+            else {
+                NSError *error = [[NSError alloc] initWithDomain:kPASchedulesErrorDomain code:0 userInfo:@{NSLocalizedDescriptionKey : result[@"message"] ? result[@"message"] : @"Fetch error, no result."}];
+                
+                failure(nil, error);
+            }
+        }
+        else [self sessionEnded:result];
+    } failure:failure];
+}
+
+- (void)teachers:(NSUInteger)teacherId success:(void (^)(PATeacher *teacher))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    NSDictionary *parameters = @{@"key" : [self sessionKey], @"id" : @(teacherId), @"ios" : @YES};
+    
+    [self POST:@"api/v1/teachers/" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *result = (NSDictionary *)responseObject;
+        
+        if (!result[@"session"]) {
+            if ([result[@"result"] intValue] != 0 || result[@"result"] == nil) {
+                PATeacher *teacher = [[PATeacher alloc] initWithAttributes:result];
+                
+                success(teacher);
+            }
+            else {
+                NSError *error = [[NSError alloc] initWithDomain:kPASchedulesErrorDomain code:0 userInfo:@{NSLocalizedDescriptionKey : result[@"message"] ? result[@"message"] : @"Fetch error, no result."}];
+                
+                failure(nil, error);
+            }
+        }
+        else [self sessionEnded:result];
+    } failure:failure];
+}
+
+- (void)supercourses:(NSUInteger)supercourseId success:(void (^)(PASupercourse *supercourse))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    NSDictionary *parameters = @{@"key" : [self sessionKey], @"id" : @(supercourseId), @"ios" : @YES};
+    
+    [self POST:@"api/v1/supercourses/" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *result = (NSDictionary *)responseObject;
+        
+        if (!result[@"session"]) {
+            if ([result[@"result"] intValue] != 0 || result[@"result"] == nil) {
+                PASupercourse *supercourse = [[PASupercourse alloc] initWithAttributes:result];
+                
+                success(supercourse);
+            }
+            else {
+                NSError *error = [[NSError alloc] initWithDomain:kPASchedulesErrorDomain code:0 userInfo:@{NSLocalizedDescriptionKey : result[@"message"] ? result[@"message"] : @"Fetch error, no result."}];
+                
+                failure(nil, error);
+            }
+        }
+        else [self sessionEnded:result];
+    } failure:failure];
+}
+
+- (void)commitments:(NSUInteger)commitmentId success:(void (^)(PACommitment *commitment))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    NSDictionary *parameters = @{@"key" : [self sessionKey], @"id" : @(commitmentId), @"ios" : @YES};
+    
+    [self POST:@"api/v1/commitments/" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        NSDictionary *result = (NSDictionary *)responseObject;
+        
+        if (!result[@"session"]) {
+            if ([result[@"result"] intValue] != 0 || result[@"result"] == nil) {
+                PACommitment *commitment = [[PACommitment alloc] initWithAttributes:result];
+                
+                success(commitment);
+            }
+            else {
+                NSError *error = [[NSError alloc] initWithDomain:kPASchedulesErrorDomain code:0 userInfo:@{NSLocalizedDescriptionKey : result[@"message"] ? result[@"message"] : @"Fetch error, no result."}];
+                
+                failure(nil, error);
+            }
+        }
+        else [self sessionEnded:result];
+    } failure:failure];
+}
+
+- (void)saveSession:(NSString *)key forStudent:(PAStudent *)student {
+    [[NSUserDefaults standardUserDefaults] setObject:@{@"key" : key, @"studentId" : @(student.studentId), @"created" : [NSDate date]} forKey:@"session"];
+}
+
+- (NSString *)sessionKey {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"session"][@"key"];
+}
+
++ (PAStudent *)studentFromSession {
+    NSUInteger studentId = [[[NSUserDefaults standardUserDefaults] objectForKey:@"session"][@"studentId"] intValue];
+    
+    return [[PAStudent alloc] initWithAttributes:@{@"id" : @(studentId)}];
+}
+
++ (BOOL)currentUser {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"session"] != nil;
+}
+
++ (void)destroySession {
+    [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"session"];
+}
+
++ (NSDate *)sessionCreated {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"session"][@"created"];
+}
+
+- (void)sessionEnded:(NSDictionary *)result {
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (self.delegate && [self.delegate respondsToSelector:@selector(sessionDidEnd:)]) {
+            [self.delegate sessionDidEnd:result];
+        }
+    });
 }
 
 @end

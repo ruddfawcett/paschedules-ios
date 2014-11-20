@@ -17,8 +17,7 @@
 @property (strong, nonatomic) NSString *title;
 
 @property (nonatomic) NSUInteger commitmentId;
-
-@property (strong, nonatomic) NSNumber *size;
+@property (nonatomic) NSUInteger size;
 
 @property (strong, nonatomic) NSArray *students;
 

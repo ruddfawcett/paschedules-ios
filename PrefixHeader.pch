@@ -14,7 +14,6 @@
 
 // API
 #import "PASchedulesAPI.h"
-#import "PASession.h"
 
 // PAViews
 #import "PANavigationController.h"
@@ -22,3 +21,5 @@
 #pragma mark - PAExtensions
 #import "UIImage+PAExtensions.h"
 #import "NSError+PAExtensions.h"
+#import "NSDate+PAExtensions.h"
+#import "UITabBarItem+Selected.h"

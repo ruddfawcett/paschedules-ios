@@ -11,11 +11,24 @@
 
 @class PAStudent;
 @class PASchedule;
-@class PASession;
+@class PASection;
+@class PATeacher;
+@class PASupercourse;
+@class PACommitment;
+
+@protocol PASessionDelegate <NSObject>
+
+@optional
+
+- (void)sessionDidEnd:(NSDictionary *)result;
+
+@end
 
 @interface PASchedulesAPI : AFHTTPRequestOperationManager
 
-@property (strong, nonatomic) PASession *currentUser;
+@property (strong, nonatomic) PAStudent *currentStudent;
+
+@property (strong, nonatomic) id<PASessionDelegate> delegate;
 
 + (instancetype)sharedClient;
 
@@ -26,5 +39,23 @@
 - (void)students:(NSUInteger)studentId success:(void (^)(PAStudent *student))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 - (void)schedules:(NSUInteger)studentId success:(void (^)(PASchedule *schedule))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+- (void)sections:(NSUInteger)sectionId success:(void (^)(PASection *section))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+- (void)teachers:(NSUInteger)teacherId success:(void (^)(PATeacher *teacher))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+- (void)supercourses:(NSUInteger)supercourseId success:(void (^)(PASupercourse *supercourse))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+- (void)commitments:(NSUInteger)commitmentId success:(void (^)(PACommitment *commitment))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+#pragma mark - Helper Methods
+
++ (PAStudent *)studentFromSession;
+
++ (void)destroySession;
+
++ (NSDate *)sessionCreated;
+
++ (BOOL)currentUser;
 
 @end

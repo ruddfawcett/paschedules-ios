@@ -16,7 +16,7 @@
 
 - (id)init {
     if (self = [super init]) {
-        self.navigationBar.translucent = NO;
+        
     }
     
     return self;

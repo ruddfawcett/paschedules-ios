@@ -8,6 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class PANavigationController;
+
+@class PAStudentViewController;
+
 @interface PATabBarController : UITabBarController
+
+@property (strong, nonatomic) PAStudent *student;
+
+- (id)initWithStudent:(PAStudent *)student;
 
 @end

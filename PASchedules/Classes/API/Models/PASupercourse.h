@@ -8,6 +8,17 @@
 
 #import <Foundation/Foundation.h>
 
+@class PASection;
+
 @interface PASupercourse : NSObject
+
+@property (strong, nonatomic) NSString *title;
+@property (strong, nonatomic) NSString *name;
+
+@property (nonatomic) NSUInteger supercourseId;
+
+@property (strong, nonatomic) NSArray *sections;
+
+- (id)initWithAttributes:(NSDictionary *)attributes;
 
 @end
