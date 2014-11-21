@@ -8,9 +8,11 @@
 
 #import <UIKit/UIKit.h>
 
-@class PATextFieldCell;
-@class PATabBarController;
 @class PAStudent;
+
+@class PATextFieldCell;
+
+@class PATabBarController;
 
 @interface PALoginViewController : UITableViewController
 

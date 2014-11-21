@@ -13,6 +13,11 @@
 @class PACommitment;
 @class PAStudent;
 
+@class PABasicTeacherTableViewCell;
+@class PABasicInfoTableViewCell;
+@class PAEmptyTableViewCell;
+@class PAStudentTableViewCell;
+
 typedef NS_ENUM(NSUInteger, PACommitmentTableViewSections) {
     PACommitmentTableViewSectionSupervisor,
     PACommitmentTableViewSectionInfo,
@@ -21,8 +26,22 @@ typedef NS_ENUM(NSUInteger, PACommitmentTableViewSections) {
 
 @interface PACommitmentViewController : PATemplateTableViewController
 
+#pragma mark - Properties
+
+/**
+ *  The commitment that the controller represents.
+ */
 @property (strong, nonatomic) PACommitment *commitment;
 
+#pragma mark - Instance Methods
+
+/**
+ *  Returns this controller with a passed commitment.
+ *
+ *  @param commitment A PACommitment.
+ *
+ *  @return This controller.
+ */
 - (id)initWithCommitment:(PACommitment *)commitment;
 
 @end

@@ -12,13 +12,38 @@
 
 @interface PASupercourse : NSObject
 
+#pragma mark - Properties
+
+/**
+ *  The title of the supercourse.
+ */
 @property (strong, nonatomic) NSString *title;
+/**
+ *  The name of the supercourse.
+ */
 @property (strong, nonatomic) NSString *name;
 
+
+/**
+ *  The supercourse Id.
+ */
 @property (nonatomic) NSUInteger supercourseId;
 
+
+/**
+ *  An array of PASection objects in the supercourse.
+ */
 @property (strong, nonatomic) NSArray *sections;
 
+#pragma mark - Instance Methods
+
+/**
+ *  Returns a PASupercourse instance from an NSDictionary.
+ *
+ *  @param attributes The decoded JSON from the API call.
+ *
+ *  @return A PASupercourse instance.
+ */
 - (id)initWithAttributes:(NSDictionary *)attributes;
 
 @end

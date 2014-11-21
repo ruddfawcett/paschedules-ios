@@ -8,6 +8,15 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PATemplateTableViewController : UITableViewController <PASessionDelegate>
+#import "UIScrollView+EmptyDataSet.h"
+
+@interface PATemplateTableViewController : UITableViewController <PASessionDelegate, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource>
+
+#pragma mark - Properties
+
+/**
+ *  Stops the refreshControl from showing on viewDidLoad:.
+ */
+@property (nonatomic) BOOL shouldNotLoadRefreshing;
 
 @end

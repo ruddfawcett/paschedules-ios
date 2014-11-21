@@ -8,18 +8,19 @@
 
 #import "PACommitment.h"
 
+#import "PATeacher.h"
 #import "PAStudent.h"
 
 @implementation PACommitment
 
 - (id)initWithAttributes:(NSDictionary *)attributes {
     if (self = [super init]) {
-        self.teacherName = attributes[@"teacher"][@"name"];
+        self.teacher = [[PATeacher alloc] initWithAttributes:attributes[@"teacher"]];
         self.name = attributes[@"name"];
         self.title = attributes[@"title"];
         
-        self.commitmentId = attributes[@"id"] != nil  ? [attributes[@"id"] intValue] : 0;
-        self.size = attributes[@"size"] != nil  ? [attributes[@"size"] intValue] : 0;
+        self.commitmentId = attributes[@"id"] ? [attributes[@"id"] intValue] : 0;
+        self.size = attributes[@"size"] ? [attributes[@"size"] intValue] : 0;
         
         [self loadStudents:attributes[@"students"]];
     }

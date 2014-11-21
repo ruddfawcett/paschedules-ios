@@ -10,6 +10,16 @@
 
 @interface PASchedule : NSObject
 
+
+#pragma mark - Instance Methods
+
+/**
+ *  Returns a PATeacher instance from an NSDictionary.
+ *
+ *  @param attributes The decoded JSON from the API call.
+ *
+ *  @return A PATeacher instance.
+ */
 - (id)initWithAttributes:(NSDictionary *)attributes;
 
 @end

@@ -15,6 +15,9 @@
 @class PASupercourse;
 @class PATeacher;
 
+@class PAEmptyTableViewCell;
+@class PASectionTableViewCell;
+
 @class PASectionViewController;
 
 typedef NS_ENUM(NSUInteger, PATeacherTableViewSections) {

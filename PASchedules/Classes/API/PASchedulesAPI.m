@@ -15,12 +15,22 @@
 #import "PASupercourse.h"
 #import "PACommitment.h"
 
+/**
+ *  The base URL for the API.
+ */
 static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.herokuapp.com/";
 
 @interface PASchedulesAPI ()
 
+/**
+ *  A counter that keeps track of the number of times the user has logged in.
+ */
 @property (nonatomic) NSUInteger loginAttempts;
 
+
+/**
+ *  Whether or not the alert view for the above should be shown.
+ */
 @property (nonatomic) BOOL showedError;
 
 @end
@@ -56,7 +66,7 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
                 self.loginAttempts++;
                 
                 NSError *error;
-                
+
                 if (self.loginAttempts >= 3 && !self.showedError) {
                     error = [[NSError alloc] initWithDomain:kPASchedulesErrorDomain code:1 userInfo:@{NSLocalizedDescriptionKey : @"We've noticed something's up.\n\nIt looks like you've gotten a few failed logins, and we're sorry.\n\nAre you sure you're connected to the internet?\n\nWe're doing our best to lock down this login issue, so please just keep trying!"}];
                     
@@ -79,9 +89,12 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
         
         if (!result[@"session"]) {
             if ([result[@"result"] intValue] != 0 || result[@"result"] == nil) {
-                BOOL result = YES;
+                BOOL successful = YES;
                 
-                success(&result);
+                [self sessionEnded:result];
+                [PASchedulesAPI destroySession];
+                
+                success(&successful);
             }
             else {
                 NSError *error = [[NSError alloc] initWithDomain:kPASchedulesErrorDomain code:0 userInfo:@{NSLocalizedDescriptionKey : result[@"message"] ? result[@"message"] : @"Fetch error, no result."}];

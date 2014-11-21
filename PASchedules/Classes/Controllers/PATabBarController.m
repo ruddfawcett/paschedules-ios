@@ -11,7 +11,6 @@
 #import "PANavigationController.h"
 
 #import "PAStudentViewController.h"
-#import "PAstudent.h"
 
 @implementation PATabBarController
 
@@ -51,6 +50,11 @@
     searchViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Search" imageName:@"search-icon" selectedImageName:@"search-icon-selected"];
     
     [viewControllers addObject:searchViewController];
+    
+    UIViewController *settingsController = [[UIViewController alloc] init];
+    settingsController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Settings" imageName:@"gear-icon" selectedImageName:@"gear-icon-selected"];
+    
+    [viewControllers addObject:settingsController];
     
     NSMutableArray *newControllers = [@[] mutableCopy];
     

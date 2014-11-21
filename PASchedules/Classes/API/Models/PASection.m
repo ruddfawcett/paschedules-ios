@@ -20,7 +20,7 @@
         self.period = attributes[@"period"];
         
         self.sectionId = attributes[@"id"] ? [attributes[@"id"] intValue] : 0;
-        self.size = attributes[@"size"] != nil  ? [attributes[@"size"] intValue] : 0;
+        self.size = attributes[@"size"] ? [attributes[@"size"] intValue] : 0;
         
         if (attributes[@"supercourse"] != nil) {
             [self loadSupercourse:attributes[@"supercourse"]];

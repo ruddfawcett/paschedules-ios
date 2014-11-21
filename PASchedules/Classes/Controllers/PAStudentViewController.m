@@ -8,13 +8,28 @@
 
 #import "PAStudentViewController.h"
 
-#import "PAStudent.h"
-#import "PACourse.h"
-#import "PACommitment.h"
-#import "PASection.h"
+#import "PAEmptyTableViewCell.h"
+#import "PABasicInfoTableViewCell.h"
+#import "PACourseTableViewCell.h"
+#import "PACommitmentTableViewCell.h"
 
 #import "PASectionViewController.h"
 #import "PACommitmentViewController.h"
+
+NSString * NSStringFromStudentSections(PAStudentTableViewSections section) {
+    switch (section) {
+        case PAStudentTableViewSectionCourses:
+            return @"Courses";
+        case PAStudentTableViewSectionCommitments:
+            return @"Commitments";
+        default:
+            return nil;
+    }
+}
+
+static NSString * kPAInfoIdentifier = @"Info";
+static NSString * kPACoursesIdentifier = @"Courses";
+static NSString * kPACommitmentsIdentifier = @"Commitments";
 
 @interface PAStudentViewController ()
 
@@ -57,16 +72,7 @@
 #pragma mark - UITableViewDelegate
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if (section == PAStudentTableViewSectionInfo) {
-        return nil;
-    }
-    else if (section == PAStudentTableViewSectionCourses) {
-        return @"Courses";
-    }
-    else {
-        return @"Commitments";
-    }
-    return nil;
+    return NSStringFromStudentSections(section);
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -75,136 +81,86 @@
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == PAStudentTableViewSectionInfo) {
-        if (self.student.nickname != nil) {
-            return 2;
-        }
-        else return 1;
+        return self.student.nickname ? 2 : 1;
     }
     else if (section == PAStudentTableViewSectionCourses) {
         return self.student.courses.count;
     }
-    else {
-        return self.student.commitments.count;
-    }
-    
-    return 0;
+    else return self.student.commitments.count;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == PAStudentTableViewSectionInfo) {
-        return UITableViewAutomaticDimension;
-    }
-    else if (indexPath.section == PAStudentTableViewSectionCourses) {
+    if (indexPath.section == PAStudentTableViewSectionCourses) {
         if (self.student.courses.count == 0) {
             return UITableViewAutomaticDimension;
         }
         else {
             PACourse *thisCourse = self.student.courses[indexPath.row];
-            
-            if (thisCourse.teacherName != nil) {
-                return 60;
-            }
-            else {
-                return 50;
-            }
+            return thisCourse.teacherName ? 60 : 50;
         }
     }
-    else {
-        if (self.student.commitments.count == 0) {
-            return UITableViewAutomaticDimension;
-        }
-        else {
-            return 60;
-        }
+    else if (indexPath.section == PAStudentTableViewSectionCommitments) {
+        return (self.student.commitments.count != 0) ? 60 : UITableViewAutomaticDimension;
     }
-    
-    return UITableViewAutomaticDimension;
+    else return UITableViewAutomaticDimension;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *resuseIdentifier = @"Cell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:resuseIdentifier];
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:resuseIdentifier];
-    
     if (indexPath.section == PAStudentTableViewSectionInfo) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:resuseIdentifier];
-        PAStudent *thisStudent = self.student;
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        PABasicInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPAInfoIdentifier];
         
         if (indexPath.row == 0) {
-            cell.textLabel.text = @"Graduation";
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)thisStudent.graduation];
+            cell = [PABasicInfoTableViewCell cellWithReuseIdentifier:kPAInfoIdentifier andText:@"Graduation" andInfo:@(self.student.graduation)];
         }
         else {
-            cell.textLabel.text = @"Goes by";
-            cell.detailTextLabel.text = thisStudent.nickname;
+            cell = [PABasicInfoTableViewCell cellWithReuseIdentifier:kPAInfoIdentifier andText:@"Goes by" andInfo:self.student.nickname];
         }
+        
+        return cell;
     }
     else if (indexPath.section == PAStudentTableViewSectionCourses) {
-        if (self.student.courses.count == 0) {
-            cell.textLabel.textColor = [UIColor lightGrayColor];
-            cell.imageView.image = [UIImage maskedImageWithName:@"warning-sign" color:[UIColor lightGrayColor]];
-            cell.textLabel.text = @"No courses.";
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.userInteractionEnabled = NO;
+        if (self.student.courses.count != 0) {
+            PACourseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPACoursesIdentifier];
+            cell = [PACourseTableViewCell cellWithReuseIdentifier:kPACoursesIdentifier];
+            cell.course = self.student.courses[indexPath.row];
+            
+            return cell;
         }
         else {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:resuseIdentifier];
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            cell.detailTextLabel.numberOfLines = 0;
-            cell.detailTextLabel.lineBreakMode = NSLineBreakByWordWrapping;
+            PAEmptyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPACoursesIdentifier];
+            cell = [PAEmptyTableViewCell cellWithReuseIdentifier:kPACoursesIdentifier];
+            cell.modelType = PAModelTypeCourse;
             
-            PACourse *thisCourse = self.student.courses[indexPath.row];
-            
-            cell.textLabel.text = thisCourse.sectionName;
-            
-            if (thisCourse.teacherName != nil) {
-                cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ \n%@", thisCourse.teacherName, thisCourse.room];
-            }
-            else {
-                cell.detailTextLabel.text = [NSString stringWithFormat:@"%@", thisCourse.room];
-            }
+            return cell;
         }
     }
     else {
-        if (self.student.courses.count == 0) {
-            cell.textLabel.textColor = [UIColor lightGrayColor];
-            cell.imageView.image = [UIImage maskedImageWithName:@"warning-sign" color:[UIColor lightGrayColor]];
-            cell.textLabel.text = @"No commitments.";
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.userInteractionEnabled = NO;
+        if (self.student.commitments.count != 0) {
+            PACommitmentTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPACommitmentsIdentifier];
+            cell = [PACommitmentTableViewCell cellWithReuseIdentifier:kPACommitmentsIdentifier];
+            cell.commitment = self.student.commitments[indexPath.row];
+            
+            return cell;
         }
         else {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:resuseIdentifier];
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            cell.detailTextLabel.numberOfLines = 0;
-            cell.detailTextLabel.lineBreakMode = NSLineBreakByWordWrapping;
+            PAEmptyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPACommitmentsIdentifier];
+            cell = [PAEmptyTableViewCell cellWithReuseIdentifier:kPACommitmentsIdentifier];
+            cell.modelType = PAModelTypeCommitment;
             
-            PACommitment *thisCommitment = self.student.commitments[indexPath.row];
-            
-            cell.textLabel.text = thisCommitment.title;
-            
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ \n%@", thisCommitment.name, thisCommitment.teacherName];
+            return cell;
         }
     }
     
-    return cell;
+    return nil;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == PAStudentTableViewSectionCourses) {
-        PASection *aSection = [[PASection alloc] initWithAttributes:@{@"id" : @([self.student.courses[indexPath.row] sectionId])}];
-        
-        PASectionViewController *sectionViewController = [[PASectionViewController alloc] initWithSection:aSection];
-        
+        PASectionViewController *sectionViewController = [[PASectionViewController alloc] initWithSection:[[PASection alloc] initWithAttributes:@{@"id" : @([self.student.courses[indexPath.row] sectionId])}]];
         [self.navigationController pushViewController:sectionViewController animated:YES];
     }
     else if (indexPath.section == PAStudentTableViewSectionCommitments) {
-        PACommitment *aCommitment = self.student.commitments[indexPath.row];
-        
-        PACommitmentViewController *commitmentViewController = [[PACommitmentViewController alloc] initWithCommitment:aCommitment];
-        
+        PACommitmentViewController *commitmentViewController = [[PACommitmentViewController alloc] initWithCommitment:self.student.commitments[indexPath.row]];
         [self.navigationController pushViewController:commitmentViewController animated:YES];
     }
     else return;

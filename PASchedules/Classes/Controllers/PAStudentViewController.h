@@ -15,6 +15,11 @@
 @class PACommitment;
 @class PASection;
 
+@class PAEmptyTableViewCell;
+@class PABasicInfoTableViewCell;
+@class PACourseTableViewCell;
+@class PACommitmentTableViewCell;
+
 @class PASectionViewController;
 @class PACommitmentViewController;
 

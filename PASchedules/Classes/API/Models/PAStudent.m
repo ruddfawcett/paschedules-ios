@@ -15,12 +15,12 @@
 
 - (id)initWithAttributes:(NSDictionary *)attributes {
     if (self = [super init]) {
-        self.name = attributes[@"name"] != nil ? attributes[@"name"] : nil;
-        self.nickname = attributes[@"nickname"] != nil ? attributes[@"nickname"] : nil;
+        self.name = attributes[@"name"] ? attributes[@"name"] : nil;
+        self.nickname = attributes[@"nickname"] ? attributes[@"nickname"] : nil;
         
-        self.studentId = attributes[@"id"] != nil ? [attributes[@"id"] intValue] : 0;
+        self.studentId = attributes[@"id"] ? [attributes[@"id"] intValue] : 0;
         
-        self.graduation = attributes[@"id"] != nil ? [attributes[@"graduation"] intValue] : 0;
+        self.graduation = attributes[@"id"] ? [attributes[@"graduation"] intValue] : 0;
         
         [self loadCourses:attributes[@"courses"]];
         [self loadCommitments:attributes[@"commitments"]];

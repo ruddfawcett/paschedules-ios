@@ -9,14 +9,24 @@
 #import "PALoginViewController.h"
 
 #import "PATextFieldCell.h"
+
 #import "PATabBarController.h"
-#import "PAStudent.h"
 
 @interface PALoginViewController () <UITextFieldDelegate, PASessionDelegate>
 
+/**
+ *  The username text field, in order to avoid calling cells.
+ */
 @property (strong, nonatomic) UITextField *usernameField;
+/**
+ *  The password text field.  See above.
+ */
 @property (strong, nonatomic) UITextField *passwordField;
 
+
+/**
+ *  The andover username, ex. rfawcett (without @andover.edu) of the student.
+ */
 @property (strong, nonatomic) NSString *andoverUsername;
 
 @end
@@ -25,7 +35,6 @@
 
 - (id)init {
     if (self = [super initWithStyle:UITableViewStyleGrouped]) {
-//        self.tableView.separatorColor = [UIColor whiteColor];
     }
     
     return self;

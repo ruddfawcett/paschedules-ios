@@ -14,6 +14,10 @@
 @class PASupercourse;
 @class PATeacher;
 
+@class PABasicInfoTableViewCell;
+@class PAEmptyTableViewCell;
+@class PASectionTableViewCell;
+
 typedef NS_ENUM(NSUInteger, PASupercourseTableViewSections) {
     PASupercourseTableViewSectionInfo,
     PASupercourseTableViewSectionSections
@@ -21,8 +25,22 @@ typedef NS_ENUM(NSUInteger, PASupercourseTableViewSections) {
 
 @interface PASupercourseViewController : PATemplateTableViewController
 
+#pragma mark - Properties
+
+/**
+ *  The PASupercourse this controller represents.
+ */
 @property (strong, nonatomic) PASupercourse *supercourse;
 
+#pragma mark - Instance Methods
+
+/**
+ *  Returns this controller with a passed supercourse.
+ *
+ *  @param supercourse A PASupercourse.
+ *
+ *  @return This controller.
+ */
 - (id)initWithSupercourse:(PASupercourse *)supercourse;
 
 @end

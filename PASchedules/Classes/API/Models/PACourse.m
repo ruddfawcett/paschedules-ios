@@ -14,7 +14,7 @@
     if (self = [super init]) {
         self.sectionName = attributes[@"section"][@"name"];
         self.sectionId = [attributes[@"section"][@"id"] intValue];
-        self.teacherName = attributes[@"section"][@"teacher"] != nil ? attributes[@"section"][@"teacher"] : nil;
+        self.teacherName = attributes[@"section"][@"teacher"] ? attributes[@"section"][@"teacher"] : nil;
         self.room = attributes[@"room"];
     }
     

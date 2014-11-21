@@ -8,11 +8,23 @@
 
 #import "PASupercourseViewController.h"
 
-#import "PASupercourse.h"
-#import "PASection.h"
-#import "PATeacher.h"
+#import "PABasicInfoTableViewCell.h"
+#import "PAEmptyTableViewCell.h"
+#import "PASectionTableViewCell.h"
 
 #import "PASectionViewController.h"
+
+NSString * NSStringFromSupercourseSections(PASupercourseTableViewSections section) {
+    switch (section) {
+        case PASupercourseTableViewSectionSections:
+            return @"Sections";
+        default:
+            return nil;
+    }
+}
+
+static NSString * kPAInfoIdentifier = @"Info";
+static NSString * kPASectionsIdentifier = @"Section";
 
 @interface PASupercourseViewController ()
 
@@ -55,13 +67,7 @@
 #pragma mark - UITableViewDelegate
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if (section == PASupercourseTableViewSectionInfo) {
-        return nil;
-    }
-    else {
-        return @"Sections";
-    }
-    return nil;
+    return NSStringFromSupercourseSections(section);
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -77,22 +83,11 @@
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == PASupercourseTableViewSectionInfo) {
-        return UITableViewAutomaticDimension;
-    }
-    else {
-        if (self.supercourse.sections.count == 0) {
-            return UITableViewAutomaticDimension;
-        }
-        else {
+    if (indexPath.section == PASupercourseTableViewSectionSections) {
+        if (self.supercourse.sections.count != 0) {
             PASection *thisSection = self.supercourse.sections[indexPath.row];
             
-            if (thisSection.teacher.name != nil) {
-                return 60;
-            }
-            else {
-                return 50;
-            }
+            return thisSection.teacher.name ? 60 : 50;
         }
     }
     
@@ -100,62 +95,41 @@
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *resuseIdentifier = @"Cell";
-    
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:resuseIdentifier];
-    cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:resuseIdentifier];
-    
     if (indexPath.section == PASupercourseTableViewSectionInfo) {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleValue1 reuseIdentifier:resuseIdentifier];
-        cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        PABasicInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPAInfoIdentifier];
         
         if (indexPath.row == 0) {
-            cell.textLabel.text = @"Name";
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"%@",self.supercourse.name];
-
+            cell = [PABasicInfoTableViewCell cellWithReuseIdentifier:kPAInfoIdentifier andText:@"Name" andInfo:self.supercourse.name];
         }
         else {
-            cell.textLabel.text = @"Sections";
-            cell.detailTextLabel.text = [NSString stringWithFormat:@"%lu",(unsigned long)self.supercourse.sections.count];
-
+            cell = [PABasicInfoTableViewCell cellWithReuseIdentifier:kPAInfoIdentifier andText:@"Sections" andInfo:@(self.supercourse.sections.count)];
         }
+        
+        return cell;
     }
     else {
-        if (self.supercourse.sections.count == 0) {
-            cell.textLabel.textColor = [UIColor lightGrayColor];
-            cell.imageView.image = [UIImage maskedImageWithName:@"warning-sign" color:[UIColor lightGrayColor]];
-            cell.textLabel.text = @"No courses.";
-            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-            cell.userInteractionEnabled = NO;
+        if (self.supercourse.sections.count != 0) {
+            PASectionTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPASectionsIdentifier];
+            cell = [PASectionTableViewCell cellWithReuseIdentifier:kPASectionsIdentifier];
+            cell.section = self.supercourse.sections[indexPath.row];
+            
+            return cell;
         }
         else {
-            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleSubtitle reuseIdentifier:resuseIdentifier];
-            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
-            cell.detailTextLabel.numberOfLines = 0;
-            cell.detailTextLabel.lineBreakMode = NSLineBreakByWordWrapping;
+            PAEmptyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPASectionsIdentifier];
+            cell = [PAEmptyTableViewCell cellWithReuseIdentifier:kPASectionsIdentifier];
+            cell.modelType = PAModelTypeSection;
             
-            PASection *thisSection = self.supercourse.sections[indexPath.row];
-            
-            cell.textLabel.text = thisSection.name;
-            
-            if (thisSection.teacher.name != nil) {
-                cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ \n%@ Period", thisSection.teacher.name, thisSection.period];
-            }
-            else {
-                cell.detailTextLabel.text = [NSString stringWithFormat:@"%@ Period", thisSection.period];
-            }
+            return cell;
         }
     }
     
-    return cell;
+    return nil;
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == PASupercourseTableViewSectionSections) {
-        PASection *aSection = self.supercourse.sections[indexPath.row];
-        
-        PASectionViewController *sectionViewController = [[PASectionViewController alloc] initWithSection:aSection];
-        
+        PASectionViewController *sectionViewController = [[PASectionViewController alloc] initWithSection:self.supercourse.sections[indexPath.row]];
         [self.navigationController pushViewController:sectionViewController animated:YES];
     }
 }

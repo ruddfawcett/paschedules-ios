@@ -27,7 +27,12 @@
     
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
-    [self.refreshControl beginRefreshing];
+    self.tableView.emptyDataSetDelegate = self;
+    self.tableView.emptyDataSetSource = self;
+    
+    if (!self.shouldNotLoadRefreshing) {
+        [self.refreshControl beginRefreshing];
+    }
 }
 
 - (void)viewDidDisappear:(BOOL)animated {

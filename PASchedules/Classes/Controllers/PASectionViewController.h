@@ -15,6 +15,11 @@
 @class PASupercourse;
 @class PATeacher;
 
+@class PAEmptyTableViewCell;
+@class PABasicInfoTableViewCell;
+@class PABasicTeacherTableViewCell;
+@class PAStudentTableViewCell;
+
 @class PASupercourseViewController;
 @class PATeacherViewController;
 @class PAStudentViewController;
