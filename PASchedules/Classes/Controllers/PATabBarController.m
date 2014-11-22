@@ -11,6 +11,7 @@
 #import "PANavigationController.h"
 
 #import "PAStudentViewController.h"
+#import "PASearchViewController.h"
 
 @implementation PATabBarController
 
@@ -46,7 +47,7 @@
     
     [viewControllers addObject:scheduleViewController];
     
-    UIViewController *searchViewController = [[UIViewController alloc] init];
+    PASearchViewController *searchViewController = [[PASearchViewController alloc] init];
     searchViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Search" imageName:@"search-icon" selectedImageName:@"search-icon-selected"];
     
     [viewControllers addObject:searchViewController];

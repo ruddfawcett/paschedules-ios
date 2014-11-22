@@ -72,7 +72,7 @@
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [SVProgressHUD dismiss];
             
-            if (error.code == 0) {
+            if (error.code != 666) {
                 [NSError showHUDWithError:error];
             }
             else {

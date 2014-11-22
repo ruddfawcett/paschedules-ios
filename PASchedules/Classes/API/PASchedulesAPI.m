@@ -15,6 +15,22 @@
 #import "PASupercourse.h"
 #import "PACommitment.h"
 
+NSString * NSStringFromPAAPIListType (PAAPIListTypes type) {
+    switch (type) {
+        case PAAPIListTypeStudents:
+            return @"Students";
+            break;
+        case PAAPIListTypeTeachers:
+            return @"Teachers";
+            break;
+        case PAAPIListTypeSupercourses:
+            return @"Supercourses";
+            break;
+        default:
+            return nil;
+    }
+}
+
 /**
  *  The base URL for the API.
  */
@@ -68,7 +84,7 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
                 NSError *error;
 
                 if (self.loginAttempts >= 3 && !self.showedError) {
-                    error = [[NSError alloc] initWithDomain:kPASchedulesErrorDomain code:1 userInfo:@{NSLocalizedDescriptionKey : @"We've noticed something's up.\n\nIt looks like you've gotten a few failed logins, and we're sorry.\n\nAre you sure you're connected to the internet?\n\nWe're doing our best to lock down this login issue, so please just keep trying!"}];
+                    error = [[NSError alloc] initWithDomain:kPASchedulesErrorDomain code:666 userInfo:@{NSLocalizedDescriptionKey : @"We've noticed something's up.\n\nIt looks like you've gotten a few failed logins, and we're sorry.\n\nAre you sure you're connected to the internet?\n\nWe're doing our best to lock down this login issue, so please just keep trying!"}];
                     
                     self.showedError = YES;
                 }
@@ -97,7 +113,7 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
                 success(&successful);
             }
             else {
-                NSError *error = [[NSError alloc] initWithDomain:kPASchedulesErrorDomain code:0 userInfo:@{NSLocalizedDescriptionKey : result[@"message"] ? result[@"message"] : @"Fetch error, no result."}];
+                NSError *error = [[NSError alloc] initWithDomain:kPASchedulesErrorDomain code:0 userInfo:@{NSLocalizedDescriptionKey : result[@"message"] ? result[@"message"] : @"Fetch error. No results."}];
                 
                 failure(nil, error);
             }
@@ -119,7 +135,7 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
                 success(student);
             }
             else {
-                NSError *error = [[NSError alloc] initWithDomain:kPASchedulesErrorDomain code:0 userInfo:@{NSLocalizedDescriptionKey : result[@"message"] ? result[@"message"] : @"Fetch error, no result."}];
+                NSError *error = [[NSError alloc] initWithDomain:kPASchedulesErrorDomain code:0 userInfo:@{NSLocalizedDescriptionKey : result[@"message"] ? result[@"message"] : @"Fetch error. No results."}];
                 
                 failure(nil, error);
             }
@@ -141,7 +157,7 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
                 success(schedule);
             }
             else {
-                NSError *error = [[NSError alloc] initWithDomain:kPASchedulesErrorDomain code:0 userInfo:@{NSLocalizedDescriptionKey : result[@"message"] ? result[@"message"] : @"Fetch error, no result."}];
+                NSError *error = [[NSError alloc] initWithDomain:kPASchedulesErrorDomain code:0 userInfo:@{NSLocalizedDescriptionKey : result[@"message"] ? result[@"message"] : @"Fetch error. No results."}];
                 
                 failure(nil, error);
             }
@@ -163,7 +179,7 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
                 success(section);
             }
             else {
-                NSError *error = [[NSError alloc] initWithDomain:kPASchedulesErrorDomain code:0 userInfo:@{NSLocalizedDescriptionKey : result[@"message"] ? result[@"message"] : @"Fetch error, no result."}];
+                NSError *error = [[NSError alloc] initWithDomain:kPASchedulesErrorDomain code:0 userInfo:@{NSLocalizedDescriptionKey : result[@"message"] ? result[@"message"] : @"Fetch error. No results."}];
                 
                 failure(nil, error);
             }
@@ -185,7 +201,7 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
                 success(teacher);
             }
             else {
-                NSError *error = [[NSError alloc] initWithDomain:kPASchedulesErrorDomain code:0 userInfo:@{NSLocalizedDescriptionKey : result[@"message"] ? result[@"message"] : @"Fetch error, no result."}];
+                NSError *error = [[NSError alloc] initWithDomain:kPASchedulesErrorDomain code:0 userInfo:@{NSLocalizedDescriptionKey : result[@"message"] ? result[@"message"] : @"Fetch error. No results."}];
                 
                 failure(nil, error);
             }
@@ -207,7 +223,7 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
                 success(supercourse);
             }
             else {
-                NSError *error = [[NSError alloc] initWithDomain:kPASchedulesErrorDomain code:0 userInfo:@{NSLocalizedDescriptionKey : result[@"message"] ? result[@"message"] : @"Fetch error, no result."}];
+                NSError *error = [[NSError alloc] initWithDomain:kPASchedulesErrorDomain code:0 userInfo:@{NSLocalizedDescriptionKey : result[@"message"] ? result[@"message"] : @"Fetch error. No results."}];
                 
                 failure(nil, error);
             }
@@ -229,12 +245,62 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
                 success(commitment);
             }
             else {
-                NSError *error = [[NSError alloc] initWithDomain:kPASchedulesErrorDomain code:0 userInfo:@{NSLocalizedDescriptionKey : result[@"message"] ? result[@"message"] : @"Fetch error, no result."}];
+                NSError *error = [[NSError alloc] initWithDomain:kPASchedulesErrorDomain code:0 userInfo:@{NSLocalizedDescriptionKey : result[@"message"] ? result[@"message"] : @"Fetch error. No results."}];
                 
                 failure(nil, error);
             }
         }
         else [self sessionEnded:result];
+    } failure:failure];
+}
+
+- (void)list:(PAAPIListTypes)listType success:(void (^)(NSArray *list))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+    NSDictionary *parameters = @{@"key" : [self sessionKey], @"query" : @"empty", @"type" : [NSStringFromPAAPIListType(listType) lowercaseString], @"ios" : @YES};
+    
+    [self POST:@"api/v1/search/" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
+        if ([responseObject isKindOfClass:[NSArray class]]) {
+            NSArray *result = (NSArray *)responseObject;
+            
+            if (listType == PAAPIListTypeStudents) {
+                NSMutableArray *studentList = [@[] mutableCopy];
+                for (NSDictionary *student in result) {
+                    PAStudent *aStudent = [[PAStudent alloc] initWithAttributes:student];
+                    [studentList addObject:aStudent];
+                }
+                
+                success(studentList);
+            }
+            else if (listType == PAAPIListTypeTeachers) {
+                NSMutableArray *teacherList = [@[] mutableCopy];
+                for (NSDictionary *teacher in result) {
+                    PATeacher *aTeacher = [[PATeacher alloc] initWithAttributes:teacher];
+                    [teacherList addObject:aTeacher];
+                }
+                
+                success(teacherList);
+            }
+            else if (listType == PAAPIListTypeSupercourses) {
+                NSMutableArray *supercourseList = [@[] mutableCopy];
+                for (NSDictionary *supercourse in result) {
+                    PASupercourse *aSupercourse = [[PASupercourse alloc] initWithAttributes:supercourse];
+                    [supercourseList addObject:aSupercourse];
+                }
+                
+                success(supercourseList);
+            }
+            else {
+                NSError *error = [[NSError alloc] initWithDomain:kPASchedulesErrorDomain code:0 userInfo:@{NSLocalizedDescriptionKey : @"Fetch error. No results."}];
+                
+                failure(nil, error);
+            }
+        }
+        else {
+            if ([responseObject isKindOfClass:[NSDictionary class]]) {
+                if (responseObject[@"session"]) {
+                    [self sessionEnded:nil];
+                }
+            }
+        }
     } failure:failure];
 }
 

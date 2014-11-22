@@ -28,6 +28,10 @@
  *  The supercourse Id.
  */
 @property (nonatomic) NSUInteger supercourseId;
+/**
+ *  The number of sections in a supercourse, only used in search.
+ */
+@property (nonatomic) NSUInteger sectionCount;
 
 
 /**

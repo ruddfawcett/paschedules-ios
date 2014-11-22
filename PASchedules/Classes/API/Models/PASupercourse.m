@@ -14,12 +14,22 @@
 
 - (id)initWithAttributes:(NSDictionary *)attributes {
     if (self = [super init]) {
-        self.name = attributes[@"course"][@"class"];
-        self.title = attributes[@"course"][@"title"];
-        
-        self.supercourseId = attributes[@"course"][@"id"] ? [attributes[@"course"][@"id"] intValue] : 0;
-        
-        [self loadSections:attributes[@"sections"]];
+        if (attributes[@"course"]) {
+            self.name = attributes[@"course"][@"class"];
+            self.title = attributes[@"course"][@"title"];
+            
+            self.supercourseId = attributes[@"course"][@"id"] ? [attributes[@"course"][@"id"] intValue] : 0;
+            
+            [self loadSections:attributes[@"sections"]];
+            self.sectionCount = self.sections.count;
+        }
+        else {
+            self.name = attributes[@"class"];
+            self.title = attributes[@"title"];
+            
+            self.supercourseId = attributes[@"id"] ? [attributes[@"id"] intValue] : 0;
+            self.sectionCount = attributes[@"sections"] ? [attributes[@"sections"] intValue] : 0;
+        }
     }
     
     return self;

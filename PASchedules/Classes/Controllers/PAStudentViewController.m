@@ -63,6 +63,7 @@ static NSString * kPACommitmentsIdentifier = @"Commitments";
             [self.tableView reloadData];
             [self.refreshControl endRefreshing];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [self.tableView reloadData];
             [self.refreshControl endRefreshing];
             [NSError showWithError:error];
         }];
@@ -76,12 +77,15 @@ static NSString * kPACommitmentsIdentifier = @"Commitments";
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return self.student == nil ? 0 : 3;
+    return self.student == nil ? 1 : 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == PAStudentTableViewSectionInfo) {
-        return self.student.nickname ? 2 : 1;
+        if (self.student) {
+            return self.student.nickname ? 2 : 1;
+        }
+        else return 1;
     }
     else if (section == PAStudentTableViewSectionCourses) {
         return self.student.courses.count;
@@ -107,16 +111,27 @@ static NSString * kPACommitmentsIdentifier = @"Commitments";
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == PAStudentTableViewSectionInfo) {
-        PABasicInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPAInfoIdentifier];
-        
-        if (indexPath.row == 0) {
-            cell = [PABasicInfoTableViewCell cellWithReuseIdentifier:kPAInfoIdentifier andText:@"Graduation" andInfo:@(self.student.graduation)];
+        if (self.student) {
+            PABasicInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPAInfoIdentifier];
+            
+            if (indexPath.row == 0) {
+                cell = [PABasicInfoTableViewCell cellWithReuseIdentifier:kPAInfoIdentifier andText:@"Graduation" andInfo:@(self.student.graduation)];
+            }
+            else {
+                cell = [PABasicInfoTableViewCell cellWithReuseIdentifier:kPAInfoIdentifier andText:@"Goes by" andInfo:self.student.nickname];
+            }
+            
+            return cell;
         }
         else {
-            cell = [PABasicInfoTableViewCell cellWithReuseIdentifier:kPAInfoIdentifier andText:@"Goes by" andInfo:self.student.nickname];
+            PAEmptyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPACommitmentsIdentifier];
+            cell = [PAEmptyTableViewCell cellWithReuseIdentifier:kPACommitmentsIdentifier];
+            cell.modelType = PAModelTypeStudent;
+            
+            cell.hidden = YES;
+            
+            return cell;
         }
-        
-        return cell;
     }
     else if (indexPath.section == PAStudentTableViewSectionCourses) {
         if (self.student.courses.count != 0) {

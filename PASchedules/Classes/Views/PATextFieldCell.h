@@ -11,6 +11,11 @@
 @interface PATextFieldCell : UITableViewCell <UITextFieldDelegate>
 
 @property (strong, nonatomic) UITextField *textField;
+
 @property (strong, nonatomic) UIImage *icon;
+
+#pragma mark - Class Methods
+
++ (id)cellWithReuseIdentifier:(NSString *)reuseIdentifier;
 
 @end

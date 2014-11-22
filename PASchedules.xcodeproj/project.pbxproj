@@ -19,6 +19,9 @@
 		F152C64C1A1D3F1100F61AEF /* PATeacherViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F152C64B1A1D3F1100F61AEF /* PATeacherViewController.m */; };
 		F152C64F1A1D9D8E00F61AEF /* PASupercourseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F152C64E1A1D9D8E00F61AEF /* PASupercourseViewController.m */; };
 		F152C6521A1DB6D400F61AEF /* PACommitmentViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F152C6511A1DB6D400F61AEF /* PACommitmentViewController.m */; };
+		F188E39F1A1F8A4E00A26777 /* PATeacherTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F188E39E1A1F8A4E00A26777 /* PATeacherTableViewCell.m */; };
+		F188E3A51A1F8B2700A26777 /* PASupercourseTableViewCell.m in Sources */ = {isa = PBXBuildFile; fileRef = F188E3A41A1F8B2700A26777 /* PASupercourseTableViewCell.m */; };
+		F188E3A81A1F9DCA00A26777 /* PASearchViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F188E3A71A1F9DCA00A26777 /* PASearchViewController.m */; };
 		F193A2091A13E6EA00A11EDA /* PALoginViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F193A2081A13E6EA00A11EDA /* PALoginViewController.m */; };
 		F193E5CC1A0DC6370016103E /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = F193E5CB1A0DC6370016103E /* main.m */; };
 		F193E5CF1A0DC6370016103E /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F193E5CE1A0DC6370016103E /* AppDelegate.m */; };
@@ -70,6 +73,12 @@
 		F152C64E1A1D9D8E00F61AEF /* PASupercourseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASupercourseViewController.m; sourceTree = "<group>"; };
 		F152C6501A1DB6D400F61AEF /* PACommitmentViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PACommitmentViewController.h; sourceTree = "<group>"; };
 		F152C6511A1DB6D400F61AEF /* PACommitmentViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PACommitmentViewController.m; sourceTree = "<group>"; };
+		F188E39D1A1F8A4E00A26777 /* PATeacherTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PATeacherTableViewCell.h; path = "PASchedules/Classes/Views/Table View Cells/PATeacherTableViewCell.h"; sourceTree = SOURCE_ROOT; };
+		F188E39E1A1F8A4E00A26777 /* PATeacherTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PATeacherTableViewCell.m; path = "PASchedules/Classes/Views/Table View Cells/PATeacherTableViewCell.m"; sourceTree = SOURCE_ROOT; };
+		F188E3A31A1F8B2700A26777 /* PASupercourseTableViewCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PASupercourseTableViewCell.h; path = "Table View Cells/PASupercourseTableViewCell.h"; sourceTree = "<group>"; };
+		F188E3A41A1F8B2700A26777 /* PASupercourseTableViewCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PASupercourseTableViewCell.m; path = "Table View Cells/PASupercourseTableViewCell.m"; sourceTree = "<group>"; };
+		F188E3A61A1F9DCA00A26777 /* PASearchViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PASearchViewController.h; sourceTree = "<group>"; };
+		F188E3A71A1F9DCA00A26777 /* PASearchViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PASearchViewController.m; sourceTree = "<group>"; };
 		F193A2071A13E6EA00A11EDA /* PALoginViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PALoginViewController.h; sourceTree = "<group>"; };
 		F193A2081A13E6EA00A11EDA /* PALoginViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PALoginViewController.m; sourceTree = "<group>"; };
 		F193A20A1A13E72600A11EDA /* PASchedules.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = PASchedules.h; path = PASchedules/PASchedules.h; sourceTree = SOURCE_ROOT; };
@@ -181,10 +190,20 @@
 			isa = PBXGroup;
 			children = (
 				F1B2DBFD1A1E8876000631F8 /* Students Tab */,
+				F188E39C1A1F89AA00A26777 /* Search Tab */,
 				F1B2DBFA1A1E886C000631F8 /* PACompareViewController.h */,
 				F1B2DBFB1A1E886C000631F8 /* PACompareViewController.m */,
 			);
 			name = "Table View Controllers";
+			sourceTree = "<group>";
+		};
+		F188E39C1A1F89AA00A26777 /* Search Tab */ = {
+			isa = PBXGroup;
+			children = (
+				F188E3A61A1F9DCA00A26777 /* PASearchViewController.h */,
+				F188E3A71A1F9DCA00A26777 /* PASearchViewController.m */,
+			);
+			name = "Search Tab";
 			sourceTree = "<group>";
 		};
 		F193E5BD1A0DC6370016103E = {
@@ -280,6 +299,10 @@
 				F1B2DC081A1EA450000631F8 /* PABasicTeacherTableViewCell.m */,
 				F1B2DC101A1EF94F000631F8 /* PASectionTableViewCell.h */,
 				F1B2DC111A1EF94F000631F8 /* PASectionTableViewCell.m */,
+				F188E39D1A1F8A4E00A26777 /* PATeacherTableViewCell.h */,
+				F188E39E1A1F8A4E00A26777 /* PATeacherTableViewCell.m */,
+				F188E3A31A1F8B2700A26777 /* PASupercourseTableViewCell.h */,
+				F188E3A41A1F8B2700A26777 /* PASupercourseTableViewCell.m */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -490,14 +513,17 @@
 				F1F6817E1A0F2DC200F678FA /* PASection.m in Sources */,
 				F152C6451A1D083700F61AEF /* UITabBarItem+Selected.m in Sources */,
 				F1B2DBFC1A1E886C000631F8 /* PACompareViewController.m in Sources */,
+				F188E39F1A1F8A4E00A26777 /* PATeacherTableViewCell.m in Sources */,
 				F1F6817B1A0F2A6500F678FA /* PACommitment.m in Sources */,
 				F193A2091A13E6EA00A11EDA /* PALoginViewController.m in Sources */,
 				F1B2DC031A1E9585000631F8 /* PAEmptyTableViewCell.m in Sources */,
+				F188E3A81A1F9DCA00A26777 /* PASearchViewController.m in Sources */,
 				F152C64C1A1D3F1100F61AEF /* PATeacherViewController.m in Sources */,
 				F1B2DC121A1EF94F000631F8 /* PASectionTableViewCell.m in Sources */,
 				F1F681811A0F2DEC00F678FA /* PASupercourse.m in Sources */,
 				F1CB18541A117CA100BDB4D8 /* PANavigationController.m in Sources */,
 				F118D3831A0F265A00D1F717 /* PACourse.m in Sources */,
+				F188E3A51A1F8B2700A26777 /* PASupercourseTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

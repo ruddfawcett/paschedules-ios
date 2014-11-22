@@ -22,8 +22,6 @@
     self.refreshControl = [UIRefreshControl new];
     self.refreshControl.tintColor = [UIColor darkGrayColor];
     
-    self.edgesForExtendedLayout = UIRectEdgeNone;
-    self.automaticallyAdjustsScrollViewInsets = YES;
     
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     

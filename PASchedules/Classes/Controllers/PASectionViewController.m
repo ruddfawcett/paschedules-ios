@@ -137,7 +137,7 @@ static NSString * kPAStudentsIdentifier = @"Students";
     else {
         if (self.section.students.count == 0) {
             PAEmptyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPAStudentsIdentifier];
-            if (!cell) cell = [PAEmptyTableViewCell cellWithReuseIdentifier:kPAStudentsIdentifier];
+            cell = [PAEmptyTableViewCell cellWithReuseIdentifier:kPAStudentsIdentifier];
             cell.modelType = PAModelTypeStudent;
             
             return cell;

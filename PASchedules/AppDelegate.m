@@ -33,6 +33,10 @@ NSString * const kPASchedulesErrorDomain = @"com.ruddfawcett.paschedules.error";
     
     [[UITabBar appearance] setTintColor:PA_BLUE];
     
+    [[UIToolbar appearance] setBarTintColor:PA_BLUE];
+    
+    [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setTextColor:[UIColor blackColor]];
+    
     if ([NSDate isExpired:[PASchedulesAPI sessionCreated]] || ![PASchedulesAPI currentUser]) {
         PANavigationController *navController = [[PANavigationController alloc] initWithRootViewController:[PALoginViewController new]];
         

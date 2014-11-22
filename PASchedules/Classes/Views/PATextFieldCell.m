@@ -10,6 +10,10 @@
 
 @implementation PATextFieldCell
 
++ (id)cellWithReuseIdentifier:(NSString *)reuseIdentifier {
+    return [[self.class alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:reuseIdentifier];
+}
+
 - (id)initWithStyle:(UITableViewCellStyle)style reuseIdentifier:(NSString *)reuseIdentifier {
     if (self = [super initWithStyle:style reuseIdentifier:reuseIdentifier]) {
         CGRect frame = CGRectMake(15, 12, self.bounds.size.width-(2*15), 21);

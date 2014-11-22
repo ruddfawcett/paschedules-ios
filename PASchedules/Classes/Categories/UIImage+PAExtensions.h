@@ -13,4 +13,6 @@
 + (instancetype)maskedImage:(UIImage *)image color:(UIColor *)color;
 + (instancetype)maskedImageWithName:(NSString *)name color:(UIColor *)color;
 
++ (instancetype)imageWithColor:(UIColor *)color;
+
 @end

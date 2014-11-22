@@ -15,13 +15,15 @@
 }
 
 + (void)showWithError:(NSError *)error {
-    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-                                                    message:error.localizedDescription
-                                                   delegate:nil
-                                          cancelButtonTitle:@"Ok"
-                                          otherButtonTitles: nil];
+    [SVProgressHUD showErrorWithStatus:error.localizedDescription];
     
-    [alert show];
+//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+//                                                    message:error.localizedDescription
+//                                                   delegate:nil
+//                                          cancelButtonTitle:@"Ok"
+//                                          otherButtonTitles: nil];
+//    
+//    [alert show];
 }
 
 @end

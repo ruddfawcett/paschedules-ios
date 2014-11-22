@@ -16,6 +16,14 @@
 @class PASupercourse;
 @class PACommitment;
 
+typedef NS_ENUM(NSUInteger, PAAPIListTypes) {
+    PAAPIListTypeStudents,
+    PAAPIListTypeTeachers,
+    PAAPIListTypeSupercourses
+};
+
+NSString * NSStringFromPAAPIListType (PAAPIListTypes type);
+
 @protocol PASessionDelegate <NSObject>
 
 @optional
@@ -114,6 +122,15 @@
  *  @param failure A block that is triggered if the commitment is not successfully grabbed.
  */
 - (void)commitments:(NSUInteger)commitmentId success:(void (^)(PACommitment *commitment))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+
+/**
+ *  Returns the JSON list of objects for searching.
+ *
+ *  @param listType The list type, e.g. teachers/students/supercourses.
+ *  @param success  A block triggered on success.
+ *  @param failure  A block triggered on failure.
+ */
+- (void)list:(PAAPIListTypes)listType success:(void (^)(NSArray *list))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 #pragma mark - Class Methods
 
