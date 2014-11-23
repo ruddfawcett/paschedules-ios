@@ -23,6 +23,10 @@
  *  The nickname (the name the student prefers to be called) of the student, if the student has one.
  */
 @property (strong, nonatomic) NSString *nickname;
+/**
+ *  The description for searching.
+ */
+@property (strong, nonatomic) NSString *search;
 
 
 /**

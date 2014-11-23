@@ -86,7 +86,7 @@ static NSString * kPAStudentIdentifier = @"Student";
         return 2;
     }
     else if (section == PACommitmentTableViewSectionStudents) {
-        return self.commitment.students.count;
+        return self.commitment.students.count != 0 ? self.commitment.students.count : 1;
     }
     else {
         return 1;

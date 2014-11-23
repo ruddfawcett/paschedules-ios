@@ -22,6 +22,10 @@
         
         self.graduation = attributes[@"id"] ? [attributes[@"graduation"] intValue] : 0;
         
+        NSArray *names = [self.name componentsSeparatedByString:@" "];
+        
+        self.search = [NSString stringWithFormat:@"%@ %@ %@ %d",names[0],[names lastObject],self.nickname,self.graduation];
+        
         [self loadCourses:attributes[@"courses"]];
         [self loadCommitments:attributes[@"commitments"]];
     }

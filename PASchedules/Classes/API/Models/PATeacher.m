@@ -17,6 +17,8 @@
         self.name = attributes[@"name"];
         self.department = attributes[@"department"];
         
+        self.search = [NSString stringWithFormat:@"%@ %@",self.name,self.department];
+        
         self.teacherId = attributes[@"id"] ? [attributes[@"id"] intValue] : 0;
         
         [self loadSections:attributes[@"sections"]];

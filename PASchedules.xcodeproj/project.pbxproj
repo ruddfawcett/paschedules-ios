@@ -206,6 +206,33 @@
 			name = "Search Tab";
 			sourceTree = "<group>";
 		};
+		F188E3B01A218F5600A26777 /* Table View Cells */ = {
+			isa = PBXGroup;
+			children = (
+				F1F6818E1A0F3AB600F678FA /* PATextFieldCell.h */,
+				F1F6818F1A0F3AB600F678FA /* PATextFieldCell.m */,
+				F1B2DBFE1A1E8FF2000631F8 /* PAStudentTableViewCell.h */,
+				F1B2DBFF1A1E8FF2000631F8 /* PAStudentTableViewCell.m */,
+				F1B2DC011A1E9585000631F8 /* PAEmptyTableViewCell.h */,
+				F1B2DC021A1E9585000631F8 /* PAEmptyTableViewCell.m */,
+				F1B2DC0A1A1EECF7000631F8 /* PACourseTableViewCell.h */,
+				F1B2DC0B1A1EECF7000631F8 /* PACourseTableViewCell.m */,
+				F1B2DC0D1A1EF071000631F8 /* PACommitmentTableViewCell.h */,
+				F1B2DC0E1A1EF071000631F8 /* PACommitmentTableViewCell.m */,
+				F1B2DC041A1EA05E000631F8 /* PABasicInfoTableViewCell.h */,
+				F1B2DC051A1EA05E000631F8 /* PABasicInfoTableViewCell.m */,
+				F1B2DC071A1EA450000631F8 /* PABasicTeacherTableViewCell.h */,
+				F1B2DC081A1EA450000631F8 /* PABasicTeacherTableViewCell.m */,
+				F1B2DC101A1EF94F000631F8 /* PASectionTableViewCell.h */,
+				F1B2DC111A1EF94F000631F8 /* PASectionTableViewCell.m */,
+				F188E39D1A1F8A4E00A26777 /* PATeacherTableViewCell.h */,
+				F188E39E1A1F8A4E00A26777 /* PATeacherTableViewCell.m */,
+				F188E3A31A1F8B2700A26777 /* PASupercourseTableViewCell.h */,
+				F188E3A41A1F8B2700A26777 /* PASupercourseTableViewCell.m */,
+			);
+			name = "Table View Cells";
+			sourceTree = "<group>";
+		};
 		F193E5BD1A0DC6370016103E = {
 			isa = PBXGroup;
 			children = (
@@ -283,26 +310,7 @@
 		F193E5F61A0DD9DA0016103E /* Views */ = {
 			isa = PBXGroup;
 			children = (
-				F1F6818E1A0F3AB600F678FA /* PATextFieldCell.h */,
-				F1F6818F1A0F3AB600F678FA /* PATextFieldCell.m */,
-				F1B2DBFE1A1E8FF2000631F8 /* PAStudentTableViewCell.h */,
-				F1B2DBFF1A1E8FF2000631F8 /* PAStudentTableViewCell.m */,
-				F1B2DC011A1E9585000631F8 /* PAEmptyTableViewCell.h */,
-				F1B2DC021A1E9585000631F8 /* PAEmptyTableViewCell.m */,
-				F1B2DC0A1A1EECF7000631F8 /* PACourseTableViewCell.h */,
-				F1B2DC0B1A1EECF7000631F8 /* PACourseTableViewCell.m */,
-				F1B2DC0D1A1EF071000631F8 /* PACommitmentTableViewCell.h */,
-				F1B2DC0E1A1EF071000631F8 /* PACommitmentTableViewCell.m */,
-				F1B2DC041A1EA05E000631F8 /* PABasicInfoTableViewCell.h */,
-				F1B2DC051A1EA05E000631F8 /* PABasicInfoTableViewCell.m */,
-				F1B2DC071A1EA450000631F8 /* PABasicTeacherTableViewCell.h */,
-				F1B2DC081A1EA450000631F8 /* PABasicTeacherTableViewCell.m */,
-				F1B2DC101A1EF94F000631F8 /* PASectionTableViewCell.h */,
-				F1B2DC111A1EF94F000631F8 /* PASectionTableViewCell.m */,
-				F188E39D1A1F8A4E00A26777 /* PATeacherTableViewCell.h */,
-				F188E39E1A1F8A4E00A26777 /* PATeacherTableViewCell.m */,
-				F188E3A31A1F8B2700A26777 /* PASupercourseTableViewCell.h */,
-				F188E3A41A1F8B2700A26777 /* PASupercourseTableViewCell.m */,
+				F188E3B01A218F5600A26777 /* Table View Cells */,
 			);
 			path = Views;
 			sourceTree = "<group>";

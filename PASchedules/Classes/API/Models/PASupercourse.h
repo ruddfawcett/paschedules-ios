@@ -22,6 +22,10 @@
  *  The name of the supercourse.
  */
 @property (strong, nonatomic) NSString *name;
+/**
+ *  The description for searching.
+ */
+@property (strong, nonatomic) NSString *search;
 
 
 /**

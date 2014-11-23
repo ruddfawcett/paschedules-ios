@@ -89,7 +89,7 @@ static NSString * kPAStudentsIdentifier = @"Students";
     if (section == PASectionTableViewSectionInfo) {
         return 3;
     }
-    else return (section == PASectionTableViewSectionStudents) ? self.section.students.count : 1;
+    else return (section == PASectionTableViewSectionStudents) ? (self.section.students.count != 0 ? self.section.students.count : 1) : 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

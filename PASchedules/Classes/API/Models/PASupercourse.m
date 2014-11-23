@@ -30,6 +30,8 @@
             self.supercourseId = attributes[@"id"] ? [attributes[@"id"] intValue] : 0;
             self.sectionCount = attributes[@"sections"] ? [attributes[@"sections"] intValue] : 0;
         }
+        
+        self.search = [NSString stringWithFormat:@"%@ %@",self.name, self.title];
     }
     
     return self;

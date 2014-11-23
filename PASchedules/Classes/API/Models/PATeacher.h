@@ -22,6 +22,10 @@
  *  The department of the teacher.
  */
 @property (strong, nonatomic) NSString *department;
+/**
+ *  The description for searching.
+ */
+@property (strong, nonatomic) NSString *search;
 
 
 /**

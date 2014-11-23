@@ -81,7 +81,7 @@ static NSString * kPASectionsIdentifier = @"Sections";
         return 1;
     }
     else if (section == PATeacherTableViewSectionSections) {
-        return self.teacher.sections.count;
+        return self.teacher.sections.count != 0 ? self.teacher.sections.count : 1;
     }
     else return 1;
 }

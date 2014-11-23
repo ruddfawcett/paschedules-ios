@@ -76,7 +76,7 @@ static NSString * kPASectionsIdentifier = @"Section";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == PASupercourseTableViewSectionSections) {
-        return self.supercourse.sections.count;
+        return self.supercourse.sections.count != 0 ? self.supercourse.sections.count : 1;
     }
     
     return 2;

@@ -88,9 +88,9 @@ static NSString * kPACommitmentsIdentifier = @"Commitments";
         else return 1;
     }
     else if (section == PAStudentTableViewSectionCourses) {
-        return self.student.courses.count;
+        return self.student.courses.count != 0 ? self.student.courses.count : 1;
     }
-    else return self.student.commitments.count;
+    else return self.student.commitments.count !=0 ? self.student.commitments.count : 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {

@@ -31,8 +31,6 @@ static NSString * kPAResultIdentifier = @"Result";
 
 @property (strong, nonatomic) UITableViewController *tableViewController;
 
-@property (strong, nonatomic) UIImageView *navBarHairlineImageView;
-
 @property (strong, nonatomic) UISegmentedControl *segmentedControl;
 
 @property (strong, nonatomic) UIToolbar *toolbar;
@@ -58,49 +56,20 @@ static NSString * kPAResultIdentifier = @"Result";
 }
 
 - (void)viewDidLoad {
-    self.title = @"Search";
-    
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
-    [self navigationBarFix];
-    [self setUpToolbar];
     [self setUpTableView];
+    [self setUpToolbar];
     [self loadList:PAAPIListTypeStudents];
 }
 
-- (void)viewWillAppear:(BOOL)animated {
-    [super viewWillAppear:animated];
-    self.navBarHairlineImageView.hidden = YES;
-}
-
 - (void)viewWillDisappear:(BOOL)animated {
-    [super viewWillDisappear:animated];
-    self.navBarHairlineImageView.hidden = NO;
-    
     [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
+    
+    [super viewWillDisappear:animated];
 }
 
 #pragma mark - Setup
-
-- (void)navigationBarFix {
-    self.navBarHairlineImageView = [self findHairlineImageViewUnder:self.navigationController.navigationBar];
-}
-
-- (UIImageView *)findHairlineImageViewUnder:(UIView *)view {
-    if ([view isKindOfClass:UIImageView.class] && view.bounds.size.height <= 1.0) {
-        return (UIImageView *)view;
-    }
-    
-    for (UIView *subview in view.subviews) {
-        UIImageView *imageView = [self findHairlineImageViewUnder:subview];
-        
-        if (imageView) {
-            return imageView;
-        }
-    }
-    
-    return nil;
-}
 
 - (void)setUpToolbar {
     NSArray *items = @[NSStringFromPAAPIListType(PAAPIListTypeStudents),
@@ -108,33 +77,26 @@ static NSString * kPAResultIdentifier = @"Result";
        @"Courses"];
     
     self.segmentedControl = [[UISegmentedControl alloc] initWithItems:items];
-    self.segmentedControl.tintColor = [UIColor whiteColor];
-    self.segmentedControl.frame = CGRectMake(0, 0, self.view.bounds.size.width-20, 30);
     self.segmentedControl.selectedSegmentIndex = 0;
     [self.segmentedControl addTarget:self action:@selector(segmentChanged) forControlEvents:UIControlEventValueChanged];
     
     UIBarButtonItem *flexibleItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
     UIBarButtonItem *segment = [[UIBarButtonItem alloc] initWithCustomView:self.segmentedControl];
-    self.toolbar = [UIToolbar new];
     
-    CGRect toolbarFrame = self.navigationController.toolbar.frame;
-    toolbarFrame.origin.y = toolbarFrame.size.height + [UIApplication sharedApplication].statusBarFrame.size.height;
+    CGRect toolbarFrame = self.navigationController.navigationBar.frame;
+    
+    self.toolbar = [UIToolbar new];
     self.toolbar.frame = toolbarFrame;
     self.toolbar.items = @[flexibleItem, segment, flexibleItem];
     
-    [self.view addSubview:self.toolbar];
-    
+    self.navigationItem.titleView = self.segmentedControl;
 }
 
 - (void)setUpTableView {
-    self.tableViewController = [[UITableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    self.tableViewController = [[UITableViewController alloc] initWithStyle:UITableViewStylePlain];
     [self addChildViewController:self.tableViewController];
-
-    self.tableViewController.view.frame = CGRectMake(0,
-                                                self.toolbar.bounds.origin.y+self.toolbar.bounds.size.height,
-                                                self.view.bounds.size.width,
-                                                self.view.bounds.size.height - self.toolbar.bounds.size.height);
-
+    
+    self.tableViewController.view.frame = self.view.bounds;
     self.tableViewController.refreshControl = [UIRefreshControl new];
     self.tableViewController.refreshControl.tintColor = [UIColor darkGrayColor];
     [self.tableViewController.refreshControl addTarget:self action:@selector(loadList) forControlEvents:UIControlEventValueChanged];
@@ -147,7 +109,7 @@ static NSString * kPAResultIdentifier = @"Result";
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
 
-    [self.view insertSubview:self.tableView belowSubview:self.toolbar];
+    [self.view addSubview:self.tableView];
 }
 
 #pragma mark - API
@@ -157,8 +119,6 @@ static NSString * kPAResultIdentifier = @"Result";
 }
 
 - (void)loadList:(PAAPIListTypes)type {
-    self.searchField.text = nil;
-    
     [[PASchedulesAPI sharedClient] list:type success:^(NSArray *list) {
         if (type == PAAPIListTypeStudents) {
             self.originalStudents = list;
@@ -189,14 +149,49 @@ static NSString * kPAResultIdentifier = @"Result";
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if (section == PASearchTableViewSectionsType) {
-        return NSStringFromPAAPIListType(self.segmentedControl.selectedSegmentIndex);
+        if (self.segmentedControl.selectedSegmentIndex == PAAPIListTypeStudents) {
+            if (self.originalStudents.count == self.studentsList.count) {
+                return [NSString stringWithFormat:@"All %@",NSStringFromPAAPIListType(self.segmentedControl.selectedSegmentIndex)];
+            }
+            else return @"Results";
+        }
+        else if (self.segmentedControl.selectedSegmentIndex == PAAPIListTypeTeachers) {
+            if (self.originalTeachers.count == self.teachersList.count) {
+                return [NSString stringWithFormat:@"All %@",NSStringFromPAAPIListType(self.segmentedControl.selectedSegmentIndex)];
+            }
+            else return @"Results";
+        
+        }
+        else {
+            if (self.originalSupercourses.count == self.originalSupercourses.count) {
+                return @"Courses";
+            }
+            else return @"Results";
+        }
     }
     
     return nil;
 }
 
+- (NSArray *)sectionIndexTitlesForTableView:(UITableView *)tableView {
+    NSMutableArray *alphabets = [[NSMutableArray alloc] initWithArray:[[UILocalizedIndexedCollation currentCollation] sectionIndexTitles]];
+    
+    [alphabets removeLastObject];
+    
+    return nil;
+}
+
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    return indexPath.section == PASearchTableViewSectionsSearchField ? UITableViewAutomaticDimension : 50;
+    if (indexPath.section == PASearchTableViewSectionsType) {
+        if (self.segmentedControl.selectedSegmentIndex == PAAPIListTypeStudents) {
+            if (self.studentsList.count != 0) {
+                return [self.studentsList[indexPath.row] nickname] ? 60 : 50;
+            }
+            else return UITableViewAutomaticDimension;
+        }
+        else return 50;
+    }
+    return UITableViewAutomaticDimension;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -224,7 +219,8 @@ static NSString * kPAResultIdentifier = @"Result";
         PATextFieldCell *cell = [tableView dequeueReusableCellWithIdentifier:kPASearchIdentifier];
         cell = [PATextFieldCell cellWithReuseIdentifier:kPASearchIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.textField.placeholder = @"Search Query";
+        cell.textField.placeholder = @"Search by name, graduation or both.";
+        cell.textField.clearButtonMode = UITextFieldViewModeNever;
         cell.textField.returnKeyType = UIReturnKeyDone;
         cell.textField.delegate = self;
         
@@ -245,6 +241,7 @@ static NSString * kPAResultIdentifier = @"Result";
                 PAEmptyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPAResultIdentifier];
                 cell = [PAEmptyTableViewCell cellWithReuseIdentifier:kPAResultIdentifier];
                 cell.modelType = PAModelTypeStudent;
+                cell.imageView.image = nil;
                 
                 return cell;
             }
@@ -261,6 +258,7 @@ static NSString * kPAResultIdentifier = @"Result";
                 PAEmptyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPAResultIdentifier];
                 cell = [PAEmptyTableViewCell cellWithReuseIdentifier:kPAResultIdentifier];
                 cell.modelType = PAModelTypeTeacher;
+                cell.imageView.image = nil;
                 
                 return cell;
             }
@@ -277,6 +275,7 @@ static NSString * kPAResultIdentifier = @"Result";
                 PAEmptyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPAResultIdentifier];
                 cell = [PAEmptyTableViewCell cellWithReuseIdentifier:kPAResultIdentifier];
                 cell.modelType = PAModelTypeSupercourse;
+                cell.imageView.image = nil;
                 
                 return cell;
             }
@@ -312,12 +311,15 @@ static NSString * kPAResultIdentifier = @"Result";
 #pragma mark - UISegmentedControlDelegate
 
 - (void)segmentChanged {
-    self.searchField.text = nil;
+    [self.tableView scrollRectToVisible:CGRectMake(0, 0, 1, 1) animated:YES];
+    
     self.studentsList = self.originalStudents;
     self.teachersList = self.originalTeachers;
     self.supercoursesList = self.originalSupercourses;
     
     if (self.segmentedControl.selectedSegmentIndex == PAAPIListTypeStudents) {
+        self.searchField.placeholder = @"Search by name, graduation or both.";
+        
         if (!self.studentsList) {
             [self loadSegmentChange];
         }
@@ -325,6 +327,7 @@ static NSString * kPAResultIdentifier = @"Result";
         [self reloadSection:PASearchTableViewSectionsType withRowAnimation:UITableViewRowAnimationFade];
     }
     else if (self.segmentedControl.selectedSegmentIndex == PAAPIListTypeTeachers) {
+        self.searchField.placeholder = @"Search by name, department or both.";
         if (!self.teachersList) {
             [self loadSegmentChange];
         }
@@ -332,6 +335,7 @@ static NSString * kPAResultIdentifier = @"Result";
         [self reloadSection:PASearchTableViewSectionsType withRowAnimation:UITableViewRowAnimationFade];
     }
     else {
+        self.searchField.placeholder = @"Search by course, code or both.";
         if (!self.supercoursesList) {
             [self loadSegmentChange];
         }
@@ -344,13 +348,24 @@ static NSString * kPAResultIdentifier = @"Result";
     self.studentsList = self.originalStudents;
     self.teachersList = self.originalTeachers;
     self.supercoursesList = self.originalSupercourses;
-    
-    self.searchField.text = nil;
+
     [self.refreshControl beginRefreshing];
     [self loadList:self.segmentedControl.selectedSegmentIndex];
 }
 
 #pragma mark - UITextViewDelegate
+
+- (BOOL)textFieldShouldClear:(UITextField *)textField {
+    self.studentsList = self.originalStudents;
+    self.teachersList = self.originalTeachers;
+    self.supercoursesList = self.originalSupercourses;
+    
+    return YES;
+}
+
+- (void)textFieldDidBeginEditing:(UITextField *)textField {
+    [self search:self.searchField.text];
+}
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     NSString *query = [textField.text stringByReplacingCharactersInRange:range withString:string];
@@ -369,7 +384,7 @@ static NSString * kPAResultIdentifier = @"Result";
 - (void)search:(NSString *)query {
     if (self.segmentedControl.selectedSegmentIndex == PAAPIListTypeStudents) {
         if (self.studentsList) {
-            NSPredicate *filter = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"name contains[cd] '%@'",query]];
+            NSPredicate *filter = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"search contains[cd] '%@'",query]];
             NSArray *filtered = [self.originalStudents filteredArrayUsingPredicate:filter];
             
             self.studentsList = filtered;
@@ -384,7 +399,7 @@ static NSString * kPAResultIdentifier = @"Result";
     }
     else if (self.segmentedControl.selectedSegmentIndex == PAAPIListTypeTeachers) {
         if (self.teachersList) {
-            NSPredicate *filter = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"name contains[cd] '%@'",query]];
+            NSPredicate *filter = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"search contains[cd] '%@'",query]];
             NSArray *filtered = [self.originalTeachers filteredArrayUsingPredicate:filter];
             
             self.teachersList = filtered;
@@ -399,7 +414,7 @@ static NSString * kPAResultIdentifier = @"Result";
     }
     else {
         if (self.supercoursesList) {
-            NSPredicate *filter = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"title contains[cd] '%@' OR name contains[cd] '%@'",query,query]];
+            NSPredicate *filter = [NSPredicate predicateWithFormat:[NSString stringWithFormat:@"search contains[cd] '%@'",query]];
             NSArray *filtered = [self.originalSupercourses filteredArrayUsingPredicate:filter];
             
             self.supercoursesList = filtered;
