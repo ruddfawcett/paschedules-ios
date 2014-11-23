@@ -191,8 +191,7 @@
 			children = (
 				F1B2DBFD1A1E8876000631F8 /* Students Tab */,
 				F188E39C1A1F89AA00A26777 /* Search Tab */,
-				F1B2DBFA1A1E886C000631F8 /* PACompareViewController.h */,
-				F1B2DBFB1A1E886C000631F8 /* PACompareViewController.m */,
+				F188E3B11A21AB9300A26777 /* Compare Tab */,
 			);
 			name = "Table View Controllers";
 			sourceTree = "<group>";
@@ -231,6 +230,23 @@
 				F188E3A41A1F8B2700A26777 /* PASupercourseTableViewCell.m */,
 			);
 			name = "Table View Cells";
+			sourceTree = "<group>";
+		};
+		F188E3B11A21AB9300A26777 /* Compare Tab */ = {
+			isa = PBXGroup;
+			children = (
+				F188E3B21A21AB9F00A26777 /* Search */,
+				F1B2DBFA1A1E886C000631F8 /* PACompareViewController.h */,
+				F1B2DBFB1A1E886C000631F8 /* PACompareViewController.m */,
+			);
+			name = "Compare Tab";
+			sourceTree = "<group>";
+		};
+		F188E3B21A21AB9F00A26777 /* Search */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Search;
 			sourceTree = "<group>";
 		};
 		F193E5BD1A0DC6370016103E = {

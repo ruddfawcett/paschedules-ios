@@ -31,7 +31,7 @@
             self.sectionCount = attributes[@"sections"] ? [attributes[@"sections"] intValue] : 0;
         }
         
-        self.search = [NSString stringWithFormat:@"%@ %@",self.name, self.title];
+        self.search = [NSString stringWithFormat:@"%@ %@ %@",self.name, self.title,self.name];
     }
     
     return self;

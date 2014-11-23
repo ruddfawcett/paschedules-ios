@@ -23,6 +23,8 @@ extern NSString * NSStringFromPAModelType(PAModelType modelType);
 
 @property (nonatomic) PAModelType modelType;
 
+@property (nonatomic) BOOL search;
+
 #pragma mark - Class Methods
 
 + (id)cellWithReuseIdentifier:(NSString *)reuseIdentifier;

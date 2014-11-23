@@ -27,6 +27,6 @@ typedef NS_ENUM(NSUInteger, PASearchTableViewSections) {
     PASearchTableViewSectionsType
 };
 
-@interface PASearchViewController : UIViewController <UITableViewDataSource, UITableViewDelegate, UITextFieldDelegate>
+@interface PASearchViewController : UITableViewController <UITextFieldDelegate>
 
 @end

@@ -25,15 +25,7 @@ static NSString * kPAResultIdentifier = @"Result";
 
 @property (strong, nonatomic) UITextField *searchField;
 
-@property (strong, nonatomic) UIRefreshControl *refreshControl;
-
-@property (strong, nonatomic) UITableView *tableView;
-
-@property (strong, nonatomic) UITableViewController *tableViewController;
-
 @property (strong, nonatomic) UISegmentedControl *segmentedControl;
-
-@property (strong, nonatomic) UIToolbar *toolbar;
 
 @property (strong, nonatomic) NSArray *originalStudents;
 @property (strong, nonatomic) NSArray *originalTeachers;
@@ -48,7 +40,7 @@ static NSString * kPAResultIdentifier = @"Result";
 @implementation PASearchViewController
 
 - (id)init {
-    if (self = [super init]) {
+    if (self = [super initWithStyle:UITableViewStylePlain]) {
     
     }
     
@@ -58,8 +50,16 @@ static NSString * kPAResultIdentifier = @"Result";
 - (void)viewDidLoad {
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
-    [self setUpTableView];
-    [self setUpToolbar];
+    self.refreshControl = [UIRefreshControl new];
+    self.refreshControl.tintColor = [UIColor darkGrayColor];
+    [self.refreshControl addTarget:self action:@selector(loadList) forControlEvents:UIControlEventValueChanged];
+    
+    [self.refreshControl beginRefreshing];
+    
+    self.tableView.delegate = self;
+    self.tableView.dataSource = self;
+    
+    [self setUpSegment];
     [self loadList:PAAPIListTypeStudents];
 }
 
@@ -71,7 +71,7 @@ static NSString * kPAResultIdentifier = @"Result";
 
 #pragma mark - Setup
 
-- (void)setUpToolbar {
+- (void)setUpSegment {
     NSArray *items = @[NSStringFromPAAPIListType(PAAPIListTypeStudents),
        NSStringFromPAAPIListType(PAAPIListTypeTeachers),
        @"Courses"];
@@ -80,36 +80,7 @@ static NSString * kPAResultIdentifier = @"Result";
     self.segmentedControl.selectedSegmentIndex = 0;
     [self.segmentedControl addTarget:self action:@selector(segmentChanged) forControlEvents:UIControlEventValueChanged];
     
-    UIBarButtonItem *flexibleItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemFlexibleSpace target:nil action:nil];
-    UIBarButtonItem *segment = [[UIBarButtonItem alloc] initWithCustomView:self.segmentedControl];
-    
-    CGRect toolbarFrame = self.navigationController.navigationBar.frame;
-    
-    self.toolbar = [UIToolbar new];
-    self.toolbar.frame = toolbarFrame;
-    self.toolbar.items = @[flexibleItem, segment, flexibleItem];
-    
     self.navigationItem.titleView = self.segmentedControl;
-}
-
-- (void)setUpTableView {
-    self.tableViewController = [[UITableViewController alloc] initWithStyle:UITableViewStylePlain];
-    [self addChildViewController:self.tableViewController];
-    
-    self.tableViewController.view.frame = self.view.bounds;
-    self.tableViewController.refreshControl = [UIRefreshControl new];
-    self.tableViewController.refreshControl.tintColor = [UIColor darkGrayColor];
-    [self.tableViewController.refreshControl addTarget:self action:@selector(loadList) forControlEvents:UIControlEventValueChanged];
-
-    self.refreshControl = self.tableViewController.refreshControl;
-    
-    [self.refreshControl beginRefreshing];
-    
-    self.tableView = self.tableViewController.tableView;
-    self.tableView.delegate = self;
-    self.tableView.dataSource = self;
-
-    [self.view addSubview:self.tableView];
 }
 
 #pragma mark - API
@@ -164,7 +135,7 @@ static NSString * kPAResultIdentifier = @"Result";
         }
         else {
             if (self.originalSupercourses.count == self.originalSupercourses.count) {
-                return @"Courses";
+                return @"All Courses";
             }
             else return @"Results";
         }
@@ -240,6 +211,7 @@ static NSString * kPAResultIdentifier = @"Result";
             else {
                 PAEmptyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPAResultIdentifier];
                 cell = [PAEmptyTableViewCell cellWithReuseIdentifier:kPAResultIdentifier];
+                cell.search = YES;
                 cell.modelType = PAModelTypeStudent;
                 cell.imageView.image = nil;
                 
@@ -257,6 +229,7 @@ static NSString * kPAResultIdentifier = @"Result";
             else {
                 PAEmptyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPAResultIdentifier];
                 cell = [PAEmptyTableViewCell cellWithReuseIdentifier:kPAResultIdentifier];
+                cell.search = YES;
                 cell.modelType = PAModelTypeTeacher;
                 cell.imageView.image = nil;
                 
@@ -274,6 +247,7 @@ static NSString * kPAResultIdentifier = @"Result";
             else {
                 PAEmptyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPAResultIdentifier];
                 cell = [PAEmptyTableViewCell cellWithReuseIdentifier:kPAResultIdentifier];
+                cell.search = YES;
                 cell.modelType = PAModelTypeSupercourse;
                 cell.imageView.image = nil;
                 
