@@ -22,7 +22,6 @@
     self.refreshControl = [UIRefreshControl new];
     self.refreshControl.tintColor = [UIColor darkGrayColor];
     
-    
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
     self.tableView.emptyDataSetDelegate = self;
@@ -31,6 +30,11 @@
     if (!self.shouldNotLoadRefreshing) {
         [self.refreshControl beginRefreshing];
     }
+    
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+    [self setNeedsStatusBarAppearanceUpdate];
+    [self prefersStatusBarHidden];
+    [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
 }
 
 - (void)viewDidDisappear:(BOOL)animated {
@@ -39,6 +43,10 @@
 
 - (void)viewWillAppear:(BOOL)animated {
     [super viewWillAppear:animated];
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return NO;
 }
 
 - (void)sessionDidEnd:(NSDictionary *)result {

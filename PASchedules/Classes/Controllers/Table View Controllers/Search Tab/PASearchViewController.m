@@ -41,7 +41,7 @@ static NSString * kPAResultIdentifier = @"Result";
 
 - (id)init {
     if (self = [super initWithStyle:UITableViewStylePlain]) {
-    
+        
     }
     
     return self;
@@ -59,6 +59,11 @@ static NSString * kPAResultIdentifier = @"Result";
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
     
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+    [self setNeedsStatusBarAppearanceUpdate];
+    [self prefersStatusBarHidden];
+    [self performSelector:@selector(setNeedsStatusBarAppearanceUpdate)];
+    
     [self setUpSegment];
     [self loadList:PAAPIListTypeStudents];
 }
@@ -73,14 +78,18 @@ static NSString * kPAResultIdentifier = @"Result";
 
 - (void)setUpSegment {
     NSArray *items = @[NSStringFromPAAPIListType(PAAPIListTypeStudents),
-       NSStringFromPAAPIListType(PAAPIListTypeTeachers),
-       @"Courses"];
+                       NSStringFromPAAPIListType(PAAPIListTypeTeachers),
+                       @"Courses"];
     
     self.segmentedControl = [[UISegmentedControl alloc] initWithItems:items];
     self.segmentedControl.selectedSegmentIndex = 0;
     [self.segmentedControl addTarget:self action:@selector(segmentChanged) forControlEvents:UIControlEventValueChanged];
     
     self.navigationItem.titleView = self.segmentedControl;
+}
+
+- (BOOL)prefersStatusBarHidden {
+    return NO;
 }
 
 #pragma mark - API
@@ -131,7 +140,7 @@ static NSString * kPAResultIdentifier = @"Result";
                 return [NSString stringWithFormat:@"All %@",NSStringFromPAAPIListType(self.segmentedControl.selectedSegmentIndex)];
             }
             else return @"Results";
-        
+            
         }
         else {
             if (self.originalSupercourses.count == self.originalSupercourses.count) {
@@ -170,17 +179,24 @@ static NSString * kPAResultIdentifier = @"Result";
     
     if (section == PASearchTableViewSectionsType) {
         if (self.segmentedControl.selectedSegmentIndex == PAAPIListTypeStudents) {
-            count = self.studentsList.count;
+            if (self.originalStudents.count != 0) {
+                count = self.studentsList.count == 0 ? 1 : self.studentsList.count;
+            }
+            else count = 0;
         }
         else if (self.segmentedControl.selectedSegmentIndex == PAAPIListTypeTeachers) {
-            count = self.teachersList.count;
+            if (self.originalTeachers.count != 0) {
+                count = self.teachersList.count == 0 ? 1 : self.teachersList.count;
+            }
+            else count = 0;
         }
         else {
-            count = self.supercoursesList.count;
+            if (self.originalSupercourses.count != 0) {
+                count = self.supercoursesList.count == 0 ? 1 : self.supercoursesList.count;
+            }
+            else count = 0;
         }
     }
-    
-    if (count == 0) count = 1;
     
     return section == 0 ? 1 : count;
 }
@@ -190,7 +206,7 @@ static NSString * kPAResultIdentifier = @"Result";
         PATextFieldCell *cell = [tableView dequeueReusableCellWithIdentifier:kPASearchIdentifier];
         cell = [PATextFieldCell cellWithReuseIdentifier:kPASearchIdentifier];
         cell.selectionStyle = UITableViewCellSelectionStyleNone;
-        cell.textField.placeholder = @"Search by name, graduation or both.";
+        cell.textField.placeholder = @"Search";
         cell.textField.clearButtonMode = UITextFieldViewModeNever;
         cell.textField.returnKeyType = UIReturnKeyDone;
         cell.textField.delegate = self;
@@ -292,7 +308,7 @@ static NSString * kPAResultIdentifier = @"Result";
     self.supercoursesList = self.originalSupercourses;
     
     if (self.segmentedControl.selectedSegmentIndex == PAAPIListTypeStudents) {
-        self.searchField.placeholder = @"Search by name, graduation or both.";
+        // self.searchField.placeholder = @"Search by name, graduation or both.";
         
         if (!self.studentsList) {
             [self loadSegmentChange];
@@ -301,7 +317,7 @@ static NSString * kPAResultIdentifier = @"Result";
         [self reloadSection:PASearchTableViewSectionsType withRowAnimation:UITableViewRowAnimationFade];
     }
     else if (self.segmentedControl.selectedSegmentIndex == PAAPIListTypeTeachers) {
-        self.searchField.placeholder = @"Search by name, department or both.";
+        // self.searchField.placeholder = @"Search by name, department or both.";
         if (!self.teachersList) {
             [self loadSegmentChange];
         }
@@ -309,7 +325,7 @@ static NSString * kPAResultIdentifier = @"Result";
         [self reloadSection:PASearchTableViewSectionsType withRowAnimation:UITableViewRowAnimationFade];
     }
     else {
-        self.searchField.placeholder = @"Search by course, code or both.";
+        // self.searchField.placeholder = @"Search by course, code or both.";
         if (!self.supercoursesList) {
             [self loadSegmentChange];
         }
@@ -322,7 +338,7 @@ static NSString * kPAResultIdentifier = @"Result";
     self.studentsList = self.originalStudents;
     self.teachersList = self.originalTeachers;
     self.supercoursesList = self.originalSupercourses;
-
+    
     [self.refreshControl beginRefreshing];
     [self loadList:self.segmentedControl.selectedSegmentIndex];
 }

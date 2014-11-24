@@ -17,6 +17,8 @@
 
 - (id)initWithStudent:(PAStudent *)student {
     if (self = [super init]) {
+        self.tabBar.translucent = NO;
+        
         self.student = student;
         [self initialize];
     }

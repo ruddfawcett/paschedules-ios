@@ -10,7 +10,7 @@
 
 #import "UIScrollView+EmptyDataSet.h"
 
-@interface PATemplateTableViewController : UITableViewController <PASessionDelegate, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource>
+@interface PATemplateTableViewController : UITableViewController <PASessionDelegate, UIScrollViewDelegate, UITextFieldDelegate, DZNEmptyDataSetDelegate, DZNEmptyDataSetSource>
 
 #pragma mark - Properties
 

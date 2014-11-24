@@ -38,6 +38,8 @@ NSString * const kPASchedulesErrorDomain = @"com.ruddfawcett.paschedules.error";
     
     [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setTextColor:[UIColor blackColor]];
     
+    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+    
     if ([NSDate isExpired:[PASchedulesAPI sessionCreated]] || ![PASchedulesAPI currentUser]) {
         PANavigationController *navController = [[PANavigationController alloc] initWithRootViewController:[PALoginViewController new]];
         

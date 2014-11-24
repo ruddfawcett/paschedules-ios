@@ -9,6 +9,6 @@
 #import <UIKit/UIKit.h>
 #import <CRNavigationController/CRNavigationController.h>
 
-@interface PANavigationController : CRNavigationController
+@interface PANavigationController : UINavigationController
 
 @end
