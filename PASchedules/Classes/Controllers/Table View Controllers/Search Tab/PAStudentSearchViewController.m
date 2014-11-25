@@ -26,13 +26,15 @@ static NSString * kPAResultIdentifier = @"Result";
 @property (strong, nonatomic) NSArray *originalStudents;
 @property (strong, nonatomic) NSArray *studentsList;
 
+@property (strong, nonatomic) NSIndexPath *indexPath;
+
 @end
 
 @implementation PAStudentSearchViewController
 
-- (id)init {
+- (id)initWithIndexPath:(NSIndexPath *)indexPath {
     if (self = [super initWithStyle:UITableViewStylePlain]) {
-        
+        self.indexPath = indexPath;
     }
     
     return self;
@@ -40,6 +42,8 @@ static NSString * kPAResultIdentifier = @"Result";
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.title = @"Student Seach";
     
     [self.refreshControl addTarget:self action:@selector(loadList) forControlEvents:UIControlEventValueChanged];
     [self loadList];
@@ -52,14 +56,30 @@ static NSString * kPAResultIdentifier = @"Result";
 }
 
 - (void)loadList {
-    [[PASchedulesAPI sharedClient] list:PAAPIListTypeStudents success:^(NSArray *list) {
+    if ([self shouldLoadStudents]) {
+        [[PASchedulesAPI sharedClient] list:PAAPIListTypeStudents success:^(NSArray *list) {
+            [PACache sharedCache].students = list;
             self.originalStudents = list;
             self.studentsList = list;
+            [self reloadSection:PAStudentSearchTableViewSectionStudents withRowAnimation:UITableViewRowAnimationFade];
+            [self.refreshControl endRefreshing];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [self.refreshControl endRefreshing];
+            [NSError showWithError:error];
+        }];
+    }
+}
+
+- (BOOL)shouldLoadStudents {
+    if ([PACache sharedCache].students) {
+        self.originalStudents = [PACache sharedCache].students;
+        self.studentsList = [PACache sharedCache].students;
+        [self reloadSection:PAStudentSearchTableViewSectionStudents withRowAnimation:UITableViewRowAnimationFade];
         [self.refreshControl endRefreshing];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [self.refreshControl endRefreshing];
-        [NSError showWithError:error];
-    }];
+        
+        return NO;
+    }
+    else return YES;
 }
 
 #pragma mark - UITableView
@@ -152,10 +172,18 @@ static NSString * kPAResultIdentifier = @"Result";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == PAStudentSearchTableViewSectionStudents) {
-        PAStudentViewController *studentController = [[PAStudentViewController alloc] initWithStudent:self.studentsList[indexPath.row]];
-        [self.navigationController pushViewController:studentController animated:YES];
-    }
+//    if (indexPath.section == PAStudentSearchTableViewSectionStudents) {
+//        PAStudentViewController *studentController = [[PAStudentViewController alloc] initWithStudent:self.studentsList[indexPath.row]];
+//        [self.navigationController pushViewController:studentController animated:YES];
+//    }
+
+    dispatch_async(dispatch_get_main_queue(), ^{
+        if (self.delegate && [self.delegate respondsToSelector:@selector(studentSelected:forIndexPath:)]) {
+            [self.delegate studentSelected:self.studentsList[indexPath.row] forIndexPath:self.indexPath];
+            [self dismissViewControllerAnimated:YES completion:nil];
+            [self.navigationController popToRootViewControllerAnimated:YES];
+        }
+    });
 }
 
 #pragma mark - UITextFieldDelegate
@@ -172,6 +200,8 @@ static NSString * kPAResultIdentifier = @"Result";
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     NSString *query = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    
+    [query stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     [self search:query];
     

@@ -13,3 +13,5 @@
 #import "PASection.h"
 #import "PATeacher.h"
 #import "PASupercourse.h"
+
+#import "PACache.h"

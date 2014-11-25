@@ -99,26 +99,72 @@ static NSString * kPAResultIdentifier = @"Result";
 }
 
 - (void)loadList:(PAAPIListTypes)type {
-    [[PASchedulesAPI sharedClient] list:type success:^(NSArray *list) {
-        if (type == PAAPIListTypeStudents) {
-            self.originalStudents = list;
-            self.studentsList = list;
+    if ([self shouldLoadList:type]) {
+        dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+            [[PASchedulesAPI sharedClient] list:type success:^(NSArray *list) {
+                if (type == PAAPIListTypeStudents) {
+                    [PACache sharedCache].students = list;
+                    self.originalStudents = list;
+                    self.studentsList = list;
+                }
+                else if (type == PAAPIListTypeTeachers) {
+                    [PACache sharedCache].teachers = list;
+                    self.originalTeachers = list;
+                    self.teachersList = list;
+                }
+                else {
+                    [PACache sharedCache].supercourses = list;
+                    self.originalSupercourses = list;
+                    self.supercoursesList = list;
+                }
+                
+                [self reloadSection:PASearchTableViewSectionsType withRowAnimation:UITableViewRowAnimationFade];
+                [self.refreshControl endRefreshing];
+            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+                [self.refreshControl endRefreshing];
+                [NSError showWithError:error];
+            }];
+        });
+    }
+}
+
+- (BOOL)shouldLoadList:(PAAPIListTypes)type {
+    BOOL result;
+    
+    if (type == PAAPIListTypeStudents) {
+        if ([PACache sharedCache].students.count) {
+            self.originalStudents = [PACache sharedCache].students;
+            self.studentsList = [PACache sharedCache].students;
+            
+            result = NO;
         }
-        else if (type == PAAPIListTypeTeachers) {
-            self.originalTeachers = list;
-            self.teachersList = list;
+        else result = YES;
+    }
+    else if (type == PAAPIListTypeTeachers) {
+        if ([PACache sharedCache].teachers) {
+            self.originalTeachers = [PACache sharedCache].teachers;
+            self.teachersList = [PACache sharedCache].teachers;
+            
+            result = NO;
         }
-        else {
-            self.originalSupercourses = list;
-            self.supercoursesList = list;
+        else result = YES;
+    }
+    else {
+        if ([PACache sharedCache].supercourses) {
+            self.originalSupercourses = [PACache sharedCache].supercourses;
+            self.supercoursesList = [PACache sharedCache].supercourses;
+            
+            result = NO;
         }
-        
+        else result = YES;
+    }
+    
+    if (!result) {
         [self reloadSection:PASearchTableViewSectionsType withRowAnimation:UITableViewRowAnimationFade];
         [self.refreshControl endRefreshing];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [self.refreshControl endRefreshing];
-        [NSError showWithError:error];
-    }];
+    }
+    
+    return result;
 }
 
 #pragma mark - UITableViewDelegates
@@ -175,7 +221,7 @@ static NSString * kPAResultIdentifier = @"Result";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSUInteger count;
+    NSUInteger count = 0;
     
     if (section == PASearchTableViewSectionsType) {
         if (self.segmentedControl.selectedSegmentIndex == PAAPIListTypeStudents) {
@@ -359,6 +405,8 @@ static NSString * kPAResultIdentifier = @"Result";
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     NSString *query = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    
+    [query stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     [self search:query];
     

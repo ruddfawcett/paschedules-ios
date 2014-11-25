@@ -8,6 +8,13 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PACompareViewController : UITableViewController
+#import "PAStudentSearchViewController.h"
+
+@class PAStudent;
+
+@class PAStudentViewController;
+@class PAComparisonViewController;
+
+@interface PACompareViewController : UITableViewController <PAStudentSearchDelegate>
 
 @end

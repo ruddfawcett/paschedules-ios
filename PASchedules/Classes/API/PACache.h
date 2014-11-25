@@ -1,0 +1,21 @@
+//
+//  PACacheManager.h
+//  PASchedules
+//
+//  Created by Rudd Fawcett on 11/24/14.
+//  Copyright (c) 2014 Rudd Fawcett. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+
+@interface PACache : NSObject
+
+@property (strong, nonatomic) NSArray *students;
+@property (strong, nonatomic) NSArray *teachers;
+@property (strong, nonatomic) NSArray *supercourses;
+
+#pragma mark - Class Methods
+
++ (instancetype)sharedCache;
+
+@end

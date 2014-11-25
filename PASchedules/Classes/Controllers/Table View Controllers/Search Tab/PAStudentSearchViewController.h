@@ -23,6 +23,20 @@ typedef NS_ENUM(NSUInteger, PAStudentSearchTableViewSections) {
     PAStudentSearchTableViewSectionStudents
 };
 
+@class PAStudentSearchViewController;
+
+@protocol PAStudentSearchDelegate <NSObject>
+
+@required;
+
+- (void)studentSelected:(PAStudent *)student forIndexPath:(NSIndexPath *)indexPath;
+
+@end
+
 @interface PAStudentSearchViewController : PATemplateTableViewController
+
+@property (strong, nonatomic) id<PAStudentSearchDelegate> delegate;
+
+- (id)initWithIndexPath:(NSIndexPath *)indexPath;
 
 @end

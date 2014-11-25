@@ -8,6 +8,9 @@
 
 /* Begin PBXBuildFile section */
 		677452FEF38A6A9D4B9D9574 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B9AF2B506BB69C0E8E3A684 /* libPods.a */; };
+		F1D808281A2435360068B20D /* PAComparisonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1D808271A2435360068B20D /* PAComparisonViewController.m */; };
+		F1D8082B1A2442310068B20D /* PACache.m in Sources */ = {isa = PBXBuildFile; fileRef = F1D8082A1A2442310068B20D /* PACache.m */; };
+		F1D808311A2468050068B20D /* NSArray+PAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F1D808301A2468050068B20D /* NSArray+PAExtensions.m */; };
 		F1FE36641A23B9F0006EFFC3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F1FE36031A23B9F0006EFFC3 /* AppDelegate.m */; };
 		F1FE36651A23B9F0006EFFC3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1FE36041A23B9F0006EFFC3 /* LaunchScreen.xib */; };
 		F1FE36661A23B9F0006EFFC3 /* PACommitment.m in Sources */ = {isa = PBXBuildFile; fileRef = F1FE360A1A23B9F0006EFFC3 /* PACommitment.m */; };
@@ -54,6 +57,13 @@
 		1B9AF2B506BB69C0E8E3A684 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5816D954C368EF0942C41008 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		EEF57C240426B12D7CC19B88 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		F1D808261A2435360068B20D /* PAComparisonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAComparisonViewController.h; sourceTree = "<group>"; };
+		F1D808271A2435360068B20D /* PAComparisonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAComparisonViewController.m; sourceTree = "<group>"; };
+		F1D808291A2442310068B20D /* PACache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PACache.h; sourceTree = "<group>"; };
+		F1D8082A1A2442310068B20D /* PACache.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PACache.m; sourceTree = "<group>"; };
+		F1D8082F1A2468050068B20D /* NSArray+PAExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+PAExtensions.h"; sourceTree = "<group>"; };
+		F1D808301A2468050068B20D /* NSArray+PAExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+PAExtensions.m"; sourceTree = "<group>"; };
+		F1D808321A246AFF0068B20D /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = SOURCE_ROOT; };
 		F1FE35D81A23B9B2006EFFC3 /* PASchedules.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PASchedules.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1FE36021A23B9F0006EFFC3 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F1FE36031A23B9F0006EFFC3 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -132,7 +142,6 @@
 		F1FE365C1A23B9F0006EFFC3 /* PATextFieldCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PATextFieldCell.h; sourceTree = "<group>"; };
 		F1FE365D1A23B9F0006EFFC3 /* PATextFieldCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PATextFieldCell.m; sourceTree = "<group>"; };
 		F1FE365F1A23B9F0006EFFC3 /* Images.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Images.xcassets; sourceTree = "<group>"; };
-		F1FE36601A23B9F0006EFFC3 /* Prefix.pch */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = Prefix.pch; sourceTree = "<group>"; };
 		F1FE36621A23B9F0006EFFC3 /* Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		F1FE36631A23B9F0006EFFC3 /* main.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -202,10 +211,10 @@
 			children = (
 				F1FE36021A23B9F0006EFFC3 /* AppDelegate.h */,
 				F1FE36031A23B9F0006EFFC3 /* AppDelegate.m */,
+				F1D808321A246AFF0068B20D /* PrefixHeader.pch */,
 				F1FE36041A23B9F0006EFFC3 /* LaunchScreen.xib */,
 				F1FE36061A23B9F0006EFFC3 /* Classes */,
 				F1FE365F1A23B9F0006EFFC3 /* Images.xcassets */,
-				F1FE36601A23B9F0006EFFC3 /* Prefix.pch */,
 				F1FE36611A23B9F0006EFFC3 /* Supporting Files */,
 			);
 			path = PASchedules;
@@ -230,6 +239,8 @@
 				F1FE36171A23B9F0006EFFC3 /* PASchedules.h */,
 				F1FE36181A23B9F0006EFFC3 /* PASchedulesAPI.h */,
 				F1FE36191A23B9F0006EFFC3 /* PASchedulesAPI.m */,
+				F1D808291A2442310068B20D /* PACache.h */,
+				F1D8082A1A2442310068B20D /* PACache.m */,
 			);
 			path = API;
 			sourceTree = "<group>";
@@ -266,6 +277,8 @@
 				F1FE36201A23B9F0006EFFC3 /* UIImage+PAExtensions.m */,
 				F1FE36211A23B9F0006EFFC3 /* UITabBarItem+Selected.h */,
 				F1FE36221A23B9F0006EFFC3 /* UITabBarItem+Selected.m */,
+				F1D8082F1A2468050068B20D /* NSArray+PAExtensions.h */,
+				F1D808301A2468050068B20D /* NSArray+PAExtensions.m */,
 			);
 			path = Categories;
 			sourceTree = "<group>";
@@ -316,6 +329,8 @@
 			children = (
 				F1FE362E1A23B9F0006EFFC3 /* PACompareViewController.h */,
 				F1FE362F1A23B9F0006EFFC3 /* PACompareViewController.m */,
+				F1D808261A2435360068B20D /* PAComparisonViewController.h */,
+				F1D808271A2435360068B20D /* PAComparisonViewController.m */,
 			);
 			path = "Compare Tab";
 			sourceTree = "<group>";
@@ -443,6 +458,7 @@
 		F1FE35D01A23B9B2006EFFC3 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = PA;
 				LastUpgradeCheck = 0610;
 				ORGANIZATIONNAME = "Rudd Fawcett";
 				TargetAttributes = {
@@ -534,6 +550,7 @@
 				F1FE366E1A23B9F0006EFFC3 /* NSDate+PAExtensions.m in Sources */,
 				F1FE36811A23B9F0006EFFC3 /* PABasicTeacherTableViewCell.m in Sources */,
 				F1FE367A1A23B9F0006EFFC3 /* PACommitmentViewController.m in Sources */,
+				F1D808281A2435360068B20D /* PAComparisonViewController.m in Sources */,
 				F1FE366C1A23B9F0006EFFC3 /* PATeacher.m in Sources */,
 				F1FE366D1A23B9F0006EFFC3 /* PASchedulesAPI.m in Sources */,
 				F1FE367C1A23B9F0006EFFC3 /* PAStudentViewController.m in Sources */,
@@ -550,9 +567,11 @@
 				F1FE366F1A23B9F0006EFFC3 /* NSError+PAExtensions.m in Sources */,
 				F1FE367B1A23B9F0006EFFC3 /* PASectionViewController.m in Sources */,
 				F1FE36851A23B9F0006EFFC3 /* PASectionTableViewCell.m in Sources */,
+				F1D808311A2468050068B20D /* NSArray+PAExtensions.m in Sources */,
 				F1FE367D1A23B9F0006EFFC3 /* PASupercourseViewController.m in Sources */,
 				F1FE366A1A23B9F0006EFFC3 /* PAStudent.m in Sources */,
 				F1FE36711A23B9F0006EFFC3 /* UITabBarItem+Selected.m in Sources */,
+				F1D8082B1A2442310068B20D /* PACache.m in Sources */,
 				F1FE36661A23B9F0006EFFC3 /* PACommitment.m in Sources */,
 				F1FE36671A23B9F0006EFFC3 /* PACourse.m in Sources */,
 				F1FE36691A23B9F0006EFFC3 /* PASection.m in Sources */,

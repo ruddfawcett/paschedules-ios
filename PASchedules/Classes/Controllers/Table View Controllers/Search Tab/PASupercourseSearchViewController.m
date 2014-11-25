@@ -41,6 +41,8 @@ static NSString * kPAResultIdentifier = @"Result";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.title = @"Course Seach";
+    
     [self.refreshControl addTarget:self action:@selector(loadList) forControlEvents:UIControlEventValueChanged];
     [self loadList];
 }
@@ -52,14 +54,29 @@ static NSString * kPAResultIdentifier = @"Result";
 }
 
 - (void)loadList {
-    [[PASchedulesAPI sharedClient] list:PAAPIListTypeSupercourses success:^(NSArray *list) {
-        self.originalSupercourses = list;
-        self.supercoursesList = list;
+    if ([self shouldLoadSupercourses]) {
+        [[PASchedulesAPI sharedClient] list:PAAPIListTypeSupercourses success:^(NSArray *list) {
+            self.originalSupercourses = list;
+            self.supercoursesList = list;
+            [self reloadSection:PASupercourseSearchTableViewSectionSupercourses withRowAnimation:UITableViewRowAnimationFade];
+            [self.refreshControl endRefreshing];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [self.refreshControl endRefreshing];
+            [NSError showWithError:error];
+        }];
+    }
+}
+
+- (BOOL)shouldLoadSupercourses {
+    if ([PACache sharedCache].supercourses) {
+        self.originalSupercourses = [PACache sharedCache].supercourses;
+        self.supercoursesList = [PACache sharedCache].supercourses;
+        [self reloadSection:PASupercourseSearchTableViewSectionSupercourses withRowAnimation:UITableViewRowAnimationFade];
         [self.refreshControl endRefreshing];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [self.refreshControl endRefreshing];
-        [NSError showWithError:error];
-    }];
+        
+        return NO;
+    }
+    else return YES;
 }
 
 #pragma mark - UITableView
@@ -169,6 +186,8 @@ static NSString * kPAResultIdentifier = @"Result";
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     NSString *query = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    
+    [query stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     [self search:query];
     

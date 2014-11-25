@@ -11,6 +11,7 @@
 #import "PANavigationController.h"
 
 #import "PAStudentViewController.h"
+#import "PACompareViewController.h"
 #import "PASearchViewController.h"
 
 @implementation PATabBarController
@@ -39,7 +40,7 @@
     
     [viewControllers addObject:studentViewController];
     
-    UIViewController *compareViewController = [[UIViewController alloc] init];
+    PACompareViewController *compareViewController = [[PACompareViewController alloc] init];
     compareViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Compare" imageName:@"scale-icon" selectedImageName:@"scale-icon-selected"];
     
     [viewControllers addObject:compareViewController];

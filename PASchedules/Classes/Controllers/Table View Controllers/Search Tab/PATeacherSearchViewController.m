@@ -41,6 +41,8 @@ static NSString * kPAResultIdentifier = @"Result";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.title = @"Teacher Seach";
+    
     [self.refreshControl addTarget:self action:@selector(loadList) forControlEvents:UIControlEventValueChanged];
     [self loadList];
 }
@@ -52,14 +54,29 @@ static NSString * kPAResultIdentifier = @"Result";
 }
 
 - (void)loadList {
-    [[PASchedulesAPI sharedClient] list:PAAPIListTypeTeachers success:^(NSArray *list) {
-        self.originalTeachers = list;
-        self.teachersList = list;
+    if ([self shouldLoadTeachers]) {
+        [[PASchedulesAPI sharedClient] list:PAAPIListTypeTeachers success:^(NSArray *list) {
+            self.originalTeachers = list;
+            self.teachersList = list;
+            [self reloadSection:PATeacherSearchTableViewSectionTeachers withRowAnimation:UITableViewRowAnimationFade];
+            [self.refreshControl endRefreshing];
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            [self.refreshControl endRefreshing];
+            [NSError showWithError:error];
+        }];
+    }
+}
+
+- (BOOL)shouldLoadTeachers {
+    if ([PACache sharedCache].teachers) {
+        self.originalTeachers = [PACache sharedCache].teachers;
+        self.teachersList = [PACache sharedCache].teachers;
+        [self reloadSection:PATeacherSearchTableViewSectionTeachers withRowAnimation:UITableViewRowAnimationFade];
         [self.refreshControl endRefreshing];
-    } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-        [self.refreshControl endRefreshing];
-        [NSError showWithError:error];
-    }];
+        
+        return NO;
+    }
+    else return YES;
 }
 
 #pragma mark - UITableView
@@ -169,6 +186,8 @@ static NSString * kPAResultIdentifier = @"Result";
 
 - (BOOL)textField:(UITextField *)textField shouldChangeCharactersInRange:(NSRange)range replacementString:(NSString *)string {
     NSString *query = [textField.text stringByReplacingCharactersInRange:range withString:string];
+    
+    [query stringByTrimmingCharactersInSet:[NSCharacterSet whitespaceAndNewlineCharacterSet]];
     
     [self search:query];
     

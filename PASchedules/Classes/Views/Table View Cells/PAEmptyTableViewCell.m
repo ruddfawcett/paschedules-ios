@@ -45,7 +45,10 @@ NSString * NSStringFromPAModelType(PAModelType modelType) {
 }
 
 - (void)setModelType:(PAModelType)modelType {
-    self.textLabel.text = self.search ? [NSString stringWithFormat:@"No %@s found.",[NSStringFromPAModelType(modelType) lowercaseString]] : [NSString stringWithFormat:@"No %@s.", [NSStringFromPAModelType(modelType) lowercaseString]];
+    NSString *type = [NSStringFromPAModelType(modelType) lowercaseString];
+    type = [type stringByReplacingOccurrencesOfString:@"super" withString:@""];
+    
+    self.textLabel.text = self.search ? [NSString stringWithFormat:@"No %@s found.", type] : [NSString stringWithFormat:@"No %@s.", type];
 }
 
 @end
