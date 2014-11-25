@@ -24,7 +24,7 @@
         
         NSArray *names = [self.name componentsSeparatedByString:@" "];
         
-        self.search = [NSString stringWithFormat:@"%@ %@ %@ %d %@ %d %@ %d %@",names[0],[names lastObject],self.nickname,self.graduation,names[0],self.graduation,self.nickname,self.graduation,[names lastObject]];
+        self.search = [NSString stringWithFormat:@"%@ %@ %@ %lu %@ %lu %@ %d %@",names[0],[names lastObject],self.nickname,(unsigned long)self.graduation,names[0],(unsigned long)self.graduation,self.nickname,self.graduation,[names lastObject]];
         
         [self loadCourses:attributes[@"courses"]];
         [self loadCommitments:attributes[@"commitments"]];

@@ -11,6 +11,7 @@
 		F1D808281A2435360068B20D /* PAComparisonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1D808271A2435360068B20D /* PAComparisonViewController.m */; };
 		F1D8082B1A2442310068B20D /* PACache.m in Sources */ = {isa = PBXBuildFile; fileRef = F1D8082A1A2442310068B20D /* PACache.m */; };
 		F1D808311A2468050068B20D /* NSArray+PAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F1D808301A2468050068B20D /* NSArray+PAExtensions.m */; };
+		F1D808351A2528FB0068B20D /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1D808341A2528FB0068B20D /* Crashlytics.framework */; };
 		F1FE36641A23B9F0006EFFC3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F1FE36031A23B9F0006EFFC3 /* AppDelegate.m */; };
 		F1FE36651A23B9F0006EFFC3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1FE36041A23B9F0006EFFC3 /* LaunchScreen.xib */; };
 		F1FE36661A23B9F0006EFFC3 /* PACommitment.m in Sources */ = {isa = PBXBuildFile; fileRef = F1FE360A1A23B9F0006EFFC3 /* PACommitment.m */; };
@@ -64,6 +65,7 @@
 		F1D8082F1A2468050068B20D /* NSArray+PAExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "NSArray+PAExtensions.h"; sourceTree = "<group>"; };
 		F1D808301A2468050068B20D /* NSArray+PAExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+PAExtensions.m"; sourceTree = "<group>"; };
 		F1D808321A246AFF0068B20D /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = SOURCE_ROOT; };
+		F1D808341A2528FB0068B20D /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
 		F1FE35D81A23B9B2006EFFC3 /* PASchedules.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PASchedules.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1FE36021A23B9F0006EFFC3 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F1FE36031A23B9F0006EFFC3 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -151,6 +153,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1D808351A2528FB0068B20D /* Crashlytics.framework in Frameworks */,
 				677452FEF38A6A9D4B9D9574 /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -170,6 +173,7 @@
 		C42B073D300838D9DC300513 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F1D808341A2528FB0068B20D /* Crashlytics.framework */,
 				1B9AF2B506BB69C0E8E3A684 /* libPods.a */,
 			);
 			name = Frameworks;
@@ -442,6 +446,7 @@
 				F1FE35D51A23B9B2006EFFC3 /* Frameworks */,
 				F1FE35D61A23B9B2006EFFC3 /* Resources */,
 				CA0821B8EB38D49B3724592B /* Copy Pods Resources */,
+				F1D808331A2528380068B20D /* Integrate Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -464,6 +469,7 @@
 				TargetAttributes = {
 					F1FE35D71A23B9B2006EFFC3 = {
 						CreatedOnToolsVersion = 6.1;
+						DevelopmentTeam = K99NAT9AQ8;
 					};
 				};
 			};
@@ -527,6 +533,20 @@
 			shellPath = /bin/sh;
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
+		};
+		F1D808331A2528380068B20D /* Integrate Crashlytics */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Integrate Crashlytics";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "./Crashlytics.framework/run ee94e24c5383105ff0dd886b0283711d3f06efff fb74ea043af5c4c81e02bc4fa7fe6fda90146cb91a1bfc2893b1ff5cc9a712c6";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -610,7 +630,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Rudd Fawcett (K99NAT9AQ8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Rudd Fawcett (K99NAT9AQ8)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -652,7 +673,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Rudd Fawcett (K99NAT9AQ8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Rudd Fawcett (K99NAT9AQ8)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -676,12 +698,19 @@
 			baseConfigurationReference = 5816D954C368EF0942C41008 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PREFIX_HEADER = PrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/PASchedules/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 1;
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -690,12 +719,19 @@
 			baseConfigurationReference = EEF57C240426B12D7CC19B88 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				GCC_PREFIX_HEADER = PrefixHeader.pch;
 				INFOPLIST_FILE = "$(SRCROOT)/PASchedules/Supporting Files/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
-				TARGETED_DEVICE_FAMILY = 1;
+				PROVISIONING_PROFILE = "";
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

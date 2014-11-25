@@ -7,6 +7,7 @@
 //
 
 #import <UIKit/UIKit.h>
+#import <Crashlytics/Crashlytics.h>
 
 @class PASchedulesAPI;
 @class PANavigationController;
