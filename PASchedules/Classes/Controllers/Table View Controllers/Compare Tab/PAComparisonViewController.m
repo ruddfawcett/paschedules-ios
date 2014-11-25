@@ -66,12 +66,19 @@ static NSString * kPACommitmentIdentifier = @"Commitment";
     [self loadStudents];
 }
 
+- (void)viewDidDisappear:(BOOL)animated {
+    [super viewDidDisappear:animated];
+    
+    [self.tableView deselectRowAtIndexPath:[self.tableView indexPathForSelectedRow] animated:YES];
+}
+
 #pragma mark - API Methods
 
 - (void)loadStudents {
     self.loading = YES;
     
-    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
+    dispatch_group_t group = dispatch_group_create();
+    dispatch_group_async(group,dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^ {
         [[PASchedulesAPI sharedClient] students:self.firstStudent.studentId success:^(PAStudent *student) {
             self.firstStudent = student;
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -87,10 +94,14 @@ static NSString * kPACommitmentIdentifier = @"Commitment";
             self.secondStudent = student;
             self.loading = NO;
             
-            [self compare:self.firstStudent withStudent:self.secondStudent];
-            
-            [self.tableView reloadData];
-            [self.refreshControl endRefreshing];
+            [self compare:self.firstStudent withStudent:self.secondStudent completion:^(NSArray *sharedCourses, NSArray *sharedTeachers, NSArray *sharedCommitments) {
+                self.sharedCourses = sharedCourses;
+                self.sharedTeachers = sharedTeachers;
+                self.sharedCommitments = sharedCommitments;
+                
+                [self.tableView reloadData];
+                [self.refreshControl endRefreshing];
+            }];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [self.refreshControl endRefreshing];
             [self dismissViewControllerAnimated:YES completion:nil];
@@ -104,36 +115,55 @@ static NSString * kPACommitmentIdentifier = @"Commitment";
 
 #pragma mark - "Fun" comparison logic:
 
-- (void)compare:(PAStudent *)student withStudent:(PAStudent *)studentTwo {
+- (void)compare:(PAStudent *)student withStudent:(PAStudent *)studentTwo completion:(void (^)(NSArray *sharedCourses, NSArray *sharedTeachers, NSArray *sharedCommitments))completion {
     NSMutableArray *sharedCourses = [@[] mutableCopy];
-    NSMutableArray *sharedTeachers = [@[] mutableCopy];
+    NSMutableArray *sharedTeacherIds = [@[] mutableCopy];
     NSMutableArray *sharedCommitments = [@[] mutableCopy];
     
     for (PACourse *eachCourse in student.courses) {
-        if ([[NSArray arrayOfCourseIds:studentTwo.courses] containsObject:[NSNumber numberWithInt:eachCourse.sectionId]]) {
+        if ([[NSArray arrayOfCourseIds:studentTwo.courses] containsObject:[NSNumber numberWithInteger:eachCourse.sectionId]]) {
             [sharedCourses addObject:eachCourse];
         }
         
         if ([[NSArray arrayOfTeacherNames:studentTwo.courses] containsObject:eachCourse.teacherName]) {
-            [[PASchedulesAPI sharedClient] sections:eachCourse.sectionId success:^(PASection *section) {
-                [sharedTeachers addObject:section.teacher];
-            } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
-                error = [[NSError alloc] initWithDomain:kPASchedulesErrorDomain code:1 userInfo:@{NSLocalizedDescriptionKey : @"Failed to load teachers."}];
-                
-                [NSError showWithError:error];
-            }];
+            [sharedTeacherIds addObject:@(eachCourse.sectionId)];
         }
     }
     
     for (PACommitment *eachCommitment in student.commitments) {
-        if ([[NSArray arrayOfCommitmentIds:studentTwo.commitments] containsObject:[NSNumber numberWithInt:eachCommitment.commitmentId]]) {
+        if ([[NSArray arrayOfCommitmentIds:studentTwo.commitments] containsObject:[NSNumber numberWithInteger:eachCommitment.commitmentId]]) {
             [sharedCommitments addObject:eachCommitment];
         }
     }
     
-    self.sharedCourses = sharedCourses;
-    self.sharedTeachers = sharedTeachers;
-    self.sharedCommitments = sharedCommitments;
+    [self loadSections:sharedTeacherIds success:^(NSArray *teachers) {
+        completion(sharedCourses, teachers, sharedCommitments);
+    }];
+    
+}
+
+- (void)loadSections:(NSArray *)sectionIds success:(void (^)(NSArray *teachers))success {
+    __block NSMutableArray *teachers = [@[] mutableCopy];
+    
+    dispatch_group_t group = dispatch_group_create();
+    
+    for (NSNumber *sectionId in sectionIds) {
+        dispatch_group_enter(group);
+        [[PASchedulesAPI sharedClient] sections:[sectionId intValue] success:^(PASection *section) {
+            [teachers addObject:section.teacher];
+
+            dispatch_group_leave(group);
+        } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
+            error = [[NSError alloc] initWithDomain:kPASchedulesErrorDomain code:1 userInfo:@{NSLocalizedDescriptionKey : @"Failed to load some teachers."}];
+            [NSError showWithError:error];
+            
+            dispatch_group_leave(group);
+        }];
+    }
+    
+    dispatch_group_notify(group, dispatch_get_main_queue(), ^{
+        success(teachers);
+    });
 }
 
 #pragma mark - UITableViewDelegates
@@ -145,18 +175,13 @@ static NSString * kPACommitmentIdentifier = @"Commitment";
         }
         else return UITableViewAutomaticDimension;
     }
-    else if (indexPath.section == 1) {
-        if (self.sharedTeachers.count != 0) {
-            return 50;
-        }
-        else return UITableViewAutomaticDimension;
-    }
-    else {
+    else if (indexPath.section == 2) {
         if (self.sharedCommitments.count != 0) {
             return 60;
         }
         else return UITableViewAutomaticDimension;
     }
+    else return UITableViewAutomaticDimension;
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -201,9 +226,10 @@ static NSString * kPACommitmentIdentifier = @"Commitment";
     }
     else if (indexPath.section == 1) {
         if (self.sharedTeachers.count != 0) {
-            PATeacherTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPATeacherIdentifier];
-            cell = [PATeacherTableViewCell cellWithReuseIdentifier:kPATeacherIdentifier];
-            cell.teacher = self.sharedTeachers[indexPath.row];
+            UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPATeacherIdentifier];
+            cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kPATeacherIdentifier];
+            cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
+            cell.textLabel.text = [self.sharedTeachers[indexPath.row] name];
             
             return cell;
         }
@@ -227,7 +253,7 @@ static NSString * kPACommitmentIdentifier = @"Commitment";
         }
         else {
             PAEmptyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPACommitmentIdentifier];
-            cell = [PAEmptyTableViewCell cellWithReuseIdentifier:kPACourseIdentifier];
+            cell = [PAEmptyTableViewCell cellWithReuseIdentifier:kPACommitmentIdentifier];
             cell.search = YES;
             cell.imageView.image = nil;
             cell.modelType = PAModelTypeCommitment;
