@@ -22,6 +22,20 @@
 #import "PATeacherViewController.h"
 #import "PACommitmentViewController.h"
 
+NSString * NSStringFromComparisonSections(PAComparisonTableViewSections section) {
+    switch (section) {
+        case PAComparisonTableViewSectionCourses:
+            return @"Shared Classes";
+            break;
+        case PAComparisonTableViewSectionTeachers:
+            return @"Shared Teachers";
+            break;
+        default:
+            return @"Shared Commitments";
+            break;
+    }
+}
+
 static NSString * kPACourseIdentifier = @"Course";
 static NSString * kPATeacherIdentifier = @"Teacher";
 static NSString * kPACommitmentIdentifier = @"Commitment";
@@ -170,13 +184,13 @@ static NSString * kPACommitmentIdentifier = @"Commitment";
 #pragma mark - UITableViewDelegates
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
+    if (indexPath.section == PAComparisonTableViewSectionCourses) {
         if (self.sharedCourses.count != 0) {
             return 60;
         }
         else return UITableViewAutomaticDimension;
     }
-    else if (indexPath.section == 2) {
+    else if (indexPath.section == PAComparisonTableViewSectionCommitments) {
         if (self.sharedCommitments.count != 0) {
             return 60;
         }
@@ -186,10 +200,7 @@ static NSString * kPACommitmentIdentifier = @"Commitment";
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
-        return @"Shared Courses";
-    }
-    return section == 1 ? @"Shared Teachers" : @"Shared Commitments";
+    return NSStringFromComparisonSections(section);
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
@@ -197,17 +208,17 @@ static NSString * kPACommitmentIdentifier = @"Commitment";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == 0) {
+    if (section == PAComparisonTableViewSectionCourses) {
         return self.sharedCourses.count != 0 ? self.sharedCourses.count : 1;
     }
-    else if (section == 1) {
+    else if (section == PAComparisonTableViewSectionTeachers) {
         return self.sharedTeachers.count != 0 ? self.sharedTeachers.count : 1;
     }
     else return self.sharedCommitments.count != 0 ? self.sharedCommitments.count : 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
+    if (indexPath.section == PAComparisonTableViewSectionCourses) {
         if (self.sharedCourses.count != 0) {
             PACourseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPACourseIdentifier];
             cell = [PACourseTableViewCell cellWithReuseIdentifier:kPACourseIdentifier];
@@ -225,7 +236,7 @@ static NSString * kPACommitmentIdentifier = @"Commitment";
             return cell;
         }
     }
-    else if (indexPath.section == 1) {
+    else if (indexPath.section == PAComparisonTableViewSectionTeachers) {
         if (self.sharedTeachers.count != 0) {
             UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPATeacherIdentifier];
             cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kPATeacherIdentifier];
@@ -265,7 +276,7 @@ static NSString * kPACommitmentIdentifier = @"Commitment";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
+    if (indexPath.section == PAComparisonTableViewSectionCourses) {
         PASectionViewController *sectionViewController = [[PASectionViewController alloc] initWithSection:[[PASection alloc] initWithAttributes:@{@"id" : @([self.sharedCourses[indexPath.row] sectionId])}]];
         [self.navigationController pushViewController:sectionViewController animated:YES];
     }

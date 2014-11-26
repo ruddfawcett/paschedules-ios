@@ -15,6 +15,11 @@
 @class PAStudentViewController;
 @class PAComparisonViewController;
 
+typedef NS_ENUM(NSUInteger, PACompareTableViewSections) {
+    PACompareTableViewSectionStudents,
+    PACompareTableViewSectionCompare
+};
+
 @interface PACompareViewController : UITableViewController <PAStudentSearchDelegate>
 
 @end

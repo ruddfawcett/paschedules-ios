@@ -22,6 +22,12 @@
 @class PATeacherViewController;
 @class PACommitmentViewController;
 
+typedef NS_ENUM(NSUInteger, PAComparisonTableViewSections) {
+    PAComparisonTableViewSectionCourses,
+    PAComparisonTableViewSectionTeachers,
+    PAComparisonTableViewSectionCommitments
+};
+
 @interface PAComparisonViewController : UITableViewController
 
 - (id)initWithStudent:(PAStudent *)firstStudent andStudent:(PAStudent *)secondStudent;

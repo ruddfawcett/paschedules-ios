@@ -13,6 +13,15 @@
 #import "PAStudentViewController.h"
 #import "PAComparisonViewController.h"
 
+NSString * NSStringStringFromCompareSections(PACompareTableViewSections section) {
+    switch (section) {
+        case PACompareTableViewSectionStudents:
+            return @"Select Students";
+        default:
+            return nil;
+    }
+}
+
 static NSString * kPAStudentIdentifier = @"Student";
 static NSString * kPAComparisonIdentifier = @"Comparison";
 
@@ -50,10 +59,7 @@ static NSString * kPAComparisonIdentifier = @"Comparison";
 #pragma mark - UITableViewDelegates
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    if (section == 0) {
-        return @"Select Students";
-    }
-    else return nil;
+    return NSStringStringFromCompareSections(section);
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
@@ -68,15 +74,15 @@ static NSString * kPAComparisonIdentifier = @"Comparison";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return section == 0 ? 2 : 1;
+    return section == PACompareTableViewSectionStudents ? 2 : 1;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPAComparisonIdentifier];
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kPAComparisonIdentifier];
     
-    if (indexPath.section == 0) {
-        cell.textLabel.text = [NSString stringWithFormat:@"Student %ld",indexPath.row+1];
+    if (indexPath.section == PACompareTableViewSectionStudents) {
+        cell.textLabel.text = [NSString stringWithFormat:@"Student %ld",(long unsigned)indexPath.row+1];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     else {
@@ -90,7 +96,7 @@ static NSString * kPAComparisonIdentifier = @"Comparison";
 }
 
 - (void)tableView:(UITableView *)tableView accessoryButtonTappedForRowWithIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
+    if (indexPath.section == PACompareTableViewSectionStudents) {
         PAStudentViewController *studentController = [[PAStudentViewController alloc] initWithStudent:(indexPath.row == 0 ? self.firstStudent : self.secondStudent)];
         
         [self.navigationController pushViewController:studentController animated:YES];
@@ -99,7 +105,7 @@ static NSString * kPAComparisonIdentifier = @"Comparison";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 0) {
+    if (indexPath.section == PACompareTableViewSectionStudents) {
         PAStudentSearchViewController *searchController = [[PAStudentSearchViewController alloc] initWithIndexPath:indexPath];
         searchController.delegate = self;
         
@@ -127,7 +133,7 @@ static NSString * kPAComparisonIdentifier = @"Comparison";
     UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:indexPath];
     cell.tintColor = PA_BLUE;
     cell.accessoryType = UITableViewCellAccessoryDetailDisclosureButton;
-    cell.textLabel.text = student.name;
+    cell.textLabel.text = student.nickname ? [NSString stringWithFormat:@"%@ (%@)",student.name,student.nickname] : [NSString stringWithFormat:@"%@",student.name];
     
     if (self.firstStudent && self.secondStudent) {
         UITableViewCell *cell = [self.tableView cellForRowAtIndexPath:[NSIndexPath indexPathForRow:0 inSection:1]];
