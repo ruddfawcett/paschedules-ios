@@ -118,9 +118,8 @@ static NSString * kPAResultIdentifier = @"Result";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == PAStudentSearchTableViewSectionStudents) {
         if (self.studentsList.count != 0) {
-            return [self.studentsList[indexPath.row] nickname] ? 60 : 50;
+            return 50;
         }
-        else return UITableViewAutomaticDimension;
     }
     return UITableViewAutomaticDimension;
 }
@@ -132,7 +131,7 @@ static NSString * kPAResultIdentifier = @"Result";
         count = self.studentsList.count != 0 ? self.studentsList.count : 1;
     }
     
-    return section == 0 ? 1 : count;
+    return section == PAStudentSearchTableViewSectionSearch ? 1 : count;
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -172,11 +171,6 @@ static NSString * kPAResultIdentifier = @"Result";
 }
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-//    if (indexPath.section == PAStudentSearchTableViewSectionStudents) {
-//        PAStudentViewController *studentController = [[PAStudentViewController alloc] initWithStudent:self.studentsList[indexPath.row]];
-//        [self.navigationController pushViewController:studentController animated:YES];
-//    }
-
     dispatch_async(dispatch_get_main_queue(), ^{
         if (self.delegate && [self.delegate respondsToSelector:@selector(studentSelected:forIndexPath:)]) {
             [self.delegate studentSelected:self.studentsList[indexPath.row] forIndexPath:self.indexPath];

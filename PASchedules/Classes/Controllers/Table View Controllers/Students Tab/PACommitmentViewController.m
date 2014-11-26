@@ -98,8 +98,7 @@ static NSString * kPAStudentIdentifier = @"Student";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == PACommitmentTableViewSectionStudents) {
         if (self.commitment.students.count != 0) {
-            PAStudent *thisStudent = self.commitment.students[indexPath.row];
-            return thisStudent.nickname ? 60 : 50;
+            return 50;
         }
     }
     

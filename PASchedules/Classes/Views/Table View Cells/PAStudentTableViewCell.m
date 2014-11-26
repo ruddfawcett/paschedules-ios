@@ -25,14 +25,9 @@
 }
 
 - (void)setStudent:(PAStudent *)student {
-    self.textLabel.text = student.name;
-    
-    if (student.nickname != nil) {
-        self.detailTextLabel.text = [NSString stringWithFormat:@"Goes by %@\nClass of %lu", student.nickname, (unsigned long)student.graduation];
-    }
-    else {
-        self.detailTextLabel.text = [NSString stringWithFormat:@"Class of %lu", (unsigned long)student.graduation];
-    }
+    self.textLabel.text = student.nickname ? [NSString stringWithFormat:@"%@ (%@)",student.name, student.nickname] : [NSString stringWithFormat:@"%@",student.name];
+
+    self.detailTextLabel.text = [NSString stringWithFormat:@"Class of %lu", (unsigned long)student.graduation];
 }
 
 @end
