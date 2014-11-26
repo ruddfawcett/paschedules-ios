@@ -19,7 +19,7 @@
 NSString * NSStringFromStudentSections(PAStudentTableViewSections section) {
     switch (section) {
         case PAStudentTableViewSectionCourses:
-            return @"Courses";
+            return @"Classes";
         case PAStudentTableViewSectionCommitments:
             return @"Commitments";
         default:
@@ -28,7 +28,7 @@ NSString * NSStringFromStudentSections(PAStudentTableViewSections section) {
 }
 
 static NSString * kPAInfoIdentifier = @"Info";
-static NSString * kPACoursesIdentifier = @"Courses";
+static NSString * kPAClassesIdentifier = @"Classes";
 static NSString * kPACommitmentsIdentifier = @"Commitments";
 
 @interface PAStudentViewController ()
@@ -135,15 +135,15 @@ static NSString * kPACommitmentsIdentifier = @"Commitments";
     }
     else if (indexPath.section == PAStudentTableViewSectionCourses) {
         if (self.student.courses.count != 0) {
-            PACourseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPACoursesIdentifier];
-            cell = [PACourseTableViewCell cellWithReuseIdentifier:kPACoursesIdentifier];
+            PACourseTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPAClassesIdentifier];
+            cell = [PACourseTableViewCell cellWithReuseIdentifier:kPAClassesIdentifier];
             cell.course = self.student.courses[indexPath.row];
             
             return cell;
         }
         else {
-            PAEmptyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPACoursesIdentifier];
-            cell = [PAEmptyTableViewCell cellWithReuseIdentifier:kPACoursesIdentifier];
+            PAEmptyTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPAClassesIdentifier];
+            cell = [PAEmptyTableViewCell cellWithReuseIdentifier:kPAClassesIdentifier];
             cell.modelType = PAModelTypeCourse;
             
             return cell;

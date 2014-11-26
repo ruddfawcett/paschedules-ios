@@ -20,7 +20,7 @@
 NSString * NSStringFromSectionSections(PASectionTableViewSections section) {
     switch (section) {
         case PASectionTableViewSectionSupercourse:
-            return @"Supercourse";
+            return @"Course";
         case PASectionTableViewSectionTeacher:
             return @"Teacher";
         case PASectionTableViewSectionInfo:
@@ -95,8 +95,7 @@ static NSString * kPAStudentsIdentifier = @"Students";
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == PASectionTableViewSectionStudents) {
         if (self.section.students.count != 0) {
-            PAStudent *thisStudent = self.section.students[indexPath.row];
-            return thisStudent.nickname ? 60 : 50;
+            return 50;
         }
     }
     
