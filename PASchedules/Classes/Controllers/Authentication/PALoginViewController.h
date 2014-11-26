@@ -8,6 +8,8 @@
 
 #import <UIKit/UIKit.h>
 
+#import "AppDelegate.h"
+
 @class PAStudent;
 
 @class PATextFieldCell;

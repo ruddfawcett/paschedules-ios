@@ -70,7 +70,9 @@
             PATabBarController *tabBarController = [[PATabBarController alloc] initWithStudent:student];
             tabBarController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
         
-            [self.navigationController presentViewController:tabBarController animated:YES completion:nil];
+//            [self.navigationController presentViewController:tabBarController animated:YES completion:nil];
+            
+            [[UIApplication sharedApplication] delegate].window.rootViewController = tabBarController;
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [SVProgressHUD dismiss];
             
