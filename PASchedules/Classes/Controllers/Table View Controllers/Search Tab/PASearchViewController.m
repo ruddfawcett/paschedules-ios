@@ -58,6 +58,7 @@ static NSString * kPAResultIdentifier = @"Result";
     
     self.tableView.delegate = self;
     self.tableView.dataSource = self;
+    self.tableView.showsVerticalScrollIndicator = NO;
     
     [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
     [self setNeedsStatusBarAppearanceUpdate];

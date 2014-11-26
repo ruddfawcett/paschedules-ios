@@ -15,15 +15,18 @@
 }
 
 + (void)showWithError:(NSError *)error {
-    [SVProgressHUD showErrorWithStatus:error.localizedDescription];
-    
-//    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
-//                                                    message:error.localizedDescription
-//                                                   delegate:nil
-//                                          cancelButtonTitle:@"Ok"
-//                                          otherButtonTitles: nil];
-//    
-//    [alert show];
+    if (error.code != 666) {
+        [SVProgressHUD showErrorWithStatus:error.localizedDescription];
+    }
+    else {
+        UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"Error"
+                                                        message:error.localizedDescription
+                                                       delegate:nil
+                                              cancelButtonTitle:@"Ok"
+                                              otherButtonTitles: nil];
+        
+        [alert show];
+    }
 }
 
 @end

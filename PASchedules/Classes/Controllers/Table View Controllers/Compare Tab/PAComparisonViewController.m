@@ -53,6 +53,7 @@ static NSString * kPACommitmentIdentifier = @"Commitment";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.tableView.showsVerticalScrollIndicator = NO;
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithImage:[UIImage imageNamed:@"back-icon"] style:UIBarButtonItemStylePlain target:self action:@selector(dismissModalViewControllerAnimated:)];
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     

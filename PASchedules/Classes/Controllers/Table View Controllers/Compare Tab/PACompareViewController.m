@@ -36,6 +36,7 @@ static NSString * kPAComparisonIdentifier = @"Comparison";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
+    self.tableView.showsVerticalScrollIndicator = NO;
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     self.navigationItem.title = @"Find Comparisons";
 }
@@ -75,7 +76,7 @@ static NSString * kPAComparisonIdentifier = @"Comparison";
     cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:kPAComparisonIdentifier];
     
     if (indexPath.section == 0) {
-        cell.textLabel.text = [NSString stringWithFormat:@"Student %d",indexPath.row+1];
+        cell.textLabel.text = [NSString stringWithFormat:@"Student %ld",indexPath.row+1];
         cell.accessoryType = UITableViewCellAccessoryDisclosureIndicator;
     }
     else {

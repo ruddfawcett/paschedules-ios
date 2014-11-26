@@ -42,6 +42,8 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    self.tableView.showsVerticalScrollIndicator = NO;
     self.title = @"Log In";
 }
 

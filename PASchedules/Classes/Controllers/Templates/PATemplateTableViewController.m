@@ -26,6 +26,7 @@
     
     self.tableView.emptyDataSetDelegate = self;
     self.tableView.emptyDataSetSource = self;
+    self.tableView.showsVerticalScrollIndicator = NO;
     
     if (!self.shouldNotLoadRefreshing) {
         [self.refreshControl beginRefreshing];
