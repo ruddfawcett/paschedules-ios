@@ -24,8 +24,6 @@ NSString * const kPASchedulesErrorDomain = @"com.ruddfawcett.paschedules.error";
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [Crashlytics startWithAPIKey:@"ee94e24c5383105ff0dd886b0283711d3f06efff"];
-    
     self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
     self.window.backgroundColor = PA_WHITE;
     
@@ -51,6 +49,8 @@ NSString * const kPASchedulesErrorDomain = @"com.ruddfawcett.paschedules.error";
         PATabBarController *studentController = [[PATabBarController alloc] initWithStudent:[PASchedulesAPI studentFromSession]];
         self.window.rootViewController = studentController;
     }
+    
+    [Crashlytics startWithAPIKey:@"ee94e24c5383105ff0dd886b0283711d3f06efff"];
 
     [self.window makeKeyAndVisible];
     
