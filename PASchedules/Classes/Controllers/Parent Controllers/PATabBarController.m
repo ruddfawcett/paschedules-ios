@@ -13,6 +13,7 @@
 #import "PAStudentViewController.h"
 #import "PACompareViewController.h"
 #import "PASearchViewController.h"
+#import "PASettingsViewController.h"
 
 @implementation PATabBarController
 
@@ -55,7 +56,7 @@
     
     [viewControllers addObject:searchViewController];
     
-    UIViewController *settingsController = [[UIViewController alloc] init];
+    PASettingsViewController *settingsController = [[PASettingsViewController alloc] init];
     settingsController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Settings" imageName:@"gear-icon" selectedImageName:@"gear-icon-selected"];
     
     [viewControllers addObject:settingsController];

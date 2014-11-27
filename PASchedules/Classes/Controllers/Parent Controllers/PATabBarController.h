@@ -12,6 +12,7 @@
 @class PAStudentViewController;
 @class PACompareViewController;
 @class PASearchViewController;
+@class PASettingsViewController;
 
 @interface PATabBarController : UITabBarController
 
