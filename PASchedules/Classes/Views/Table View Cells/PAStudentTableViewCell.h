@@ -12,10 +12,20 @@
 
 @interface PAStudentTableViewCell : UITableViewCell
 
+/**
+ *  The PAStudent object assigned to the cell.
+ */
 @property (strong, nonatomic) PAStudent *student;
 
 #pragma mark - Class Methods
 
+/**
+ *  Returns a cell
+ *
+ *  @param reuseIdentifier The cell reuse identiifer.
+ *
+ *  @return A UITableViewCell.
+ */
 + (id)cellWithReuseIdentifier:(NSString *)reuseIdentifier;
 
 @end

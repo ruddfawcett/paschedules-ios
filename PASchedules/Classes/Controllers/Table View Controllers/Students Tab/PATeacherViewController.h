@@ -27,8 +27,22 @@ typedef NS_ENUM(NSUInteger, PATeacherTableViewSections) {
 
 @interface PATeacherViewController : PATemplateTableViewController
 
+#pragma mark - Properties
+
+/**
+ *  The PATeacher that the controller represents.
+ */
 @property (strong, nonatomic) PATeacher *teacher;
 
+#pragma mark - Instance Methods
+
+/**
+ *  Returns this controller with a passed teacher.
+ *
+ *  @param commitment A PATeacher.
+ *
+ *  @return This controller.
+ */
 - (id)initWithTeacher:(PATeacher *)teacher;
 
 @end

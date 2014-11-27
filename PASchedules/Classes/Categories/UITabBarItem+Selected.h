@@ -24,6 +24,15 @@
 
 @interface UITabBarItem (EasySelected)
 
+/**
+ *  A tabBarItem convenice method that provides quick tabBarItems.
+ *
+ *  @param title         The title of the tabBarItem.
+ *  @param image         The image when the tabBarItem is not selected.
+ *  @param selectedImage The image when the tabBarItem is selected.
+ *
+ *  @return <#return value description#>
+ */
 - (instancetype)initWithTitle:(NSString *)title imageName:(NSString *)image selectedImageName:(NSString *)selectedImage;
 
 @end

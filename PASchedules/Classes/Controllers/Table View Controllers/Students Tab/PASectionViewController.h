@@ -33,8 +33,21 @@ typedef NS_ENUM(NSUInteger, PASectionTableViewSections) {
 
 @interface PASectionViewController : PATemplateTableViewController
 
+#pragma mark - Properties
+
+/**
+ *  The PASection that the controller represents.
+ */
 @property (strong, nonatomic) PASection *section;
 
+#pragma mark - Instance Methods
+/**
+ *  Returns this controller with a passed section.
+ *
+ *  @param commitment A PASection.
+ *
+ *  @return This controller.
+ */
 - (id)initWithSection:(PASection *)section;
 
 @end

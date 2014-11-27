@@ -12,10 +12,20 @@
 
 @interface PABasicTeacherTableViewCell : UITableViewCell
 
+/**
+ *  The PATeacher object that is assigned to the cell.
+ */
 @property (nonatomic) PATeacher *teacher;
 
 #pragma mark - Class Methods
 
+/**
+ *  Returns a cell
+ *
+ *  @param reuseIdentifier The cell reuse identiifer.
+ *
+ *  @return A UITableViewCell.
+ */
 + (id)cellWithReuseIdentifier:(NSString *)reuseIdentifier;
 
 @end

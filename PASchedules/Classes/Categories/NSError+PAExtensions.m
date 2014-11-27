@@ -10,10 +10,6 @@
 
 @implementation NSError (PAExtensions)
 
-+ (void)showHUDWithError:(NSError *)error {
-    [SVProgressHUD showErrorWithStatus:error.localizedDescription];
-}
-
 + (void)showWithError:(NSError *)error {
     if (error.code != 666) {
         [SVProgressHUD showErrorWithStatus:error.localizedDescription];

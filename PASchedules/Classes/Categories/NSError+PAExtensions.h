@@ -10,7 +10,11 @@
 
 @interface NSError (PAExtensions)
 
-+ (void)showHUDWithError:(NSError *)error;
+/**
+ *  Shows a SVProgressHUD with the localizedDescription of the error passed.
+ *
+ *  @param error The error.
+ */
 + (void)showWithError:(NSError *)error;
 
 @end

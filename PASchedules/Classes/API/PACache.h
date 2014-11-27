@@ -14,8 +14,13 @@
 @property (strong, nonatomic) NSArray *teachers;
 @property (strong, nonatomic) NSArray *supercourses;
 
-#pragma mark - Class Methods
+#pragma mark - Singleton
 
+/**
+ *  A PACache singleton.
+ *
+ *  @return Returns a PACache.
+ */
 + (instancetype)sharedCache;
 
 @end

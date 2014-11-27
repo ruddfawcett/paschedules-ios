@@ -24,6 +24,8 @@ typedef NS_ENUM(NSUInteger, PAAPIListTypes) {
 
 NSString * NSStringFromPAAPIListType (PAAPIListTypes type);
 
+#pragma mark - Delegate
+
 @protocol PASessionDelegate <NSObject>
 
 @optional
@@ -132,7 +134,7 @@ NSString * NSStringFromPAAPIListType (PAAPIListTypes type);
  */
 - (void)list:(PAAPIListTypes)listType success:(void (^)(NSArray *list))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
-#pragma mark - Class Methods
+#pragma mark - Singleton
 
 /**
  *  A PASchedulesAPI singleton.

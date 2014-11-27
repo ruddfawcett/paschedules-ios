@@ -14,6 +14,9 @@
 @implementation NSArray (PAExtensions)
 
 + (instancetype)arrayOfCourseIds:(NSArray *)courses {
+    // return [courses valueForKeyPath:@"sectionId"]; This should work, but I haven't tested it yet.
+    // It would make it much more efficient that using the current for loops.
+    
     NSMutableArray *ids = [@[] mutableCopy];
     
     for (PACourse *course in courses) {

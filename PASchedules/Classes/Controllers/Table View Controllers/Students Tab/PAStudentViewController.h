@@ -31,8 +31,22 @@ typedef NS_ENUM(NSUInteger, PAStudentTableViewSections) {
 
 @interface PAStudentViewController : PATemplateTableViewController
 
+#pragma mark - Properties
+
+/**
+ *  The PAStudent the controller represents.
+ */
 @property (strong, nonatomic) PAStudent *student;
 
+#pragma mark - Instance Methods
+
+/**
+ *  Returns this controller with a passed student.
+ *
+ *  @param commitment A PAStudent.
+ *
+ *  @return This controller.
+ */
 - (id)initWithStudent:(PAStudent *)student;
 
 @end
