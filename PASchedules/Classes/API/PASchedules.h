@@ -13,5 +13,8 @@
 #import "PASection.h"
 #import "PATeacher.h"
 #import "PASupercourse.h"
+#import "PADay.h"
+#import "PAPeriod.h"
+#import "PASchedule.h"
 
 #import "PACache.h"
