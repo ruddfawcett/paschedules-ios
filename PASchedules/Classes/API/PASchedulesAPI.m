@@ -100,7 +100,7 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
 }
 
 - (void)logout:(void (^)(BOOL *success))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
-    [self POST:@"api/v1/logout/" parameters:@{@"key" : [self sessionKey]} success:^(AFHTTPRequestOperation *operation, id responseObject) {
+    [self POST:@"api/v1/logout/" parameters:@{@"key" : [self sessionKey], @"ios" : @YES} success:^(AFHTTPRequestOperation *operation, id responseObject) {
         NSDictionary *result = (NSDictionary *)responseObject;
         
         if (!result[@"session"]) {
@@ -331,6 +331,8 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
 }
 
 - (void)sessionEnded:(NSDictionary *)result {
+    [PASchedulesAPI destroySession];
+    
     dispatch_async(dispatch_get_main_queue(), ^{
         if (self.delegate && [self.delegate respondsToSelector:@selector(sessionDidEnd:)]) {
             [self.delegate sessionDidEnd:result];

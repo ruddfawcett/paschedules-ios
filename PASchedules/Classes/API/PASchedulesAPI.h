@@ -144,6 +144,11 @@ NSString * NSStringFromPAAPIListType (PAAPIListTypes type);
 #pragma mark - Helper Methods
 
 /**
+ *  Destroy the current session for the user.
+ */
++ (void)destroySession;
+
+/**
  *  Give me a student from the session!
  *
  *  @return Here.

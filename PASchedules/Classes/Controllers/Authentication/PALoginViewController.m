@@ -52,10 +52,6 @@
         [self.passwordField becomeFirstResponder];
     }
     
-//    if ([[NSUserDefaults standardUserDefaults] objectForKey:@"credentials"]) {
-//        [self loginUser];
-//    }
-    
     [super viewDidAppear:animated];
 }
 
@@ -69,8 +65,6 @@
             PAStudent *student = [[PAStudent alloc] initWithAttributes:result];
             PATabBarController *tabBarController = [[PATabBarController alloc] initWithStudent:student];
             tabBarController.modalTransitionStyle = UIModalTransitionStyleCrossDissolve;
-        
-//            [self.navigationController presentViewController:tabBarController animated:YES completion:nil];
             
             [[UIApplication sharedApplication] delegate].window.rootViewController = tabBarController;
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
@@ -82,7 +76,6 @@
             else {
                 [NSError showWithError:error];
             }
-            
             
             [self.passwordField becomeFirstResponder];
             
