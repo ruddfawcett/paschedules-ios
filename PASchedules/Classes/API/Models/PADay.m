@@ -8,6 +8,30 @@
 
 #import "PADay.h"
 
+#import "PAPeriod.h"
+
 @implementation PADay
+
+- (id)initWithAttributes:(NSArray *)attributes andIndex:(NSUInteger)index {
+    if (self = [super init]) {
+        self.day = index;
+        
+        [self loadPeriods:attributes];
+    }
+
+    return self;
+}
+
+- (void)loadPeriods:(NSArray *)periodList {
+    NSMutableArray *thePeriods = [NSMutableArray array];
+    
+    for (NSDictionary *period in periodList) {
+        PAPeriod *aPeriod = [[PAPeriod alloc] initWithAttributes:period];
+        
+        [thePeriods addObject:aPeriod];
+    }
+    
+    self.periods = thePeriods;
+}
 
 @end

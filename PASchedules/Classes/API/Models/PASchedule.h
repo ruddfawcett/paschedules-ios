@@ -8,8 +8,14 @@
 
 #import <Foundation/Foundation.h>
 
+@class PADay;
+
 @interface PASchedule : NSObject
 
+/**
+ *  An array of PADay objects.
+ */
+@property (strong, nonatomic) NSArray *days;
 
 #pragma mark - Instance Methods
 
