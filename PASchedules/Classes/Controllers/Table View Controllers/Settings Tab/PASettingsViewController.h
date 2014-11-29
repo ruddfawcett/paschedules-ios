@@ -10,13 +10,14 @@
 
 #import <SVProgressHUD/SVProgressHUD.h>
 #import <VTAcknowledgementsViewController/VTAcknowledgementsViewController.h>
+#import <CTFeedback/CTFeedbackViewController.h>
 
 @class PALoginViewController;
 
 typedef NS_ENUM(NSUInteger, PASettingsTableViewSections) {
     PASettingsTableViewSectionUser,
-    PASettingsTableViewSectionAcknowledgments,
-    
+    PASettingsTableViewSectionFeedback,
+    PASettingsTableViewSectionAcknowledgments
 };
 
 @interface PASettingsViewController : UITableViewController <PASessionDelegate>

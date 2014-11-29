@@ -6,6 +6,7 @@ pod 'AFNetworking', '2.5.0'
 pod 'DZNEmptyDataSet', '1.4.1'
 pod 'SVProgressHUD', '1.0'
 pod 'CRNavigationController', '1.1'
+pod 'CTFeedback', :git => 'https://github.com/ruddfawcett/CTFeedback.git'
 pod 'VTAcknowledgementsViewController'
 
 post_install do |installer|

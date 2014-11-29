@@ -15,7 +15,9 @@ NSString * NSStringFromSettingsSections(PASettingsTableViewSections section) {
         case PASettingsTableViewSectionUser:
             return @"My Account";
             break;
-            
+        case PASettingsTableViewSectionFeedback:
+            return @"Comments or Suggestions";
+            break;
         default:
             return @"Acknowledgments";
             break;
@@ -41,6 +43,8 @@ static NSString * kPAAcknowledgmentIdentifier = @"Acknowledgment";
     [super viewDidLoad];
     
     self.title = @"Settings";
+    
+    self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
@@ -48,7 +52,7 @@ static NSString * kPAAcknowledgmentIdentifier = @"Acknowledgment";
 }
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 3;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
@@ -65,6 +69,9 @@ static NSString * kPAAcknowledgmentIdentifier = @"Acknowledgment";
             cell.textLabel.text = @"Logout";
         }
         else cell.textLabel.text = @"Change Password";
+    }
+    else if (indexPath.section == PASettingsTableViewSectionFeedback) {
+        cell.textLabel.text = @"Feedback";
     }
     else {
         cell.textLabel.text = @"Third Party";
@@ -88,6 +95,14 @@ static NSString * kPAAcknowledgmentIdentifier = @"Acknowledgment";
         else {
             [[UIApplication sharedApplication] openURL:[NSURL URLWithString:@"http://paschedules.herokuapp.com/users/edit"]];
         }
+    }
+    else if (indexPath.section == PASettingsTableViewSectionFeedback) {
+        
+        CTFeedbackViewController *feedbackViewController = [CTFeedbackViewController controllerWithTopics:CTFeedbackViewController.defaultTopics localizedTopics:CTFeedbackViewController.defaultLocalizedTopics];
+        feedbackViewController.hidesScreenshotCell = YES;
+        feedbackViewController.useHTML = YES;
+        feedbackViewController.toRecipients = @[@"rfawcett@andover.edu"];
+        [self.navigationController pushViewController:feedbackViewController animated:YES];
     }
     else {
         VTAcknowledgementsViewController *viewController = [VTAcknowledgementsViewController acknowledgementsViewController];
