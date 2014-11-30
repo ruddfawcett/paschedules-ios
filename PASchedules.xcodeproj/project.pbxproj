@@ -8,10 +8,14 @@
 
 /* Begin PBXBuildFile section */
 		677452FEF38A6A9D4B9D9574 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B9AF2B506BB69C0E8E3A684 /* libPods.a */; };
+		F127A5381A26580F00CFC8FF /* PASettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F127A5371A26580F00CFC8FF /* PASettingsViewController.m */; };
+		F127A53E1A2669D300CFC8FF /* Pods-acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = F127A53D1A2669D300CFC8FF /* Pods-acknowledgements.plist */; };
 		F1D808281A2435360068B20D /* PAComparisonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1D808271A2435360068B20D /* PAComparisonViewController.m */; };
 		F1D8082B1A2442310068B20D /* PACache.m in Sources */ = {isa = PBXBuildFile; fileRef = F1D8082A1A2442310068B20D /* PACache.m */; };
 		F1D808311A2468050068B20D /* NSArray+PAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F1D808301A2468050068B20D /* NSArray+PAExtensions.m */; };
 		F1D808351A2528FB0068B20D /* Crashlytics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F1D808341A2528FB0068B20D /* Crashlytics.framework */; };
+		F1E062681A26E00D0043750E /* PADay.m in Sources */ = {isa = PBXBuildFile; fileRef = F1E062671A26E00D0043750E /* PADay.m */; };
+		F1E0626B1A26E0170043750E /* PAPeriod.m in Sources */ = {isa = PBXBuildFile; fileRef = F1E0626A1A26E0170043750E /* PAPeriod.m */; };
 		F1FE36641A23B9F0006EFFC3 /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = F1FE36031A23B9F0006EFFC3 /* AppDelegate.m */; };
 		F1FE36651A23B9F0006EFFC3 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = F1FE36041A23B9F0006EFFC3 /* LaunchScreen.xib */; };
 		F1FE36661A23B9F0006EFFC3 /* PACommitment.m in Sources */ = {isa = PBXBuildFile; fileRef = F1FE360A1A23B9F0006EFFC3 /* PACommitment.m */; };
@@ -58,6 +62,9 @@
 		1B9AF2B506BB69C0E8E3A684 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5816D954C368EF0942C41008 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		EEF57C240426B12D7CC19B88 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		F127A5361A26580F00CFC8FF /* PASettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PASettingsViewController.h; path = "Settings Tab/PASettingsViewController.h"; sourceTree = "<group>"; };
+		F127A5371A26580F00CFC8FF /* PASettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PASettingsViewController.m; path = "Settings Tab/PASettingsViewController.m"; sourceTree = "<group>"; };
+		F127A53D1A2669D300CFC8FF /* Pods-acknowledgements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Pods-acknowledgements.plist"; path = "Pods/Target Support Files/Pods/Pods-acknowledgements.plist"; sourceTree = SOURCE_ROOT; };
 		F1D808261A2435360068B20D /* PAComparisonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAComparisonViewController.h; sourceTree = "<group>"; };
 		F1D808271A2435360068B20D /* PAComparisonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAComparisonViewController.m; sourceTree = "<group>"; };
 		F1D808291A2442310068B20D /* PACache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PACache.h; sourceTree = "<group>"; };
@@ -66,6 +73,10 @@
 		F1D808301A2468050068B20D /* NSArray+PAExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "NSArray+PAExtensions.m"; sourceTree = "<group>"; };
 		F1D808321A246AFF0068B20D /* PrefixHeader.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = PrefixHeader.pch; sourceTree = SOURCE_ROOT; };
 		F1D808341A2528FB0068B20D /* Crashlytics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Crashlytics.framework; sourceTree = "<group>"; };
+		F1E062661A26E00D0043750E /* PADay.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PADay.h; sourceTree = "<group>"; };
+		F1E062671A26E00D0043750E /* PADay.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PADay.m; sourceTree = "<group>"; };
+		F1E062691A26E0170043750E /* PAPeriod.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAPeriod.h; sourceTree = "<group>"; };
+		F1E0626A1A26E0170043750E /* PAPeriod.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAPeriod.m; sourceTree = "<group>"; };
 		F1FE35D81A23B9B2006EFFC3 /* PASchedules.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = PASchedules.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		F1FE36021A23B9F0006EFFC3 /* AppDelegate.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AppDelegate.h; sourceTree = "<group>"; };
 		F1FE36031A23B9F0006EFFC3 /* AppDelegate.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AppDelegate.m; sourceTree = "<group>"; };
@@ -179,6 +190,15 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		F127A5391A26581200CFC8FF /* Settings Tab */ = {
+			isa = PBXGroup;
+			children = (
+				F127A5361A26580F00CFC8FF /* PASettingsViewController.h */,
+				F127A5371A26580F00CFC8FF /* PASettingsViewController.m */,
+			);
+			name = "Settings Tab";
+			sourceTree = "<group>";
+		};
 		F1D808251A23BD4B0068B20D /* Model Searches */ = {
 			isa = PBXGroup;
 			children = (
@@ -190,6 +210,45 @@
 				F1FE36381A23B9F0006EFFC3 /* PATeacherSearchViewController.m */,
 			);
 			name = "Model Searches";
+			sourceTree = "<group>";
+		};
+		F1E0626C1A26E0EC0043750E /* Schedule Models */ = {
+			isa = PBXGroup;
+			children = (
+				F1FE360D1A23B9F0006EFFC3 /* PASchedule.h */,
+				F1FE360E1A23B9F0006EFFC3 /* PASchedule.m */,
+				F1E062661A26E00D0043750E /* PADay.h */,
+				F1E062671A26E00D0043750E /* PADay.m */,
+				F1E062691A26E0170043750E /* PAPeriod.h */,
+				F1E0626A1A26E0170043750E /* PAPeriod.m */,
+			);
+			name = "Schedule Models";
+			sourceTree = "<group>";
+		};
+		F1E0626D1A26E0FB0043750E /* People Models */ = {
+			isa = PBXGroup;
+			children = (
+				F1FE36111A23B9F0006EFFC3 /* PAStudent.h */,
+				F1FE36121A23B9F0006EFFC3 /* PAStudent.m */,
+				F1FE36151A23B9F0006EFFC3 /* PATeacher.h */,
+				F1FE36161A23B9F0006EFFC3 /* PATeacher.m */,
+			);
+			name = "People Models";
+			sourceTree = "<group>";
+		};
+		F1E0626E1A26E1070043750E /* Class and Commitment Models */ = {
+			isa = PBXGroup;
+			children = (
+				F1FE36091A23B9F0006EFFC3 /* PACommitment.h */,
+				F1FE360A1A23B9F0006EFFC3 /* PACommitment.m */,
+				F1FE360B1A23B9F0006EFFC3 /* PACourse.h */,
+				F1FE360C1A23B9F0006EFFC3 /* PACourse.m */,
+				F1FE360F1A23B9F0006EFFC3 /* PASection.h */,
+				F1FE36101A23B9F0006EFFC3 /* PASection.m */,
+				F1FE36131A23B9F0006EFFC3 /* PASupercourse.h */,
+				F1FE36141A23B9F0006EFFC3 /* PASupercourse.m */,
+			);
+			name = "Class and Commitment Models";
 			sourceTree = "<group>";
 		};
 		F1FE35CF1A23B9B2006EFFC3 = {
@@ -252,20 +311,9 @@
 		F1FE36081A23B9F0006EFFC3 /* Models */ = {
 			isa = PBXGroup;
 			children = (
-				F1FE36091A23B9F0006EFFC3 /* PACommitment.h */,
-				F1FE360A1A23B9F0006EFFC3 /* PACommitment.m */,
-				F1FE360B1A23B9F0006EFFC3 /* PACourse.h */,
-				F1FE360C1A23B9F0006EFFC3 /* PACourse.m */,
-				F1FE360D1A23B9F0006EFFC3 /* PASchedule.h */,
-				F1FE360E1A23B9F0006EFFC3 /* PASchedule.m */,
-				F1FE360F1A23B9F0006EFFC3 /* PASection.h */,
-				F1FE36101A23B9F0006EFFC3 /* PASection.m */,
-				F1FE36111A23B9F0006EFFC3 /* PAStudent.h */,
-				F1FE36121A23B9F0006EFFC3 /* PAStudent.m */,
-				F1FE36131A23B9F0006EFFC3 /* PASupercourse.h */,
-				F1FE36141A23B9F0006EFFC3 /* PASupercourse.m */,
-				F1FE36151A23B9F0006EFFC3 /* PATeacher.h */,
-				F1FE36161A23B9F0006EFFC3 /* PATeacher.m */,
+				F1E0626E1A26E1070043750E /* Class and Commitment Models */,
+				F1E0626C1A26E0EC0043750E /* Schedule Models */,
+				F1E0626D1A26E0FB0043750E /* People Models */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -324,6 +372,7 @@
 				F1FE362D1A23B9F0006EFFC3 /* Compare Tab */,
 				F1FE36301A23B9F0006EFFC3 /* Search Tab */,
 				F1FE36391A23B9F0006EFFC3 /* Students Tab */,
+				F127A5391A26581200CFC8FF /* Settings Tab */,
 			);
 			path = "Table View Controllers";
 			sourceTree = "<group>";
@@ -428,6 +477,7 @@
 		F1FE36611A23B9F0006EFFC3 /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				F127A53D1A2669D300CFC8FF /* Pods-acknowledgements.plist */,
 				F1FE36621A23B9F0006EFFC3 /* Info.plist */,
 				F1FE36631A23B9F0006EFFC3 /* main.m */,
 			);
@@ -496,6 +546,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F127A53E1A2669D300CFC8FF /* Pods-acknowledgements.plist in Resources */,
 				F1FE36651A23B9F0006EFFC3 /* LaunchScreen.xib in Resources */,
 				F1FE368A1A23B9F0006EFFC3 /* Images.xcassets in Resources */,
 			);
@@ -555,6 +606,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				F1E062681A26E00D0043750E /* PADay.m in Sources */,
 				F1FE36741A23B9F0006EFFC3 /* PATabBarController.m in Sources */,
 				F1FE36821A23B9F0006EFFC3 /* PACommitmentTableViewCell.m in Sources */,
 				F1FE36731A23B9F0006EFFC3 /* PANavigationController.m in Sources */,
@@ -571,6 +623,7 @@
 				F1FE36811A23B9F0006EFFC3 /* PABasicTeacherTableViewCell.m in Sources */,
 				F1FE367A1A23B9F0006EFFC3 /* PACommitmentViewController.m in Sources */,
 				F1D808281A2435360068B20D /* PAComparisonViewController.m in Sources */,
+				F1E0626B1A26E0170043750E /* PAPeriod.m in Sources */,
 				F1FE366C1A23B9F0006EFFC3 /* PATeacher.m in Sources */,
 				F1FE366D1A23B9F0006EFFC3 /* PASchedulesAPI.m in Sources */,
 				F1FE367C1A23B9F0006EFFC3 /* PAStudentViewController.m in Sources */,
@@ -587,6 +640,7 @@
 				F1FE366F1A23B9F0006EFFC3 /* NSError+PAExtensions.m in Sources */,
 				F1FE367B1A23B9F0006EFFC3 /* PASectionViewController.m in Sources */,
 				F1FE36851A23B9F0006EFFC3 /* PASectionTableViewCell.m in Sources */,
+				F127A5381A26580F00CFC8FF /* PASettingsViewController.m in Sources */,
 				F1D808311A2468050068B20D /* NSArray+PAExtensions.m in Sources */,
 				F1FE367D1A23B9F0006EFFC3 /* PASupercourseViewController.m in Sources */,
 				F1FE366A1A23B9F0006EFFC3 /* PAStudent.m in Sources */,

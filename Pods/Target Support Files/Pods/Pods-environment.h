@@ -54,6 +54,12 @@
 #define COCOAPODS_VERSION_MINOR_CRNavigationController 1
 #define COCOAPODS_VERSION_PATCH_CRNavigationController 0
 
+// CTFeedback
+#define COCOAPODS_POD_AVAILABLE_CTFeedback
+#define COCOAPODS_VERSION_MAJOR_CTFeedback 1
+#define COCOAPODS_VERSION_MINOR_CTFeedback 0
+#define COCOAPODS_VERSION_PATCH_CTFeedback 16
+
 // DZNEmptyDataSet
 #define COCOAPODS_POD_AVAILABLE_DZNEmptyDataSet
 #define COCOAPODS_VERSION_MAJOR_DZNEmptyDataSet 1
@@ -65,4 +71,10 @@
 #define COCOAPODS_VERSION_MAJOR_SVProgressHUD 1
 #define COCOAPODS_VERSION_MINOR_SVProgressHUD 0
 #define COCOAPODS_VERSION_PATCH_SVProgressHUD 0
+
+// VTAcknowledgementsViewController
+#define COCOAPODS_POD_AVAILABLE_VTAcknowledgementsViewController
+#define COCOAPODS_VERSION_MAJOR_VTAcknowledgementsViewController 0
+#define COCOAPODS_VERSION_MINOR_VTAcknowledgementsViewController 12
+#define COCOAPODS_VERSION_PATCH_VTAcknowledgementsViewController 0
 
