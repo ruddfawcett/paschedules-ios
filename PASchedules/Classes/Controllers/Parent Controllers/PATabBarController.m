@@ -66,6 +66,10 @@
     for (id eachController in viewControllers) {
         PANavigationController *navController = [[PANavigationController alloc] initWithRootViewController:eachController];
         
+        if ([[NSUserDefaults standardUserDefaults] integerForKey:kPASchedulesLaunchCount] >= 5) {
+            navController.tabBarItem.imageInsets = UIEdgeInsetsMake(5, 0, -5, 0);
+        }
+        
         [newControllers addObject:navController];
     }
     

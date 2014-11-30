@@ -14,6 +14,8 @@
 #import "PATabBarController.h"
 #import "PAStudentViewController.h"
 
+NSString * const kPASchedulesFirstLaunch = @"com.ruddfawcett.paschedules.firstLaunch";
+NSString * const kPASchedulesLaunchCount = @"com.ruddfawcett.paschedules.launchCount";
 NSString * const kPASchedulesErrorDomain = @"com.ruddfawcett.paschedules.error";
 
 @interface AppDelegate ()
@@ -24,25 +26,20 @@ NSString * const kPASchedulesErrorDomain = @"com.ruddfawcett.paschedules.error";
 
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
+    [Crashlytics startWithAPIKey:@"ee94e24c5383105ff0dd886b0283711d3f06efff"];
+    
     self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
     self.window.backgroundColor = PA_WHITE;
     
-    //temp color: [UIColor colorWithRed:0.027 green:0.188 blue:0.353 alpha:1.00]
+    if (![[NSUserDefaults standardUserDefaults] boolForKey:kPASchedulesFirstLaunch]) {
+        [[NSUserDefaults standardUserDefaults] setInteger:[[NSUserDefaults standardUserDefaults] integerForKey:kPASchedulesLaunchCount]+1 forKey:kPASchedulesLaunchCount];
+    }
+    else {
+        [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kPASchedulesFirstLaunch];
+        [[NSUserDefaults standardUserDefaults] setInteger:0 forKey:kPASchedulesLaunchCount];
+    }
     
-    [[UINavigationBar appearance] setBarTintColor:PA_BLUE];
-    [[UINavigationBar appearance] setTintColor:PA_WHITE];
-    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : PA_WHITE}];
-    
-    [[UITableView appearance] setSeparatorColor:PA_WHITE];
-    
-    [[UITabBar appearance] setTintColor:PA_BLUE];
-    
-    [[UISegmentedControl appearance] setTintColor:PA_BLUE];
-    [[UISegmentedControl appearanceWhenContainedIn:[UINavigationBar class], nil] setTintColor:PA_WHITE];
-    
-    [[UITextField appearanceWhenContainedIn:[UISearchBar class], nil] setTextColor:[UIColor blackColor]];
-    
-    [[UIApplication sharedApplication] setStatusBarHidden:NO withAnimation:UIStatusBarAnimationNone];
+    [self setUpAppearances];
     
     if ([NSDate isExpired:[PASchedulesAPI sessionCreated]] || ![PASchedulesAPI currentUser]) {
         PANavigationController *navController = [[PANavigationController alloc] initWithRootViewController:[PALoginViewController new]];
@@ -53,12 +50,25 @@ NSString * const kPASchedulesErrorDomain = @"com.ruddfawcett.paschedules.error";
         PATabBarController *studentController = [[PATabBarController alloc] initWithStudent:[PASchedulesAPI studentFromSession]];
         self.window.rootViewController = studentController;
     }
-    
-    [Crashlytics startWithAPIKey:@"ee94e24c5383105ff0dd886b0283711d3f06efff"];
 
     [self.window makeKeyAndVisible];
     
     return YES;
+}
+
+- (void)setUpAppearances {
+    [[UINavigationBar appearance] setBarTintColor:PA_BLUE];
+    [[UINavigationBar appearance] setTintColor:PA_WHITE];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : PA_WHITE}];
+    
+    [[UITabBar appearance] setTintColor:PA_BLUE];
+    
+    if ([[NSUserDefaults standardUserDefaults] integerForKey:kPASchedulesLaunchCount] >= 5) {
+        [[UITabBarItem appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor clearColor]} forState:UIControlStateNormal];
+    }
+    
+    [[UISegmentedControl appearance] setTintColor:PA_BLUE];
+    [[UISegmentedControl appearanceWhenContainedIn:[UINavigationBar class], nil] setTintColor:PA_WHITE];
 }
 
 @end

@@ -15,6 +15,9 @@
 @class PATabBarController;
 @class PAStudentViewController;
 
+
+extern NSString * const kPASchedulesFirstLaunch;
+extern NSString * const kPASchedulesLaunchCount;
 extern NSString * const kPASchedulesErrorDomain;
 
 @interface AppDelegate : UIResponder <UIApplicationDelegate>
