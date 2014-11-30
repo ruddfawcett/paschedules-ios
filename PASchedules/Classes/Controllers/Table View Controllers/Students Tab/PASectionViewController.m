@@ -78,6 +78,10 @@ static NSString * kPAStudentsIdentifier = @"Students";
 #pragma mark - UITableViewDelegate
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if (section == PASectionTableViewSectionStudents) {
+        return [NSString stringWithFormat:@"%@ (%d)", NSStringFromSectionSections(section), self.section.students.count];
+    }
+    
     return NSStringFromSectionSections(section);
 }
 
@@ -87,7 +91,7 @@ static NSString * kPAStudentsIdentifier = @"Students";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == PASectionTableViewSectionInfo) {
-        return 3;
+        return 2;
     }
     else return (section == PASectionTableViewSectionStudents) ? (self.section.students.count != 0 ? self.section.students.count : 1) : 1;
 }
@@ -124,11 +128,8 @@ static NSString * kPAStudentsIdentifier = @"Students";
         if (indexPath.row == 0) {
             cell = [PABasicInfoTableViewCell cellWithReuseIdentifier:kPAInfoIdentifier andText:@"Name" andInfo:self.section.name];
         }
-        else if (indexPath.row == 1) {
-            cell = [PABasicInfoTableViewCell cellWithReuseIdentifier:kPAInfoIdentifier andText:@"Period" andInfo:self.section.period];
-        }
         else {
-            cell = [PABasicInfoTableViewCell cellWithReuseIdentifier:kPAInfoIdentifier andText:@"Section Size" andInfo:@(self.section.size)];
+            cell = [PABasicInfoTableViewCell cellWithReuseIdentifier:kPAInfoIdentifier andText:@"Period" andInfo:self.section.period];
         }
         
         return cell;

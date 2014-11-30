@@ -57,7 +57,7 @@ static NSString * kPACommitmentsIdentifier = @"Commitments";
 - (void)loadStudent {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
         [[PASchedulesAPI sharedClient] students:self.studentId success:^(PAStudent *student) {
-            self.navigationController.navigationBar.topItem.title = student.name;
+            self.navigationController.navigationBar.topItem.title = student.nickname ? [NSString stringWithFormat:@"%@ (%@)", student.name, student.nickname] : student.name;
             self.student = student;
             
             [self.tableView reloadData];
@@ -73,6 +73,14 @@ static NSString * kPACommitmentsIdentifier = @"Commitments";
 #pragma mark - UITableViewDelegate
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if (section == PAStudentTableViewSectionCourses) {
+        return [NSString stringWithFormat:@"%@ (%d)", NSStringFromStudentSections(section), self.student.courses.count];
+    }
+    
+    if (section == PAStudentTableViewSectionCommitments) {
+        return [NSString stringWithFormat:@"%@ (%d)", NSStringFromStudentSections(section), self.student.commitments.count];
+    }
+    
     return NSStringFromStudentSections(section);
 }
 
@@ -82,10 +90,7 @@ static NSString * kPACommitmentsIdentifier = @"Commitments";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
     if (section == PAStudentTableViewSectionInfo) {
-        if (self.student) {
-            return self.student.nickname ? 2 : 1;
-        }
-        else return 1;
+        return 1;
     }
     else if (section == PAStudentTableViewSectionCourses) {
         return self.student.courses.count != 0 ? self.student.courses.count : 1;
@@ -113,13 +118,7 @@ static NSString * kPACommitmentsIdentifier = @"Commitments";
     if (indexPath.section == PAStudentTableViewSectionInfo) {
         if (self.student) {
             PABasicInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPAInfoIdentifier];
-            
-            if (indexPath.row == 0) {
-                cell = [PABasicInfoTableViewCell cellWithReuseIdentifier:kPAInfoIdentifier andText:@"Graduation" andInfo:@(self.student.graduation)];
-            }
-            else {
-                cell = [PABasicInfoTableViewCell cellWithReuseIdentifier:kPAInfoIdentifier andText:@"Goes by" andInfo:self.student.nickname];
-            }
+            cell = [PABasicInfoTableViewCell cellWithReuseIdentifier:kPAInfoIdentifier andText:@"Graduation" andInfo:@(self.student.graduation)];
             
             return cell;
         }

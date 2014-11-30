@@ -24,8 +24,6 @@
     
     self.navigationItem.backBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"" style:UIBarButtonItemStylePlain target:nil action:nil];
     
-    self.tableView.emptyDataSetDelegate = self;
-    self.tableView.emptyDataSetSource = self;
     self.tableView.showsVerticalScrollIndicator = NO;
     
     if (!self.shouldNotLoadRefreshing) {

@@ -18,7 +18,7 @@ typedef NS_ENUM(NSUInteger, PADayType) {
     PADayTypeFriday
 };
 
-NSString * NSStringFromPADayType (PADayType dayType);
+NSString * NSStringFromPADayType(PADayType dayType);
 
 @interface PADay : NSObject
 
@@ -32,9 +32,10 @@ NSString * NSStringFromPADayType (PADayType dayType);
  *  Returns a PADay instance from an NSArray.
  *
  *  @param attributes The array of JSON periods.
- *  @param index      The index of the arry in the schedule array.
+ *  @param index      The index of the array in the schedule array.
  *
  *  @return A PADay instance.
  */
 - (id)initWithAttributes:(NSArray *)attributes andIndex:(NSUInteger)index;
+
 @end

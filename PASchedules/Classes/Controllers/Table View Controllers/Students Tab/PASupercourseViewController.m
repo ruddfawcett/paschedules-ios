@@ -67,6 +67,10 @@ static NSString * kPASectionsIdentifier = @"Section";
 #pragma mark - UITableViewDelegate
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if (section == PASupercourseTableViewSectionSections) {
+        return [NSString stringWithFormat:@"%@ (%d)", NSStringFromSupercourseSections(section), self.supercourse.sections.count];
+    }
+    
     return NSStringFromSupercourseSections(section);
 }
 
@@ -79,7 +83,7 @@ static NSString * kPASectionsIdentifier = @"Section";
         return self.supercourse.sections.count != 0 ? self.supercourse.sections.count : 1;
     }
     
-    return 2;
+    return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -97,13 +101,7 @@ static NSString * kPASectionsIdentifier = @"Section";
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == PASupercourseTableViewSectionInfo) {
         PABasicInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPAInfoIdentifier];
-        
-        if (indexPath.row == 0) {
-            cell = [PABasicInfoTableViewCell cellWithReuseIdentifier:kPAInfoIdentifier andText:@"Name" andInfo:self.supercourse.name];
-        }
-        else {
-            cell = [PABasicInfoTableViewCell cellWithReuseIdentifier:kPAInfoIdentifier andText:@"Sections" andInfo:@(self.supercourse.sections.count)];
-        }
+        cell = [PABasicInfoTableViewCell cellWithReuseIdentifier:kPAInfoIdentifier andText:@"Name" andInfo:self.supercourse.name];
         
         return cell;
     }

@@ -98,10 +98,10 @@ static NSString * kPAResultIdentifier = @"Result";
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if (section == PAStudentSearchTableViewSectionStudents) {
-            if (self.originalStudents.count == self.studentsList.count) {
-                return @"All Students";
-            }
-            else return @"Results";
+        if (self.originalStudents.count == self.studentsList.count) {
+            return @"All Students";
+        }
+        else return @"Results";
     }
     
     return nil;

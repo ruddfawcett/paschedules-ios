@@ -69,6 +69,10 @@ static NSString * kPASectionsIdentifier = @"Sections";
 #pragma mark - UITableViewDelegate
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if (section == PATeacherTableViewSectionSections) {
+        return [NSString stringWithFormat:@"%@ (%d)", NSStringFromTeacherSections(section), self.teacher.sections.count];
+    }
+    
     return NSStringFromTeacherSections(section);
 }
 

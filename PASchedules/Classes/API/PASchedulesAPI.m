@@ -15,7 +15,7 @@
 #import "PASupercourse.h"
 #import "PACommitment.h"
 
-NSString * NSStringFromPAAPIListType (PAAPIListTypes type) {
+NSString * NSStringFromPAAPIListType(PAAPIListTypes type) {
     switch (type) {
         case PAAPIListTypeStudents:
             return @"Students";

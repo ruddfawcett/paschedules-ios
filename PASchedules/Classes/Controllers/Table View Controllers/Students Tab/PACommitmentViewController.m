@@ -74,6 +74,10 @@ static NSString * kPAStudentIdentifier = @"Student";
 #pragma mark - UITableViewDelegate
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if (section == PACommitmentTableViewSectionStudents) {
+        return [NSString stringWithFormat:@"%@ (%d)", NSStringFromCommitmentSections(section), self.commitment.students.count];
+    }
+    
     return NSStringFromCommitmentSections(section);
 }
 
@@ -82,17 +86,11 @@ static NSString * kPAStudentIdentifier = @"Student";
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    if (section == PACommitmentTableViewSectionInfo) {
-        return 2;
-    }
-    else if (section == PACommitmentTableViewSectionStudents) {
+    if (section == PACommitmentTableViewSectionStudents) {
         return self.commitment.students.count != 0 ? self.commitment.students.count : 1;
     }
-    else {
-        return 1;
-    }
     
-    return 0;
+    return 1;
 }
 
 - (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -115,13 +113,7 @@ static NSString * kPAStudentIdentifier = @"Student";
     }
     else if (indexPath.section == PACommitmentTableViewSectionInfo) {
         PABasicInfoTableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:kPAInfoIdentifier];
-        
-        if (indexPath.row == 0) {
-            cell = [PABasicInfoTableViewCell cellWithReuseIdentifier:kPAInfoIdentifier andText:@"Name" andInfo:self.commitment.name];
-        }
-        else {
-            cell = [PABasicInfoTableViewCell cellWithReuseIdentifier:kPAInfoIdentifier andText:@"Commitment Size" andInfo:@(self.commitment.size)];
-        }
+        cell = [PABasicInfoTableViewCell cellWithReuseIdentifier:kPAInfoIdentifier andText:@"Name" andInfo:self.commitment.name];
         
         return cell;
     }

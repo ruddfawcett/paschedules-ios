@@ -200,6 +200,19 @@ static NSString * kPACommitmentIdentifier = @"Commitment";
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
+    if (section == PAComparisonTableViewSectionCourses) {
+        return [NSString stringWithFormat:@"%@ (%d)", NSStringFromComparisonSections(section), self.sharedCourses.count];
+    }
+    
+    if (section == PAComparisonTableViewSectionTeachers) {
+        return [NSString stringWithFormat:@"%@ (%d)", NSStringFromComparisonSections(section), self.sharedTeachers.count];
+    }
+    
+    if (section == PAComparisonTableViewSectionCommitments) {
+        return [NSString stringWithFormat:@"%@ (%d)", NSStringFromComparisonSections(section), self.sharedCommitments.count];
+    }
+    
+    
     return NSStringFromComparisonSections(section);
 }
 

@@ -27,9 +27,13 @@ NSString * const kPASchedulesErrorDomain = @"com.ruddfawcett.paschedules.error";
     self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
     self.window.backgroundColor = PA_WHITE;
     
+    //temp color: [UIColor colorWithRed:0.027 green:0.188 blue:0.353 alpha:1.00]
+    
     [[UINavigationBar appearance] setBarTintColor:PA_BLUE];
     [[UINavigationBar appearance] setTintColor:PA_WHITE];
-    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : [UIColor whiteColor]}];
+    [[UINavigationBar appearance] setTitleTextAttributes:@{NSForegroundColorAttributeName : PA_WHITE}];
+    
+    [[UITableView appearance] setSeparatorColor:PA_WHITE];
     
     [[UITabBar appearance] setTintColor:PA_BLUE];
     

@@ -10,6 +10,26 @@
 
 #import "PAPeriod.h"
 
+NSString * NSStringFromPADayType(PADayType dayType) {
+    switch (dayType) {
+        case PADayTypeMonday:
+            return @"Monday";
+            break;
+        case PADayTypeTuesday:
+            return @"Tuesday";
+            break;
+        case PADayTypeWednesday:
+            return @"Wednesday";
+            break;
+        case PADayTypeThursday:
+            return @"Thursday";
+            break;
+        default:
+            return @"Friday";
+            break;
+    }
+}
+
 @implementation PADay
 
 - (id)initWithAttributes:(NSArray *)attributes andIndex:(NSUInteger)index {

@@ -22,7 +22,7 @@ typedef NS_ENUM(NSUInteger, PAAPIListTypes) {
     PAAPIListTypeSupercourses
 };
 
-NSString * NSStringFromPAAPIListType (PAAPIListTypes type);
+NSString * NSStringFromPAAPIListType(PAAPIListTypes type);
 
 #pragma mark - Delegate
 
