@@ -70,7 +70,7 @@ static NSString * kPASectionsIdentifier = @"Sections";
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if (section == PATeacherTableViewSectionSections) {
-        return [NSString stringWithFormat:@"%@ (%d)", NSStringFromTeacherSections(section), self.teacher.sections.count];
+        return [NSString stringWithFormat:@"%@ (%lu)", NSStringFromTeacherSections(section), (unsigned long)self.teacher.sections.count];
     }
     
     return NSStringFromTeacherSections(section);

@@ -26,7 +26,7 @@
 
 - (void)setSupercourse:(PASupercourse *)supercourse {
     self.textLabel.text = supercourse.title;
-    self.detailTextLabel.text = [NSString stringWithFormat:@"%@", supercourse.name]; //  \n%d Sections    , supercourse.sectionCount
+    self.detailTextLabel.text = [NSString stringWithFormat:@"%@", supercourse.name];
 }
 
 @end

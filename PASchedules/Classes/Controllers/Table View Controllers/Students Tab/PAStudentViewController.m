@@ -74,11 +74,11 @@ static NSString * kPACommitmentsIdentifier = @"Commitments";
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if (section == PAStudentTableViewSectionCourses) {
-        return [NSString stringWithFormat:@"%@ (%d)", NSStringFromStudentSections(section), self.student.courses.count];
+        return [NSString stringWithFormat:@"%@ (%lu)", NSStringFromStudentSections(section), (unsigned long)self.student.courses.count];
     }
     
     if (section == PAStudentTableViewSectionCommitments) {
-        return [NSString stringWithFormat:@"%@ (%d)", NSStringFromStudentSections(section), self.student.commitments.count];
+        return [NSString stringWithFormat:@"%@ (%lu)", NSStringFromStudentSections(section), (unsigned long)self.student.commitments.count];
     }
     
     return NSStringFromStudentSections(section);

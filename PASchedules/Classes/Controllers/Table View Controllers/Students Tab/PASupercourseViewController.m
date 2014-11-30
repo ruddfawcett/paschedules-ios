@@ -68,7 +68,7 @@ static NSString * kPASectionsIdentifier = @"Section";
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if (section == PASupercourseTableViewSectionSections) {
-        return [NSString stringWithFormat:@"%@ (%d)", NSStringFromSupercourseSections(section), self.supercourse.sections.count];
+        return [NSString stringWithFormat:@"%@ (%lu)", NSStringFromSupercourseSections(section), (unsigned long)self.supercourse.sections.count];
     }
     
     return NSStringFromSupercourseSections(section);

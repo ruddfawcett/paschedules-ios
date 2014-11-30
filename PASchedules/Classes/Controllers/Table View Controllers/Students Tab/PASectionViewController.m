@@ -79,7 +79,7 @@ static NSString * kPAStudentsIdentifier = @"Students";
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     if (section == PASectionTableViewSectionStudents) {
-        return [NSString stringWithFormat:@"%@ (%d)", NSStringFromSectionSections(section), self.section.students.count];
+        return [NSString stringWithFormat:@"%@ (%lu)", NSStringFromSectionSections(section), (unsigned long)self.section.students.count];
     }
     
     return NSStringFromSectionSections(section);
