@@ -98,11 +98,11 @@ static NSString * kPAAcknowledgmentIdentifier = @"Acknowledgment";
     }
     else if (indexPath.section == PASettingsTableViewSectionFeedback) {
         
-        CTFeedbackViewController *feedbackViewController = [CTFeedbackViewController controllerWithTopics:CTFeedbackViewController.defaultTopics localizedTopics:CTFeedbackViewController.defaultLocalizedTopics];
-        feedbackViewController.hidesScreenshotCell = YES;
-        feedbackViewController.useHTML = YES;
-        feedbackViewController.toRecipients = @[@"rfawcett@andover.edu"];
-        [self.navigationController pushViewController:feedbackViewController animated:YES];
+        CTFeedbackViewController *feedbackController = [CTFeedbackViewController controllerWithTopics:CTFeedbackViewController.defaultTopics localizedTopics:CTFeedbackViewController.defaultLocalizedTopics];
+        feedbackController.hidesScreenshotCell = YES;
+        feedbackController.useHTML = YES;
+        feedbackController.toRecipients = @[@"rfawcett@andover.edu"];
+        [self.navigationController pushViewController:feedbackController animated:YES];
     }
     else {
         VTAcknowledgementsViewController *viewController = [VTAcknowledgementsViewController acknowledgementsViewController];
