@@ -10,6 +10,7 @@
 		677452FEF38A6A9D4B9D9574 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B9AF2B506BB69C0E8E3A684 /* libPods.a */; };
 		F127A5381A26580F00CFC8FF /* PASettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F127A5371A26580F00CFC8FF /* PASettingsViewController.m */; };
 		F127A53E1A2669D300CFC8FF /* Pods-acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = F127A53D1A2669D300CFC8FF /* Pods-acknowledgements.plist */; };
+		F157E4AD1A2EE0D5002CD936 /* Mixpanel+PAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F157E4AC1A2EE0D5002CD936 /* Mixpanel+PAExtensions.m */; };
 		F1D808281A2435360068B20D /* PAComparisonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1D808271A2435360068B20D /* PAComparisonViewController.m */; };
 		F1D8082B1A2442310068B20D /* PACache.m in Sources */ = {isa = PBXBuildFile; fileRef = F1D8082A1A2442310068B20D /* PACache.m */; };
 		F1D808311A2468050068B20D /* NSArray+PAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F1D808301A2468050068B20D /* NSArray+PAExtensions.m */; };
@@ -65,6 +66,8 @@
 		F127A5361A26580F00CFC8FF /* PASettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PASettingsViewController.h; path = "Settings Tab/PASettingsViewController.h"; sourceTree = "<group>"; };
 		F127A5371A26580F00CFC8FF /* PASettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PASettingsViewController.m; path = "Settings Tab/PASettingsViewController.m"; sourceTree = "<group>"; };
 		F127A53D1A2669D300CFC8FF /* Pods-acknowledgements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Pods-acknowledgements.plist"; path = "Pods/Target Support Files/Pods/Pods-acknowledgements.plist"; sourceTree = SOURCE_ROOT; };
+		F157E4AB1A2EE0D5002CD936 /* Mixpanel+PAExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Mixpanel+PAExtensions.h"; path = "PASchedules/Classes/Categories/Mixpanel+PAExtensions.h"; sourceTree = SOURCE_ROOT; };
+		F157E4AC1A2EE0D5002CD936 /* Mixpanel+PAExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Mixpanel+PAExtensions.m"; path = "PASchedules/Classes/Categories/Mixpanel+PAExtensions.m"; sourceTree = SOURCE_ROOT; };
 		F1D808261A2435360068B20D /* PAComparisonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAComparisonViewController.h; sourceTree = "<group>"; };
 		F1D808271A2435360068B20D /* PAComparisonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAComparisonViewController.m; sourceTree = "<group>"; };
 		F1D808291A2442310068B20D /* PACache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PACache.h; sourceTree = "<group>"; };
@@ -321,6 +324,8 @@
 		F1FE361A1A23B9F0006EFFC3 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				F157E4AB1A2EE0D5002CD936 /* Mixpanel+PAExtensions.h */,
+				F157E4AC1A2EE0D5002CD936 /* Mixpanel+PAExtensions.m */,
 				F1FE361B1A23B9F0006EFFC3 /* NSDate+PAExtensions.h */,
 				F1FE361C1A23B9F0006EFFC3 /* NSDate+PAExtensions.m */,
 				F1FE361D1A23B9F0006EFFC3 /* NSError+PAExtensions.h */,
@@ -649,6 +654,7 @@
 				F1FE36661A23B9F0006EFFC3 /* PACommitment.m in Sources */,
 				F1FE36671A23B9F0006EFFC3 /* PACourse.m in Sources */,
 				F1FE36691A23B9F0006EFFC3 /* PASection.m in Sources */,
+				F157E4AD1A2EE0D5002CD936 /* Mixpanel+PAExtensions.m in Sources */,
 				F1FE36871A23B9F0006EFFC3 /* PASupercourseTableViewCell.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

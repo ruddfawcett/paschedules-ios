@@ -60,6 +60,13 @@ static NSString * kPACommitmentsIdentifier = @"Commitments";
             self.navigationController.navigationBar.topItem.title = student.nickname ? [NSString stringWithFormat:@"%@ (%@)", student.name, student.nickname] : student.name;
             self.student = student;
             
+            if ([PASchedulesAPI currentUser] && student.isCurrentStudent) {
+                if (![PACache sharedCache].hasBeenUpdated) {
+                    [Mixpanel updateStudent:student];
+                    [[PACache sharedCache] setHasBeenUpdated:YES];
+                }
+            }
+            
             [self.tableView reloadData];
             [self.refreshControl endRefreshing];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {

@@ -113,9 +113,6 @@ static NSString * kPAAcknowledgmentIdentifier = @"Acknowledgment";
 }
 
 - (void)sessionDidEnd:(NSDictionary *)result {
-    PANavigationController *navController = [[PANavigationController alloc] initWithRootViewController:[PALoginViewController new]];
-    
-    [[UIApplication sharedApplication] delegate].window.rootViewController = navController;
 }
 
 @end

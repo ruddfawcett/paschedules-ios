@@ -146,6 +146,13 @@ NSString * NSStringFromPAAPIListType(PAAPIListTypes type);
 #pragma mark - Helper Methods
 
 /**
+ *  The email of the current user.
+ *
+ *  @return A string of the email.
+ */
++ (NSString *)currentUserEmail;
+
+/**
  *  Destroy the current session for the user.
  */
 + (void)destroySession;

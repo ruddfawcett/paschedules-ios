@@ -15,6 +15,10 @@
 #import "PASupercourse.h"
 #import "PACommitment.h"
 
+#import "PALoginViewController.h"
+
+#import "Mixpanel+PAExtensions.h"
+
 NSString * NSStringFromPAAPIListType(PAAPIListTypes type) {
     switch (type) {
         case PAAPIListTypeStudents:
@@ -49,6 +53,12 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
  */
 @property (nonatomic) BOOL showedError;
 
+
+/**
+ *  The user's email.
+ */
+@property (strong, nonatomic) NSString *currentEmail;
+
 @end
 
 @implementation PASchedulesAPI
@@ -73,19 +83,12 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
         if (!result[@"session"]) {
             if ([result[@"result"] intValue] == 1) {
                 self.currentStudent = [[PAStudent alloc] initWithAttributes:result];
+                
+                self.currentEmail = email;
                 [self saveSession:result[@"key"] forStudent:self.currentStudent];
                 
-                [[Mixpanel sharedInstance] track:@"login" properties:@{@"email" : email,
-                                                                       @"device":@{
-                                                                               @"ios" : kSystemVersion,
-                                                                               @"type" : kDeviceType,
-                                                                               @"name" : kDeviceName
-                                                                               },
-                                                                       @"app" : @{
-                                                                               @"version" : kAppVersion,
-                                                                               @"build" : kAppBuild
-                                                                               }
-                                                                       }];
+                [Mixpanel track:@"Student Log-In" properties:@{@"email" : email, @"attempts" : @(self.loginAttempts)}];
+                [Mixpanel identifyStudent:self.currentStudent];
                 
                 success(result);
                 return;
@@ -119,6 +122,8 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
             if ([result[@"result"] intValue] != 0 || result[@"result"] == nil) {
                 BOOL successful = YES;
                 
+                [Mixpanel track:@"User Logout"];
+                
                 [self sessionEnded:result];
                 [PASchedulesAPI destroySession];
                 
@@ -144,6 +149,8 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
             if ([result[@"result"] intValue] != 0 || result[@"result"] == nil) {
                 PAStudent *student = [[PAStudent alloc] initWithAttributes:result];
                 
+                [Mixpanel track:@"Viewed Student"];
+                
                 success(student);
             }
             else {
@@ -165,6 +172,8 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
         if (!result[@"session"]) {
             if ([result[@"result"] intValue] != 0 || result[@"result"] == nil) {
                 PASchedule *schedule = [[PASchedule alloc] initWithAttributes:result];
+                
+                [Mixpanel track:@"Viewed Schedule"];
                 
                 success(schedule);
             }
@@ -188,6 +197,8 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
             if ([result[@"result"] intValue] != 0 || result[@"result"] == nil) {
                 PASection *section = [[PASection alloc] initWithAttributes:result];
                 
+                [Mixpanel track:@"Viewed Section"];
+                
                 success(section);
             }
             else {
@@ -209,6 +220,8 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
         if (!result[@"session"]) {
             if ([result[@"result"] intValue] != 0 || result[@"result"] == nil) {
                 PATeacher *teacher = [[PATeacher alloc] initWithAttributes:result];
+                
+                [Mixpanel track:@"Viewed Teacher"];
                 
                 success(teacher);
             }
@@ -232,6 +245,8 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
             if ([result[@"result"] intValue] != 0 || result[@"result"] == nil) {
                 PASupercourse *supercourse = [[PASupercourse alloc] initWithAttributes:result];
                 
+                [Mixpanel track:@"Viewed Supercourse"];
+                
                 success(supercourse);
             }
             else {
@@ -253,6 +268,8 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
         if (!result[@"session"]) {
             if ([result[@"result"] intValue] != 0 || result[@"result"] == nil) {
                 PACommitment *commitment = [[PACommitment alloc] initWithAttributes:result];
+                
+                [Mixpanel track:@"Viewed Commitment"];
                 
                 success(commitment);
             }
@@ -317,7 +334,7 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
 }
 
 - (void)saveSession:(NSString *)key forStudent:(PAStudent *)student {
-    [[NSUserDefaults standardUserDefaults] setObject:@{@"key" : key, @"studentId" : @(student.studentId), @"created" : [NSDate date]} forKey:@"session"];
+    [[NSUserDefaults standardUserDefaults] setObject:@{@"key" : key, @"studentId" : @(student.studentId), @"created" : [NSDate date], @"email" : self.currentEmail ? self.currentEmail : @""} forKey:@"session"];
 }
 
 - (NSString *)sessionKey {
@@ -334,6 +351,10 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
     return [[NSUserDefaults standardUserDefaults] objectForKey:@"session"] != nil;
 }
 
++ (NSString *)currentUserEmail {
+    return [[NSUserDefaults standardUserDefaults] objectForKey:@"session"][@"email"];
+}
+
 + (void)destroySession {
     [[NSUserDefaults standardUserDefaults] removeObjectForKey:@"session"];
 }
@@ -348,6 +369,10 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
     dispatch_async(dispatch_get_main_queue(), ^{
         if (self.delegate && [self.delegate respondsToSelector:@selector(sessionDidEnd:)]) {
             [self.delegate sessionDidEnd:result];
+            
+            PANavigationController *navController = [[PANavigationController alloc] initWithRootViewController:[PALoginViewController new]];
+            
+            [[UIApplication sharedApplication] delegate].window.rootViewController = navController;
         }
     });
 }

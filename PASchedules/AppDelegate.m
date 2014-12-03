@@ -17,6 +17,7 @@
 NSString * const kPASchedulesFirstLaunch = @"com.ruddfawcett.paschedules.firstLaunch";
 NSString * const kPASchedulesLaunchCount = @"com.ruddfawcett.paschedules.launchCount";
 NSString * const kPASchedulesErrorDomain = @"com.ruddfawcett.paschedules.error";
+NSString * const kPAMinutes = @"App Active";
 
 @interface AppDelegate ()
 
@@ -39,8 +40,6 @@ NSString * const kPASchedulesErrorDomain = @"com.ruddfawcett.paschedules.error";
     
     [Crashlytics startWithAPIKey:keys.crashlyticsKey];
     [Mixpanel sharedInstanceWithToken:keys.mixpanelToken];
-    
-    [[Mixpanel sharedInstance] track:[NSString stringWithFormat:@"Opened on %@ at %@.",kDeviceName,[NSDate date]]];
     
     self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
     self.window.backgroundColor = PA_WHITE;
@@ -83,6 +82,14 @@ NSString * const kPASchedulesErrorDomain = @"com.ruddfawcett.paschedules.error";
     
     [[UISegmentedControl appearance] setTintColor:PA_BLUE];
     [[UISegmentedControl appearanceWhenContainedIn:[UINavigationBar class], nil] setTintColor:PA_WHITE];
+}
+
+- (void)applicationDidBecomeActive:(UIApplication *)application {
+    [[Mixpanel sharedInstance] timeEvent:kPAMinutes];
+}
+
+- (void)applicationDidEnterBackground:(UIApplication *)application {
+    [Mixpanel track:kPAMinutes];
 }
 
 @end

@@ -71,3 +71,4 @@
 #import "NSDate+PAExtensions.h"
 #import "UITabBarItem+Selected.h"
 #import "NSArray+PAExtensions.h"
+#import "Mixpanel+PAExtensions.h"

@@ -332,14 +332,17 @@ static NSString * kPAResultIdentifier = @"Result";
     if (indexPath.section == PASearchTableViewSectionsType) {
         if (self.segmentedControl.selectedSegmentIndex == PAAPIListTypeStudents) {
             PAStudentViewController *studentController = [[PAStudentViewController alloc] initWithStudent:self.studentsList[indexPath.row]];
+            [Mixpanel track:@"Student Searched"];
             [self.navigationController pushViewController:studentController animated:YES];
         }
         else if (self.segmentedControl.selectedSegmentIndex == PAAPIListTypeTeachers) {
             PATeacherViewController *teacherController = [[PATeacherViewController alloc] initWithTeacher:self.teachersList[indexPath.row]];
+            [Mixpanel track:@"Teacher Searched"];
             [self.navigationController pushViewController:teacherController animated:YES];
         }
         else {
             PASupercourseViewController *supercourseController = [[PASupercourseViewController alloc] initWithSupercourse:self.supercoursesList[indexPath.row]];
+            [Mixpanel track:@"Supercourse Searched"];
             [self.navigationController pushViewController:supercourseController animated:YES];
         }
     }

@@ -14,6 +14,8 @@
 @property (strong, nonatomic) NSArray *teachers;
 @property (strong, nonatomic) NSArray *supercourses;
 
+@property (nonatomic) BOOL hasBeenUpdated;
+
 #pragma mark - Singleton
 
 /**
