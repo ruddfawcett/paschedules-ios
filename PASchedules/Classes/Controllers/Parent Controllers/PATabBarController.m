@@ -37,7 +37,7 @@
     NSMutableArray *viewControllers = [@[] mutableCopy];
     
     PAStudentViewController *studentViewController = [[PAStudentViewController alloc] initWithStudent:self.student];
-    studentViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Students" imageName:@"grad-hat-icon" selectedImageName:@"grad-hat-icon-selected"];
+    studentViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Me" imageName:@"user-icon" selectedImageName:@"user-icon-selected"];
     
     [viewControllers addObject:studentViewController];
     
