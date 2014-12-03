@@ -7,7 +7,8 @@
 //
 
 #import <UIKit/UIKit.h>
-#import <Crashlytics/Crashlytics.h>
+
+#import <CTFeedback/CTFeedbackViewController.h>
 
 @class PASchedulesAPI;
 @class PANavigationController;
@@ -15,6 +16,11 @@
 @class PATabBarController;
 @class PAStudentViewController;
 
+#define kSystemVersion [UIDevice currentDevice].systemVersion
+#define kDeviceType CTFeedbackViewController.new.platformString
+#define kDeviceName [UIDevice currentDevice].name
+#define kAppVersion [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]
+#define kAppBuild [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey]
 
 extern NSString * const kPASchedulesFirstLaunch;
 extern NSString * const kPASchedulesLaunchCount;

@@ -24,9 +24,23 @@ NSString * const kPASchedulesErrorDomain = @"com.ruddfawcett.paschedules.error";
 
 @implementation AppDelegate
 
++ (PASchedulesKeys *)keys {
+    static PASchedulesKeys *_sharedKeys = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _sharedKeys = PASchedulesKeys.new;
+    });
+    
+    return _sharedKeys;
+}
 
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    [Crashlytics startWithAPIKey:@"ee94e24c5383105ff0dd886b0283711d3f06efff"];
+    PASchedulesKeys *keys = PASchedulesKeys.new;
+    
+    [Crashlytics startWithAPIKey:keys.crashlyticsKey];
+    [Mixpanel sharedInstanceWithToken:keys.mixpanelToken];
+    
+    [[Mixpanel sharedInstance] track:[NSString stringWithFormat:@"Opened on %@ at %@.",kDeviceName,[NSDate date]]];
     
     self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
     self.window.backgroundColor = PA_WHITE;

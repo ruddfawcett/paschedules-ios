@@ -75,6 +75,18 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
                 self.currentStudent = [[PAStudent alloc] initWithAttributes:result];
                 [self saveSession:result[@"key"] forStudent:self.currentStudent];
                 
+                [[Mixpanel sharedInstance] track:@"login" properties:@{@"email" : email,
+                                                                       @"device":@{
+                                                                               @"ios" : kSystemVersion,
+                                                                               @"type" : kDeviceType,
+                                                                               @"name" : kDeviceName
+                                                                               },
+                                                                       @"app" : @{
+                                                                               @"version" : kAppVersion,
+                                                                               @"build" : kAppBuild
+                                                                               }
+                                                                       }];
+                
                 success(result);
                 return;
             }

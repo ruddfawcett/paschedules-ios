@@ -8,34 +8,64 @@
 
 #import "PASchedules.h"
 
-// Colors
+#pragma mark - CocoaPods
 
+/**
+ *  Include all of the CocoaPods that I want to be able to use everywhere.
+ */
+#import <SVProgressHUD/SVProgressHUD.h>
+#import <Crashlytics/Crashlytics.h>
+#import <Mixpanel/Mixpanel.h>
+#import <CocoaPods-Keys/PASchedulesKeys.h>
+
+
+#pragma mark - UIColors
+/**
+ *  The colors used throughout the application.
+ */
 #define PA_BLUE [UIColor colorWithRed:0.004 green:0.090 blue:0.173 alpha:1.00]
 #define PA_DARK_BLUE [UIColor colorWithRed:0.141 green:0.408 blue:0.925 alpha:1] /*#2468ec*/
 #define PA_LIGHT_BLUE [UIColor colorWithRed:0.184 green:0.835 blue:0.984 alpha:1] /*#2fd5fb*/
 #define PA_WHITE [UIColor whiteColor]
 #define PA_DARK [UIColor darkGrayColor]
 
-// TESTING
 
-#define TESTING 0
-
-#ifdef TESTING
-#define TEST_USER_EMAIL @"rfawcett@andover.edu"
-#define TEST_USER_PASSWORD @"0013F7B5EEC8!"
-#endif
-
-#import <SVProgressHUD/SVProgressHUD.h>
-
+#pragma mark - AppDelegate
+/**
+ *  Used to change the rootViewController when necessary.
+ */
 #import "AppDelegate.h"
 
-// API
+
+#pragma mark - Testing
+
+#define TESTING 1
+
+#ifdef TESTING
+#warning SET TESTING TO 0 WHEN SUBMITTING TO APP STORE!
+#define TEST_USER_EMAIL @"rfawcett@andover.edu"
+#define TEST_USER_PASSWORD PASchedulesKeys.new.testUserPassword
+#endif
+
+
+#pragma mark - API
+/**
+ *  The API built for PASchedules.
+ */
 #import "PASchedulesAPI.h"
 
-// PAViews
+
+#pragma mark - UIViewControllers
+/**
+ *  The parent view controllers (tab bar and naviation bar) used to keep properties.
+ */
 #import "PANavigationController.h"
 
-#pragma mark - PAExtensions
+
+#pragma mark - Categories (PAExtensions)
+/**
+ *  All of the extensions (categories) that are used.
+ */
 #import "UIImage+PAExtensions.h"
 #import "NSError+PAExtensions.h"
 #import "NSDate+PAExtensions.h"
