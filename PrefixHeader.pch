@@ -39,7 +39,7 @@
 
 #pragma mark - Testing
 
-#define TESTING 1
+#define TESTING 0
 
 #ifdef TESTING
 #warning SET TESTING TO 0 WHEN SUBMITTING TO APP STORE!
