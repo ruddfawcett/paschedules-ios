@@ -19,7 +19,7 @@
 }
 
 + (void)identifyStudent:(PAStudent *)student {
-    [[Mixpanel sharedInstance] identify:[NSString stringWithFormat:@"%d",student.studentId]];
+    [[Mixpanel sharedInstance] identify:[NSString stringWithFormat:@"%lu",(unsigned long)student.studentId]];
 }
 
 + (void)updateStudent:(PAStudent *)student {
