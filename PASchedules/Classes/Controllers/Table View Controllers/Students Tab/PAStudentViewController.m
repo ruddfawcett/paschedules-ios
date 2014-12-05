@@ -61,11 +61,11 @@ static NSString * kPACommitmentsIdentifier = @"Commitments";
             self.student = student;
             
             if ([PASchedulesAPI currentUser] && student.isCurrentStudent) {
-                if (![PACache sharedCache].hasBeenUpdated) {
+//                if (![PACache sharedCache].hasBeenUpdated) {
                     [Crashlytics setStudent:student];
                     [Mixpanel updateStudent:student];
                     [[PACache sharedCache] setHasBeenUpdated:YES];
-                }
+//                }
             }
             
             [self.tableView reloadData];
