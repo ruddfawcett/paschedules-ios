@@ -40,7 +40,7 @@ EXTERNAL SOURCES:
 
 CHECKOUT OPTIONS:
   CTFeedback:
-    :commit: 0122fe55db1798fdfb925f8931ac499326d91edb
+    :commit: 9c9b5488703e90ade4b170383767a528a319de1c
     :git: https://github.com/ruddfawcett/CTFeedback.git
 
 SPEC CHECKSUMS:
