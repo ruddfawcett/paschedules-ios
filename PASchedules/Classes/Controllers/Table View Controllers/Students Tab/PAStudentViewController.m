@@ -62,6 +62,7 @@ static NSString * kPACommitmentsIdentifier = @"Commitments";
             
             if ([PASchedulesAPI currentUser] && student.isCurrentStudent) {
                 if (![PACache sharedCache].hasBeenUpdated) {
+                    [Crashlytics setStudent:student];
                     [Mixpanel updateStudent:student];
                     [[PACache sharedCache] setHasBeenUpdated:YES];
                 }

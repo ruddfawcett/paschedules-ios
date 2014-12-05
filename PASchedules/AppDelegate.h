@@ -8,8 +8,6 @@
 
 #import <UIKit/UIKit.h>
 
-#import <CTFeedback/CTFeedbackViewController.h>
-
 @class PASchedulesAPI;
 @class PANavigationController;
 @class PALoginViewController;

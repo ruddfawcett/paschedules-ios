@@ -116,6 +116,10 @@
 
 # pragma mark - UITableViewDelegate
 
+- (NSString *)tableView:(UITableView *)tableView titleForFooterInSection:(NSInteger)section {
+    return @"Please first signup on the PASchedules website.";
+}
+
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }

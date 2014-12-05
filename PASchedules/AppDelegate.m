@@ -38,8 +38,23 @@ NSString * const kPAMinutes = @"App Active";
 - (BOOL)application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
     PASchedulesKeys *keys = PASchedulesKeys.new;
     
-    [Crashlytics startWithAPIKey:keys.crashlyticsKey];
+    [Fabric with:@[CrashlyticsKit]];
+    
     [Mixpanel sharedInstanceWithToken:keys.mixpanelToken];
+    
+    if ([PASchedulesAPI currentUser]) {
+//        if ([application respondsToSelector:@selector(isRegisteredForRemoteNotifications)]) {
+//            // iOS 8 Notifications
+//            [application registerUserNotificationSettings:[UIUserNotificationSettings settingsForTypes:(UIUserNotificationTypeSound | UIUserNotificationTypeAlert | UIUserNotificationTypeBadge) categories:nil]];
+//            
+//            [application registerForRemoteNotifications];
+//        }
+//        else {
+//            // iOS < 8 Notifications
+//            [application registerForRemoteNotificationTypes:
+//             (UIRemoteNotificationTypeBadge | UIRemoteNotificationTypeAlert | UIRemoteNotificationTypeSound)];
+//        }
+    }
     
     self.window = [[UIWindow alloc] initWithFrame:UIScreen.mainScreen.bounds];
     self.window.backgroundColor = PA_WHITE;
@@ -63,10 +78,36 @@ NSString * const kPAMinutes = @"App Active";
         PATabBarController *studentController = [[PATabBarController alloc] initWithStudent:[PASchedulesAPI studentFromSession]];
         self.window.rootViewController = studentController;
     }
-
+    
     [self.window makeKeyAndVisible];
     
     return YES;
+}
+
+- (void)application:(UIApplication *)application didRegisterForRemoteNotificationsWithDeviceToken:(NSData *)deviceToken {
+    if ([PASchedulesAPI currentUser]) {
+        [Mixpanel identifyStudent:[[PASchedulesAPI sharedClient] currentStudent]];
+    }
+    
+    NSLog(@"%@",deviceToken);
+    
+    [[Mixpanel sharedInstance].people addPushDeviceToken:deviceToken];
+}
+
+- (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
+    if (error) {
+        [NSError showWithError:error];
+    }
+    
+    NSLog(@"%@",error);
+}
+
+- (void)application:(UIApplication *)application didReceiveRemoteNotification:(NSDictionary *)userInfo {
+    NSString *message = [[userInfo objectForKey:@"aps"] objectForKey:@"alert"];
+    
+    UIAlertView *alert = [[UIAlertView alloc] initWithTitle:@"" message:message delegate:nil cancelButtonTitle:@"OK" otherButtonTitles:nil];
+    
+    [alert show];
 }
 
 - (void)setUpAppearances {

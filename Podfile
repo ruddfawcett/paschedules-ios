@@ -7,7 +7,6 @@ pod 'SVProgressHUD', '1.0'
 pod 'CTFeedback', :git => 'https://github.com/ruddfawcett/CTFeedback.git'
 pod 'VTAcknowledgementsViewController'
 pod 'Mixpanel'
-pod 'CrashlyticsFramework', '~> 2.2'
 
 post_install do |installer|
     require 'fileutils'

@@ -8,8 +8,10 @@
 
 /* Begin PBXBuildFile section */
 		677452FEF38A6A9D4B9D9574 /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 1B9AF2B506BB69C0E8E3A684 /* libPods.a */; };
+		F1093D621A314B20007866D0 /* Crashlytics+PAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F1093D611A314B20007866D0 /* Crashlytics+PAExtensions.m */; };
 		F127A5381A26580F00CFC8FF /* PASettingsViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F127A5371A26580F00CFC8FF /* PASettingsViewController.m */; };
 		F127A53E1A2669D300CFC8FF /* Pods-acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = F127A53D1A2669D300CFC8FF /* Pods-acknowledgements.plist */; };
+		F143A6701A31406A00406359 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F143A66F1A31406A00406359 /* Fabric.framework */; };
 		F157E4AD1A2EE0D5002CD936 /* Mixpanel+PAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F157E4AC1A2EE0D5002CD936 /* Mixpanel+PAExtensions.m */; };
 		F1D808281A2435360068B20D /* PAComparisonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1D808271A2435360068B20D /* PAComparisonViewController.m */; };
 		F1D8082B1A2442310068B20D /* PACache.m in Sources */ = {isa = PBXBuildFile; fileRef = F1D8082A1A2442310068B20D /* PACache.m */; };
@@ -63,9 +65,12 @@
 		1B9AF2B506BB69C0E8E3A684 /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		5816D954C368EF0942C41008 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		EEF57C240426B12D7CC19B88 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
+		F1093D601A314B20007866D0 /* Crashlytics+PAExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Crashlytics+PAExtensions.h"; path = "PASchedules/Classes/Categories/Crashlytics+PAExtensions.h"; sourceTree = SOURCE_ROOT; };
+		F1093D611A314B20007866D0 /* Crashlytics+PAExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Crashlytics+PAExtensions.m"; path = "PASchedules/Classes/Categories/Crashlytics+PAExtensions.m"; sourceTree = SOURCE_ROOT; };
 		F127A5361A26580F00CFC8FF /* PASettingsViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PASettingsViewController.h; path = "Settings Tab/PASettingsViewController.h"; sourceTree = "<group>"; };
 		F127A5371A26580F00CFC8FF /* PASettingsViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PASettingsViewController.m; path = "Settings Tab/PASettingsViewController.m"; sourceTree = "<group>"; };
 		F127A53D1A2669D300CFC8FF /* Pods-acknowledgements.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "Pods-acknowledgements.plist"; path = "Pods/Target Support Files/Pods/Pods-acknowledgements.plist"; sourceTree = SOURCE_ROOT; };
+		F143A66F1A31406A00406359 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		F157E4AB1A2EE0D5002CD936 /* Mixpanel+PAExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Mixpanel+PAExtensions.h"; path = "PASchedules/Classes/Categories/Mixpanel+PAExtensions.h"; sourceTree = SOURCE_ROOT; };
 		F157E4AC1A2EE0D5002CD936 /* Mixpanel+PAExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Mixpanel+PAExtensions.m"; path = "PASchedules/Classes/Categories/Mixpanel+PAExtensions.m"; sourceTree = SOURCE_ROOT; };
 		F1D808261A2435360068B20D /* PAComparisonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAComparisonViewController.h; sourceTree = "<group>"; };
@@ -169,6 +174,7 @@
 			files = (
 				F1D808351A2528FB0068B20D /* Crashlytics.framework in Frameworks */,
 				677452FEF38A6A9D4B9D9574 /* libPods.a in Frameworks */,
+				F143A6701A31406A00406359 /* Fabric.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -187,6 +193,7 @@
 		C42B073D300838D9DC300513 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				F143A66F1A31406A00406359 /* Fabric.framework */,
 				F1D808341A2528FB0068B20D /* Crashlytics.framework */,
 				1B9AF2B506BB69C0E8E3A684 /* libPods.a */,
 			);
@@ -324,6 +331,8 @@
 		F1FE361A1A23B9F0006EFFC3 /* Categories */ = {
 			isa = PBXGroup;
 			children = (
+				F1093D601A314B20007866D0 /* Crashlytics+PAExtensions.h */,
+				F1093D611A314B20007866D0 /* Crashlytics+PAExtensions.m */,
 				F157E4AB1A2EE0D5002CD936 /* Mixpanel+PAExtensions.h */,
 				F157E4AC1A2EE0D5002CD936 /* Mixpanel+PAExtensions.m */,
 				F1FE361B1A23B9F0006EFFC3 /* NSDate+PAExtensions.h */,
@@ -501,7 +510,7 @@
 				F1FE35D51A23B9B2006EFFC3 /* Frameworks */,
 				F1FE35D61A23B9B2006EFFC3 /* Resources */,
 				CA0821B8EB38D49B3724592B /* Copy Pods Resources */,
-				F1D808331A2528380068B20D /* Integrate Crashlytics */,
+				F1D808331A2528380068B20D /* Integrate Fabric Crashlytics */,
 			);
 			buildRules = (
 			);
@@ -590,19 +599,19 @@
 			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods/Pods-resources.sh\"\n";
 			showEnvVarsInLog = 0;
 		};
-		F1D808331A2528380068B20D /* Integrate Crashlytics */ = {
+		F1D808331A2528380068B20D /* Integrate Fabric Crashlytics */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
 			);
 			inputPaths = (
 			);
-			name = "Integrate Crashlytics";
+			name = "Integrate Fabric Crashlytics";
 			outputPaths = (
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "${PODS_ROOT}/CrashlyticsFramework/Crashlytics.framework/run ee94e24c5383105ff0dd886b0283711d3f06efff";
+			shellScript = "./Fabric.framework/run 9a21dd5f8dee71a6149d22f490418c2857150e42 2a5ed929cd5ed71c01b4ac1ce73f5c9a276a79701a9fbe2743ad3707f36d7dde";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -635,6 +644,7 @@
 				F1FE36831A23B9F0006EFFC3 /* PACourseTableViewCell.m in Sources */,
 				F1FE36751A23B9F0006EFFC3 /* PACompareViewController.m in Sources */,
 				F1FE36701A23B9F0006EFFC3 /* UIImage+PAExtensions.m in Sources */,
+				F1093D621A314B20007866D0 /* Crashlytics+PAExtensions.m in Sources */,
 				F1FE36881A23B9F0006EFFC3 /* PATeacherTableViewCell.m in Sources */,
 				F1FE367E1A23B9F0006EFFC3 /* PATeacherViewController.m in Sources */,
 				F1FE36861A23B9F0006EFFC3 /* PAStudentTableViewCell.m in Sources */,
@@ -690,8 +700,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "";
+				CODE_SIGN_IDENTITY = "iOS Development: Rudd Fawcett (27Z93TMN6G)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iOS Development: Rudd Fawcett (27Z93TMN6G)";
 				COPY_PHASE_STRIP = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
 				GCC_C_LANGUAGE_STANDARD = gnu99;
@@ -711,7 +721,7 @@
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
-				PROVISIONING_PROFILE = "0abbe460-41fb-40a6-8c28-ae8ed3f0b85e";
+				PROVISIONING_PROFILE = "ecb9f0e4-6690-462f-8195-0c4ed4384106";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 			};
@@ -734,8 +744,8 @@
 				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
 				CLANG_WARN_UNREACHABLE_CODE = YES;
 				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
-				CODE_SIGN_IDENTITY = "iOS Distribution: Rudd Fawcett";
-				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iOS Distribution: Rudd Fawcett";
+				CODE_SIGN_IDENTITY = "iPhone Distribution: Rudd Fawcett (K99NAT9AQ8)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Distribution: Rudd Fawcett (K99NAT9AQ8)";
 				COPY_PHASE_STRIP = YES;
 				ENABLE_NS_ASSERTIONS = NO;
 				ENABLE_STRICT_OBJC_MSGSEND = YES;
@@ -748,7 +758,7 @@
 				GCC_WARN_UNUSED_VARIABLE = YES;
 				IPHONEOS_DEPLOYMENT_TARGET = 7.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
-				PROVISIONING_PROFILE = "0abbe460-41fb-40a6-8c28-ae8ed3f0b85e";
+				PROVISIONING_PROFILE = "ecb9f0e4-6690-462f-8195-0c4ed4384106";
 				SDKROOT = iphoneos;
 				TARGETED_DEVICE_FAMILY = "1,2";
 				VALIDATE_PRODUCT = YES;
