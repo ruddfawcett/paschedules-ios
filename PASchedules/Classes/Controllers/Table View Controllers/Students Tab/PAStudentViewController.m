@@ -39,10 +39,6 @@ static NSString * kPACommitmentsIdentifier = @"Commitments";
 
 @implementation PAStudentViewController
 
-static inline NSString* NSStringFromBOOL(BOOL aBool) {
-    return aBool? @"YES" : @"NO";
-}
-
 - (id)initWithStudent:(PAStudent *)student {
     if (self = [super init]) {
         self.studentId = student.studentId;

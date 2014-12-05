@@ -611,7 +611,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run 9a21dd5f8dee71a6149d22f490418c2857150e42 2a5ed929cd5ed71c01b4ac1ce73f5c9a276a79701a9fbe2743ad3707f36d7dde";
+			shellScript = "./Fabric.framework/run pod keys get FabricAPIKey";
 		};
 /* End PBXShellScriptBuildPhase section */
 
