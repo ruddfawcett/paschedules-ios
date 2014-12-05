@@ -39,6 +39,10 @@ static NSString * kPACommitmentsIdentifier = @"Commitments";
 
 @implementation PAStudentViewController
 
+static inline NSString* NSStringFromBOOL(BOOL aBool) {
+    return aBool? @"YES" : @"NO";
+}
+
 - (id)initWithStudent:(PAStudent *)student {
     if (self = [super init]) {
         self.studentId = student.studentId;
@@ -61,11 +65,11 @@ static NSString * kPACommitmentsIdentifier = @"Commitments";
             self.student = student;
             
             if ([PASchedulesAPI currentUser] && student.isCurrentStudent) {
-//                if (![PACache sharedCache].hasBeenUpdated) {
+                if (![PACache sharedCache].hasBeenUpdated) {
                     [Crashlytics setStudent:student];
                     [Mixpanel updateStudent:student];
                     [[PACache sharedCache] setHasBeenUpdated:YES];
-//                }
+                }
             }
             
             [self.tableView reloadData];

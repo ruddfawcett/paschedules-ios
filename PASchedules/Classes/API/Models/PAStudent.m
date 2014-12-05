@@ -58,7 +58,7 @@
 }
 
 - (BOOL)isCurrentStudent {
-    return self.studentId == [PASchedulesAPI sharedClient].currentStudent.studentId;
+    return self.studentId == [PASchedulesAPI studentFromSession].studentId;
 }
 
 @end
