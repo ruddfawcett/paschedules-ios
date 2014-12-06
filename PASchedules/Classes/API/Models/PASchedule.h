@@ -13,6 +13,11 @@
 @interface PASchedule : NSObject
 
 /**
+ *  The owner of the schedule.
+ */
+@property (strong, nonatomic) PAStudent *student;
+
+/**
  *  An array of PADay objects.
  */
 @property (strong, nonatomic) NSArray *days;

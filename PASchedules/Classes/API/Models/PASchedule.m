@@ -8,12 +8,15 @@
 
 #import "PASchedule.h"
 
+#import "PAStudent.h"
 #import "PADay.h"
 
 @implementation PASchedule
 
 - (id)initWithAttributes:(NSDictionary *)attributes {
     if (self = [super init]) {
+        self.student = [[PAStudent alloc] initWithAttributes:attributes];
+        
         [self loadDays:attributes[@"schedule"]];
     }
     
