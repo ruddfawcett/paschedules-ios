@@ -89,7 +89,7 @@ static NSString * kPAAcknowledgmentIdentifier = @"Acknowledgment";
                 [SVProgressHUD dismiss];
             } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
                 [SVProgressHUD dismiss];
-                [NSError showWithError:[NSError errorWithDomain:kPASchedulesErrorDomain code:0 userInfo:@{NSLocalizedDescriptionKey : @"Unable to log you out."}]];
+                [[PAError sharedError] showWithError:[NSError errorWithDomain:kPASchedulesErrorDomain code:0 userInfo:@{NSLocalizedDescriptionKey : @"Unable to log you out."}]];
             }];
         }
         else {

@@ -8,10 +8,25 @@
 
 #import "NSError+PAExtensions.h"
 
-@implementation NSError (PAExtensions)
+@implementation PAError
 
-+ (void)showWithError:(NSError *)error {
++ (instancetype)sharedError {
+    static PAError *_sharedError = nil;
+    static dispatch_once_t onceToken;
+    dispatch_once(&onceToken, ^{
+        _sharedError = [self new];
+    });
+    
+    return _sharedError;
+}
+
+- (void)showWithError:(NSError *)error {
     if (error.code != 666) {
+        dispatch_async(dispatch_get_main_queue(), ^{
+            if (self.delegate && [self.delegate respondsToSelector:@selector(sessionDidEnd:)]) {
+                [self.delegate didShowError:error];
+            }
+        });
         [SVProgressHUD showErrorWithStatus:error.localizedDescription];
     }
     else {

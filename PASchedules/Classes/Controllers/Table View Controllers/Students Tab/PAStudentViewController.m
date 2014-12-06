@@ -73,7 +73,7 @@ static NSString * kPACommitmentsIdentifier = @"Commitments";
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [self.tableView reloadData];
             [self.refreshControl endRefreshing];
-            [NSError showWithError:error];
+            [[PAError sharedError] showWithError:error];
         }];
     });
 }

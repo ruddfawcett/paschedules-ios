@@ -8,7 +8,7 @@
 
 #import <UIKit/UIKit.h>
 
-@interface PATemplateTableViewController : UITableViewController <PASessionDelegate, UIScrollViewDelegate, UITextFieldDelegate>
+@interface PATemplateTableViewController : UITableViewController <PASessionDelegate, PAErrorDelegate, UIScrollViewDelegate, UITextFieldDelegate>
 
 #pragma mark - Properties
 

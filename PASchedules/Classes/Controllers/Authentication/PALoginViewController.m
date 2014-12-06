@@ -69,7 +69,7 @@
             [[UIApplication sharedApplication] delegate].window.rootViewController = tabBarController;
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [SVProgressHUD dismiss];
-            [NSError showWithError:error];
+            [[PAError sharedError] showWithError:error];
             
             [self.passwordField becomeFirstResponder];
             

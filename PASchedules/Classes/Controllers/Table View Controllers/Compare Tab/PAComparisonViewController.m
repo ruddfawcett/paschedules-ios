@@ -102,7 +102,7 @@ static NSString * kPACommitmentIdentifier = @"Commitment";
             
             error = [[NSError alloc] initWithDomain:kPASchedulesErrorDomain code:1 userInfo:@{NSLocalizedDescriptionKey : @"Failed to load students."}];
             
-            [NSError showWithError:error];
+            [[PAError sharedError] showWithError:error];
         }];
         
         [[PASchedulesAPI sharedClient] students:self.secondStudent.studentId track:NO success:^(PAStudent *student) {
@@ -123,7 +123,7 @@ static NSString * kPACommitmentIdentifier = @"Commitment";
             
             error = [[NSError alloc] initWithDomain:kPASchedulesErrorDomain code:1 userInfo:@{NSLocalizedDescriptionKey : @"Failed to load students."}];
             
-            [NSError showWithError:error];
+            [[PAError sharedError] showWithError:error];
         }];
     });
 }
@@ -170,7 +170,7 @@ static NSString * kPACommitmentIdentifier = @"Commitment";
             dispatch_group_leave(group);
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             error = [[NSError alloc] initWithDomain:kPASchedulesErrorDomain code:1 userInfo:@{NSLocalizedDescriptionKey : @"Failed to load some teachers."}];
-            [NSError showWithError:error];
+            [[PAError sharedError] showWithError:error];
             
             dispatch_group_leave(group);
         }];

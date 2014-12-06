@@ -65,7 +65,7 @@ static NSString * kPAResultIdentifier = @"Result";
             [self.refreshControl endRefreshing];
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [self.refreshControl endRefreshing];
-            [NSError showWithError:error];
+            [[PAError sharedError] showWithError:error];
         }];
     }
 }

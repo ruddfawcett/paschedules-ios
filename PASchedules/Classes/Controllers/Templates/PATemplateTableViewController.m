@@ -13,6 +13,7 @@
 - (id)init {
     if (self = [super initWithStyle:UITableViewStyleGrouped]) {
         [PASchedulesAPI sharedClient].delegate = self;
+        [PAError sharedError].delegate = self;
     }
     
     return self;
@@ -50,6 +51,10 @@
 
 - (void)sessionDidEnd:(NSDictionary *)result {
     NSLog(@"session went caput");
+}
+
+- (void)didShowError:(NSError *)error {
+    [self.navigationController popToRootViewControllerAnimated:YES];
 }
 
 @end

@@ -104,7 +104,7 @@ NSString * const kPAMinutes = @"App Active";
 
 - (void)application:(UIApplication *)application didFailToRegisterForRemoteNotificationsWithError:(NSError *)error {
     if (error) {
-        [NSError showWithError:error];
+        [[PAError sharedError] showWithError:error];
     }
     
     NSLog(@"%@",error);

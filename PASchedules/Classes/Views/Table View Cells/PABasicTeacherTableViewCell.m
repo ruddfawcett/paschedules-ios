@@ -24,7 +24,7 @@
 }
 
 - (void)setTeacher:(PATeacher *)teacher {
-    if ([teacher.name isKindOfClass:[NSNull class]] || [teacher.name isEqualToString:@""] || !teacher.teacherId) {
+    if ([teacher.name isKindOfClass:[NSNull class]] || [teacher.name isEqualToString:@""] || teacher.name.length == 0) {
         self.textLabel.text = @"Not available.";
     }
     else {
