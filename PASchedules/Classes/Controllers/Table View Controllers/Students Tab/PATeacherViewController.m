@@ -53,7 +53,7 @@ static NSString * kPASectionsIdentifier = @"Sections";
 
 - (void)loadTeacher {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [[PASchedulesAPI sharedClient] teachers:self.teacherId success:^(PATeacher *teacher) {
+        [[PASchedulesAPI sharedClient] teachers:self.teacherId track:YES success:^(PATeacher *teacher) {
             self.navigationController.navigationBar.topItem.title = teacher.name;
             self.teacher = teacher;
             

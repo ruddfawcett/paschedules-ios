@@ -87,7 +87,7 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
                 self.currentEmail = email;
                 [self saveSession:result[@"key"] forStudent:self.currentStudent];
                 
-                [Mixpanel track:@"Student Log-In" properties:@{@"email" : email, @"attempts" : @(self.loginAttempts)}];
+                [Mixpanel track:@"Student Logged In" properties:@{@"attempts" : @(self.loginAttempts+1)}];
                 [Mixpanel identifyStudent:self.currentStudent];
                 
                 success(result);
@@ -122,7 +122,7 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
             if ([result[@"result"] intValue] != 0 || result[@"result"] == nil) {
                 BOOL successful = YES;
                 
-                [Mixpanel track:@"User Logout"];
+                [Mixpanel track:@"Student Logged Out"];
                 
                 [self sessionEnded:result];
                 [PASchedulesAPI destroySession];
@@ -139,7 +139,7 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
     } failure:failure];
 }
 
-- (void)students:(NSUInteger)studentId success:(void (^)(PAStudent *student))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+- (void)students:(NSUInteger)studentId track:(BOOL)track success:(void (^)(PAStudent *student))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
     NSDictionary *parameters = @{@"key" : [self sessionKey], @"id" : @(studentId), @"ios" : @YES};
     
     [self POST:@"api/v1/students/" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -149,7 +149,11 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
             if ([result[@"result"] intValue] != 0 || result[@"result"] == nil) {
                 PAStudent *student = [[PAStudent alloc] initWithAttributes:result];
                 
-                [Mixpanel track:@"Viewed Student"];
+                if (!student.isCurrentStudent) {
+                    if (track) {
+                        [Mixpanel track:@"Student Viewed" properties:@{@"Subject Name" : student.name, @"Subject ID": @(student.studentId)}];
+                    }
+                }
                 
                 success(student);
             }
@@ -163,7 +167,7 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
     } failure:failure];
 }
 
-- (void)schedules:(NSUInteger)studentId success:(void (^)(PASchedule *schedule))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+- (void)schedules:(NSUInteger)studentId track:(BOOL)track success:(void (^)(PASchedule *schedule))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
     NSDictionary *parameters = @{@"key" : [self sessionKey], @"id" : @(studentId), @"ios" : @YES};
     
     [self POST:@"api/v1/schedules/" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -173,7 +177,9 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
             if ([result[@"result"] intValue] != 0 || result[@"result"] == nil) {
                 PASchedule *schedule = [[PASchedule alloc] initWithAttributes:result];
                 
-                [Mixpanel track:@"Viewed Schedule"];
+                if (track) {
+                    [Mixpanel track:@"Schedule Viewed" properties:@{@"Subject Name" : schedule.student.name, @"Subject ID": @(schedule.student.studentId)}];
+                }
                 
                 success(schedule);
             }
@@ -187,7 +193,7 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
     } failure:failure];
 }
 
-- (void)sections:(NSUInteger)sectionId success:(void (^)(PASection *section))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+- (void)sections:(NSUInteger)sectionId track:(BOOL)track success:(void (^)(PASection *section))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
     NSDictionary *parameters = @{@"key" : [self sessionKey], @"id" : @(sectionId), @"ios" : @YES};
     
     [self POST:@"api/v1/sections/" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -197,7 +203,9 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
             if ([result[@"result"] intValue] != 0 || result[@"result"] == nil) {
                 PASection *section = [[PASection alloc] initWithAttributes:result];
                 
-                [Mixpanel track:@"Viewed Section"];
+                if (track) {
+                    [Mixpanel track:@"Section Viewed" properties:@{@"Subject Name" : section.name, @"Subject ID": @(section.sectionId)}];
+                }
                 
                 success(section);
             }
@@ -211,7 +219,7 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
     } failure:failure];
 }
 
-- (void)teachers:(NSUInteger)teacherId success:(void (^)(PATeacher *teacher))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+- (void)teachers:(NSUInteger)teacherId track:(BOOL)track success:(void (^)(PATeacher *teacher))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
     NSDictionary *parameters = @{@"key" : [self sessionKey], @"id" : @(teacherId), @"ios" : @YES};
     
     [self POST:@"api/v1/teachers/" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -221,7 +229,9 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
             if ([result[@"result"] intValue] != 0 || result[@"result"] == nil) {
                 PATeacher *teacher = [[PATeacher alloc] initWithAttributes:result];
                 
-                [Mixpanel track:@"Viewed Teacher"];
+                if (track) {
+                    [Mixpanel track:@"Teacher Viewed" properties:@{@"Subject Name" : teacher.name, @"Subject ID": @(teacher.teacherId)}];
+                }
                 
                 success(teacher);
             }
@@ -235,7 +245,7 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
     } failure:failure];
 }
 
-- (void)supercourses:(NSUInteger)supercourseId success:(void (^)(PASupercourse *supercourse))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+- (void)supercourses:(NSUInteger)supercourseId track:(BOOL)track success:(void (^)(PASupercourse *supercourse))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
     NSDictionary *parameters = @{@"key" : [self sessionKey], @"id" : @(supercourseId), @"ios" : @YES};
     
     [self POST:@"api/v1/supercourses/" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -245,7 +255,9 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
             if ([result[@"result"] intValue] != 0 || result[@"result"] == nil) {
                 PASupercourse *supercourse = [[PASupercourse alloc] initWithAttributes:result];
                 
-                [Mixpanel track:@"Viewed Supercourse"];
+                if (track) {
+                    [Mixpanel track:@"Supercourse Viewed" properties:@{@"Subject Name" : supercourse.title, @"Subject ID": @(supercourse.supercourseId)}];
+                }
                 
                 success(supercourse);
             }
@@ -259,7 +271,7 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
     } failure:failure];
 }
 
-- (void)commitments:(NSUInteger)commitmentId success:(void (^)(PACommitment *commitment))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
+- (void)commitments:(NSUInteger)commitmentId track:(BOOL)track success:(void (^)(PACommitment *commitment))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure {
     NSDictionary *parameters = @{@"key" : [self sessionKey], @"id" : @(commitmentId), @"ios" : @YES};
     
     [self POST:@"api/v1/commitments/" parameters:parameters success:^(AFHTTPRequestOperation *operation, id responseObject) {
@@ -269,7 +281,9 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
             if ([result[@"result"] intValue] != 0 || result[@"result"] == nil) {
                 PACommitment *commitment = [[PACommitment alloc] initWithAttributes:result];
                 
-                [Mixpanel track:@"Viewed Commitment"];
+                if (track) {
+                    [Mixpanel track:@"Commitment Viewed" properties:@{@"Subject Name" : commitment.name, @"Subject ID": @(commitment.commitmentId)}];
+                }
                 
                 success(commitment);
             }

@@ -45,13 +45,13 @@ static NSString * kPASectionsIdentifier = @"Section";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.refreshControl addTarget:self action:@selector(loadStudent) forControlEvents:UIControlEventValueChanged];
-    [self loadStudent];
+    [self.refreshControl addTarget:self action:@selector(loadSupercourse) forControlEvents:UIControlEventValueChanged];
+    [self loadSupercourse];
 }
 
-- (void)loadStudent {
+- (void)loadSupercourse {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [[PASchedulesAPI sharedClient] supercourses:self.supercourseId success:^(PASupercourse *supercourse) {
+        [[PASchedulesAPI sharedClient] supercourses:self.supercourseId track:YES success:^(PASupercourse *supercourse) {
             self.navigationController.navigationBar.topItem.title = supercourse.title;
             self.supercourse = supercourse;
             

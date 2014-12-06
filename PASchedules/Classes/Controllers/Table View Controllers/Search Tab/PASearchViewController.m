@@ -331,18 +331,30 @@ static NSString * kPAResultIdentifier = @"Result";
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     if (indexPath.section == PASearchTableViewSectionsType) {
         if (self.segmentedControl.selectedSegmentIndex == PAAPIListTypeStudents) {
-            PAStudentViewController *studentController = [[PAStudentViewController alloc] initWithStudent:self.studentsList[indexPath.row]];
-            [Mixpanel track:@"Student Searched"];
+            PAStudent *theStudent = self.studentsList[indexPath.row];
+            PAStudentViewController *studentController = [[PAStudentViewController alloc] initWithStudent:theStudent];
+            
+            if (![self.searchField.text isEqualToString:@""]) {
+                [Mixpanel track:@"Student Searched" properties:@{@"Subject" : @{@"Name" : theStudent.name, @"ID": @(theStudent.studentId)}, @"Search Query" : self.searchField.text}];
+            }
             [self.navigationController pushViewController:studentController animated:YES];
         }
         else if (self.segmentedControl.selectedSegmentIndex == PAAPIListTypeTeachers) {
-            PATeacherViewController *teacherController = [[PATeacherViewController alloc] initWithTeacher:self.teachersList[indexPath.row]];
-            [Mixpanel track:@"Teacher Searched"];
+            PATeacher *theTeacher = self.teachersList[indexPath.row];
+            PATeacherViewController *teacherController = [[PATeacherViewController alloc] initWithTeacher:theTeacher];
+            
+            if (![self.searchField.text isEqualToString:@""]) {
+                [Mixpanel track:@"Teacher Searched" properties:@{@"Subject" : @{@"Name" : theTeacher.name, @"ID": @(theTeacher.teacherId)}, @"Search Query" : self.searchField.text}];
+            }
             [self.navigationController pushViewController:teacherController animated:YES];
         }
         else {
-            PASupercourseViewController *supercourseController = [[PASupercourseViewController alloc] initWithSupercourse:self.supercoursesList[indexPath.row]];
-            [Mixpanel track:@"Supercourse Searched"];
+            PASupercourse *theSupercourse = self.supercoursesList[indexPath.row];
+            PASupercourseViewController *supercourseController = [[PASupercourseViewController alloc] initWithSupercourse:theSupercourse];
+            
+            if (![self.searchField.text isEqualToString:@""]) {
+                [Mixpanel track:@"Supercourse Searched" properties:@{@"Subject" : @{@"Name" : theSupercourse.title, @"ID": @(theSupercourse.supercourseId)}, @"Search Query" : self.searchField.text}];
+            }
             [self.navigationController pushViewController:supercourseController animated:YES];
         }
     }

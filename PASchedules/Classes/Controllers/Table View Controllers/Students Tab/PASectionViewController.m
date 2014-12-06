@@ -62,7 +62,7 @@ static NSString * kPAStudentsIdentifier = @"Students";
 
 - (void)loadSection {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [[PASchedulesAPI sharedClient] sections:self.sectionId success:^(PASection *section) {
+        [[PASchedulesAPI sharedClient] sections:self.sectionId track:YES success:^(PASection *section) {
             self.navigationController.navigationBar.topItem.title = section.name;
             self.section = section;
             

@@ -94,7 +94,7 @@ static NSString * kPACommitmentIdentifier = @"Commitment";
     
     dispatch_group_t group = dispatch_group_create();
     dispatch_group_async(group,dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_HIGH, 0), ^ {
-        [[PASchedulesAPI sharedClient] students:self.firstStudent.studentId success:^(PAStudent *student) {
+        [[PASchedulesAPI sharedClient] students:self.firstStudent.studentId track:NO success:^(PAStudent *student) {
             self.firstStudent = student;
         } failure:^(AFHTTPRequestOperation *operation, NSError *error) {
             [self.refreshControl endRefreshing];
@@ -105,7 +105,7 @@ static NSString * kPACommitmentIdentifier = @"Commitment";
             [NSError showWithError:error];
         }];
         
-        [[PASchedulesAPI sharedClient] students:self.secondStudent.studentId success:^(PAStudent *student) {
+        [[PASchedulesAPI sharedClient] students:self.secondStudent.studentId track:NO success:^(PAStudent *student) {
             self.secondStudent = student;
             self.loading = NO;
             
@@ -164,7 +164,7 @@ static NSString * kPACommitmentIdentifier = @"Commitment";
     
     for (NSNumber *sectionId in sectionIds) {
         dispatch_group_enter(group);
-        [[PASchedulesAPI sharedClient] sections:[sectionId intValue] success:^(PASection *section) {
+        [[PASchedulesAPI sharedClient] sections:[sectionId intValue] track:NO success:^(PASection *section) {
             [teachers addObject:section.teacher];
 
             dispatch_group_leave(group);

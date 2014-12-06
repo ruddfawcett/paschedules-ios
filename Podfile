@@ -3,10 +3,11 @@ platform :ios, '7.0'
 link_with 'PASchedules'
 
 pod 'AFNetworking', '2.5.0'
-pod 'SVProgressHUD', '1.0'
 pod 'CTFeedback', :git => 'https://github.com/ruddfawcett/CTFeedback.git'
-pod 'VTAcknowledgementsViewController'
+pod 'DZNEmptyDataSet', '~> 1.4'
 pod 'Mixpanel'
+pod 'SVProgressHUD', '1.0'
+pod 'VTAcknowledgementsViewController'
 
 post_install do |installer|
     require 'fileutils'

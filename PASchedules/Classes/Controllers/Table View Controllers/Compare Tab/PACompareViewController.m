@@ -117,7 +117,8 @@ static NSString * kPAComparisonIdentifier = @"Comparison";
             
             PANavigationController *navigationController = [[PANavigationController alloc] initWithRootViewController:compareController];
             
-            [Mixpanel track:@"Students Compared"];
+            [Mixpanel track:@"Students Compared" properties:@{@"First Subject Name" : self.firstStudent.name, @"First Subject ID" : @(self.firstStudent.studentId), @"Second Subject Name" : self.secondStudent.name, @"Second Subject ID" : @(self.secondStudent.studentId)}
+                                                                      ];
             
             [self.navigationController presentViewController:navigationController animated:YES completion:nil];
         }

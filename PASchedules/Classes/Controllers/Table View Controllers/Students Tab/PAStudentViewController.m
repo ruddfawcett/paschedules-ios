@@ -56,7 +56,7 @@ static NSString * kPACommitmentsIdentifier = @"Commitments";
 
 - (void)loadStudent {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [[PASchedulesAPI sharedClient] students:self.studentId success:^(PAStudent *student) {
+        [[PASchedulesAPI sharedClient] students:self.studentId track:YES success:^(PAStudent *student) {
             self.navigationController.navigationBar.topItem.title = student.nickname ? [NSString stringWithFormat:@"%@ (%@)", student.name, student.nickname] : student.name;
             self.student = student;
             

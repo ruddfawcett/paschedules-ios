@@ -13,6 +13,7 @@
 		F127A53E1A2669D300CFC8FF /* Pods-acknowledgements.plist in Resources */ = {isa = PBXBuildFile; fileRef = F127A53D1A2669D300CFC8FF /* Pods-acknowledgements.plist */; };
 		F143A6701A31406A00406359 /* Fabric.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = F143A66F1A31406A00406359 /* Fabric.framework */; };
 		F157E4AD1A2EE0D5002CD936 /* Mixpanel+PAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F157E4AC1A2EE0D5002CD936 /* Mixpanel+PAExtensions.m */; };
+		F1C6F99B1A3379E5008BB5AB /* PAScheduleViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1C6F99A1A3379E5008BB5AB /* PAScheduleViewController.m */; };
 		F1D808281A2435360068B20D /* PAComparisonViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = F1D808271A2435360068B20D /* PAComparisonViewController.m */; };
 		F1D8082B1A2442310068B20D /* PACache.m in Sources */ = {isa = PBXBuildFile; fileRef = F1D8082A1A2442310068B20D /* PACache.m */; };
 		F1D808311A2468050068B20D /* NSArray+PAExtensions.m in Sources */ = {isa = PBXBuildFile; fileRef = F1D808301A2468050068B20D /* NSArray+PAExtensions.m */; };
@@ -73,6 +74,8 @@
 		F143A66F1A31406A00406359 /* Fabric.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = Fabric.framework; sourceTree = "<group>"; };
 		F157E4AB1A2EE0D5002CD936 /* Mixpanel+PAExtensions.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = "Mixpanel+PAExtensions.h"; path = "PASchedules/Classes/Categories/Mixpanel+PAExtensions.h"; sourceTree = SOURCE_ROOT; };
 		F157E4AC1A2EE0D5002CD936 /* Mixpanel+PAExtensions.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = "Mixpanel+PAExtensions.m"; path = "PASchedules/Classes/Categories/Mixpanel+PAExtensions.m"; sourceTree = SOURCE_ROOT; };
+		F1C6F9991A3379E5008BB5AB /* PAScheduleViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; name = PAScheduleViewController.h; path = "PASchedules/Classes/Controllers/Table View Controllers/Schedules Tab/PAScheduleViewController.h"; sourceTree = SOURCE_ROOT; };
+		F1C6F99A1A3379E5008BB5AB /* PAScheduleViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = PAScheduleViewController.m; path = "PASchedules/Classes/Controllers/Table View Controllers/Schedules Tab/PAScheduleViewController.m"; sourceTree = SOURCE_ROOT; };
 		F1D808261A2435360068B20D /* PAComparisonViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PAComparisonViewController.h; sourceTree = "<group>"; };
 		F1D808271A2435360068B20D /* PAComparisonViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = PAComparisonViewController.m; sourceTree = "<group>"; };
 		F1D808291A2442310068B20D /* PACache.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = PACache.h; sourceTree = "<group>"; };
@@ -207,6 +210,15 @@
 				F127A5371A26580F00CFC8FF /* PASettingsViewController.m */,
 			);
 			name = "Settings Tab";
+			sourceTree = "<group>";
+		};
+		F1C6F99D1A3379F3008BB5AB /* Schedules Tab */ = {
+			isa = PBXGroup;
+			children = (
+				F1C6F9991A3379E5008BB5AB /* PAScheduleViewController.h */,
+				F1C6F99A1A3379E5008BB5AB /* PAScheduleViewController.m */,
+			);
+			name = "Schedules Tab";
 			sourceTree = "<group>";
 		};
 		F1D808251A23BD4B0068B20D /* Model Searches */ = {
@@ -383,6 +395,7 @@
 		F1FE362C1A23B9F0006EFFC3 /* Table View Controllers */ = {
 			isa = PBXGroup;
 			children = (
+				F1C6F99D1A3379F3008BB5AB /* Schedules Tab */,
 				F1FE362D1A23B9F0006EFFC3 /* Compare Tab */,
 				F1FE36301A23B9F0006EFFC3 /* Search Tab */,
 				F1FE36391A23B9F0006EFFC3 /* Students Tab */,
@@ -611,7 +624,7 @@
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 			shellPath = /bin/sh;
-			shellScript = "./Fabric.framework/run pod keys get FabricAPIKey";
+			shellScript = "./Fabric.framework/run 9a21dd5f8dee71a6149d22f490418c2857150e42";
 		};
 /* End PBXShellScriptBuildPhase section */
 
@@ -648,6 +661,7 @@
 				F1FE36881A23B9F0006EFFC3 /* PATeacherTableViewCell.m in Sources */,
 				F1FE367E1A23B9F0006EFFC3 /* PATeacherViewController.m in Sources */,
 				F1FE36861A23B9F0006EFFC3 /* PAStudentTableViewCell.m in Sources */,
+				F1C6F99B1A3379E5008BB5AB /* PAScheduleViewController.m in Sources */,
 				F1FE36841A23B9F0006EFFC3 /* PAEmptyTableViewCell.m in Sources */,
 				F1FE36721A23B9F0006EFFC3 /* PALoginViewController.m in Sources */,
 				F1FE36761A23B9F0006EFFC3 /* PASearchViewController.m in Sources */,

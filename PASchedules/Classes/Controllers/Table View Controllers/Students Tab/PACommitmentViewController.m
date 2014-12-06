@@ -52,13 +52,13 @@ static NSString * kPAStudentIdentifier = @"Student";
 - (void)viewDidLoad {
     [super viewDidLoad];
     
-    [self.refreshControl addTarget:self action:@selector(loadSection) forControlEvents:UIControlEventValueChanged];
-    [self loadSection];
+    [self.refreshControl addTarget:self action:@selector(loadCommitment) forControlEvents:UIControlEventValueChanged];
+    [self loadCommitment];
 }
 
-- (void)loadSection {
+- (void)loadCommitment {
     dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), ^{
-        [[PASchedulesAPI sharedClient] commitments:self.commitmentId success:^(PACommitment *commitment) {
+        [[PASchedulesAPI sharedClient] commitments:self.commitmentId track:YES success:^(PACommitment *commitment) {
             self.navigationController.navigationBar.topItem.title = commitment.title;
             self.commitment = commitment;
             

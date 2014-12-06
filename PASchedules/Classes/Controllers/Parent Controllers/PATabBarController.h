@@ -9,8 +9,10 @@
 #import <UIKit/UIKit.h>
 
 @class PANavigationController;
+
 @class PAStudentViewController;
 @class PACompareViewController;
+@class PAScheduleViewController;
 @class PASearchViewController;
 @class PASettingsViewController;
 

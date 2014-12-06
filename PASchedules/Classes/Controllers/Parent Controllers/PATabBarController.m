@@ -12,6 +12,7 @@
 
 #import "PAStudentViewController.h"
 #import "PACompareViewController.h"
+#import "PAScheduleViewController.h"
 #import "PASearchViewController.h"
 #import "PASettingsViewController.h"
 
@@ -46,7 +47,7 @@
     
     [viewControllers addObject:compareViewController];
     
-    UIViewController *scheduleViewController = [[UIViewController alloc] init];
+    PAScheduleViewController *scheduleViewController = [[PAScheduleViewController alloc] init];
     scheduleViewController.tabBarItem = [[UITabBarItem alloc] initWithTitle:@"Schedule" imageName:@"calendar-icon" selectedImageName:@"calendar-icon-selected"];
     
     [viewControllers addObject:scheduleViewController];

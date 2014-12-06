@@ -78,7 +78,7 @@ NSString * NSStringFromPAAPIListType(PAAPIListTypes type);
  *  @param success A block that is triggered if the student is successfully grabbed.
  *  @param failure A block that is triggered if the student is not successfully grabbed.
  */
-- (void)students:(NSUInteger)studentId success:(void (^)(PAStudent *student))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+- (void)students:(NSUInteger)studentId track:(BOOL)track success:(void (^)(PAStudent *student))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 /**
  *  Fetches a schedule for a student based on their student ID.
@@ -87,7 +87,7 @@ NSString * NSStringFromPAAPIListType(PAAPIListTypes type);
  *  @param success A block that is triggered if the schedule is successfully grabbed.
  *  @param failure A block that is triggered if the schedule is not successfully grabbed.
  */
-- (void)schedules:(NSUInteger)studentId success:(void (^)(PASchedule *schedule))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+- (void)schedules:(NSUInteger)studentId track:(BOOL)track success:(void (^)(PASchedule *schedule))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 /**
  *  Fetches a section for the given section ID.
@@ -96,7 +96,7 @@ NSString * NSStringFromPAAPIListType(PAAPIListTypes type);
  *  @param success A block that is triggered if the section is successfully grabbed.
  *  @param failure A block that is triggered if the section is not successfully grabbed.
  */
-- (void)sections:(NSUInteger)sectionId success:(void (^)(PASection *section))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+- (void)sections:(NSUInteger)sectionId track:(BOOL)track success:(void (^)(PASection *section))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 /**
  *  Fetches a teacher for the given teacher ID.
@@ -105,7 +105,7 @@ NSString * NSStringFromPAAPIListType(PAAPIListTypes type);
  *  @param success A block that is triggered if the teacher is successfully grabbed.
  *  @param failure A block that is triggered if the teacher is not successfully grabbed.
  */
-- (void)teachers:(NSUInteger)teacherId success:(void (^)(PATeacher *teacher))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+- (void)teachers:(NSUInteger)teacherId track:(BOOL)track success:(void (^)(PATeacher *teacher))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 /**
  *  Fetches the supercoure for the given ID.
@@ -114,7 +114,7 @@ NSString * NSStringFromPAAPIListType(PAAPIListTypes type);
  *  @param success A block that is triggered if the supercourse is successfully grabbed.
  *  @param failure A block that is triggered if the supercourse is not successfully grabbed.
  */
-- (void)supercourses:(NSUInteger)supercourseId success:(void (^)(PASupercourse *supercourse))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+- (void)supercourses:(NSUInteger)supercourseId track:(BOOL)track success:(void (^)(PASupercourse *supercourse))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 /**
  *  Fetches the commitment for the given ID.
@@ -123,7 +123,7 @@ NSString * NSStringFromPAAPIListType(PAAPIListTypes type);
  *  @param success A block that is triggered if the commitment is successfully grabbed.
  *  @param failure A block that is triggered if the commitment is not successfully grabbed.
  */
-- (void)commitments:(NSUInteger)commitmentId success:(void (^)(PACommitment *commitment))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
+- (void)commitments:(NSUInteger)commitmentId track:(BOOL)track success:(void (^)(PACommitment *commitment))success failure:(void (^)(AFHTTPRequestOperation *operation, NSError *error))failure;
 
 /**
  *  Returns the JSON list of objects for searching.
