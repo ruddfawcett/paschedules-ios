@@ -39,8 +39,16 @@ NSString * const kPAMinutes = @"App Active";
     PASchedulesKeys *keys = PASchedulesKeys.new;
     
     [Fabric with:@[CrashlyticsKit]];
-    
     [Mixpanel sharedInstanceWithToken:keys.mixpanelToken];
+    
+    if (FORCE_LOGIN) {
+        NSString *kPASchedulesDidLogOut = [NSString stringWithFormat:@"com.ruddfawcett.paschedules.logout.%@",kAppBuild];
+        
+        if (![[NSUserDefaults standardUserDefaults] boolForKey:kPASchedulesDidLogOut]) {
+            [PASchedulesAPI destroySession];
+            [[NSUserDefaults standardUserDefaults] setBool:YES forKey:kPASchedulesDidLogOut];
+        }
+    }
     
     if ([PASchedulesAPI currentUser]) {
 //        if ([application respondsToSelector:@selector(isRegisteredForRemoteNotifications)]) {

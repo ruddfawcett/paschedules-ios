@@ -20,6 +20,8 @@
 #define kAppVersion [[NSBundle mainBundle] objectForInfoDictionaryKey:@"CFBundleShortVersionString"]
 #define kAppBuild [[NSBundle mainBundle] objectForInfoDictionaryKey:(NSString *)kCFBundleVersionKey]
 
+#define FORCE_LOGIN YES
+
 extern NSString * const kPASchedulesFirstLaunch;
 extern NSString * const kPASchedulesLaunchCount;
 extern NSString * const kPASchedulesErrorDomain;
