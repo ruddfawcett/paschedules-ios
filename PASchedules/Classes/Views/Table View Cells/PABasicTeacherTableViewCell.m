@@ -24,9 +24,15 @@
 }
 
 - (void)setTeacher:(PATeacher *)teacher {
+    if ([teacher.name isKindOfClass:[NSNull class]] || [teacher.name isEqualToString:@""] || !teacher.teacherId) {
+        self.textLabel.text = @"Not available.";
+    }
+    else {
+        self.textLabel.text = teacher.name;
+    }
+    
     self.accessoryType = teacher.teacherId ? UITableViewCellAccessoryDisclosureIndicator : UITableViewCellAccessoryNone;
     self.userInteractionEnabled = teacher.name ? YES : NO;
-    self.textLabel.text = (![teacher.name isKindOfClass:[NSNull class]]) ? teacher.name : @"Not available.";
     self.textLabel.textColor = teacher.name ? [UIColor blackColor] : [UIColor lightGrayColor];
     self.selectionStyle = teacher.teacherId ? UITableViewCellSelectionStyleDefault : UITableViewCellSelectionStyleNone;
 }
