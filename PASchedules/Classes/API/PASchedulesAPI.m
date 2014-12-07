@@ -204,7 +204,7 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
                 PASection *section = [[PASection alloc] initWithAttributes:result];
                 
                 if (track) {
-                    [Mixpanel track:@"Section Viewed" properties:@{@"Subject Name" : section.name, @"Subject ID": @(section.sectionId)}];
+                    [Mixpanel track:@"Section Viewed" properties:@{@"Subject Name" : section.name, @"Subject Title" : section.supercourse.title, @"Subject ID": @(section.sectionId)}];
                 }
                 
                 success(section);
@@ -282,7 +282,7 @@ static NSString * const PASchedulesAPIBaseURLString = @"http://paschedulesapi.he
                 PACommitment *commitment = [[PACommitment alloc] initWithAttributes:result];
                 
                 if (track) {
-                    [Mixpanel track:@"Commitment Viewed" properties:@{@"Subject Name" : commitment.name, @"Subject ID": @(commitment.commitmentId)}];
+                    [Mixpanel track:@"Commitment Viewed" properties:@{@"Subject Name" : commitment.title, @"Subject ID": @(commitment.commitmentId)}];
                 }
                 
                 success(commitment);
