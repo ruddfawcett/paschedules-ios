@@ -11,15 +11,18 @@
 @implementation Mixpanel (PAExtensions)
 
 + (void)track:(NSString *)event {
+    [Mixpanel updateLastSeen];
     [[Mixpanel sharedInstance] track:event];
 }
 
 + (void)track:(NSString *)event properties:(NSDictionary *)properties {
+    [Mixpanel updateLastSeen];
     [[Mixpanel sharedInstance] track:event properties:properties];
 }
 
 + (void)identifyStudent:(PAStudent *)student {
     [[Mixpanel sharedInstance] identify:[NSString stringWithFormat:@"%lu",(unsigned long)student.studentId]];
+    [Mixpanel updateLastSeen];
 }
 
 + (void)updateStudent:(PAStudent *)student {
@@ -32,6 +35,10 @@
                                               @"graduation" : @(student.graduation),
                                               @"id" : @(student.studentId)
                                               }];
+}
+
++ (void)updateLastSeen {
+    [[[Mixpanel sharedInstance] people] set:@{@"$last_seen" : [NSDate date]}];
 }
 
 @end
